@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ドライバー募集｜有限会社アドヴァンス【千葉・埼玉エリア食品輸送】</title>
+  <title>ドライバー募集｜有限会社アドヴァンス</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet" />
@@ -16,81 +16,178 @@
       --black: #111;
       --white: #fff;
       --gray: #f4f5f7;
-      --text: #222;
     }
     html { font-size: 62.5%; scroll-behavior: smooth; }
     body {
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1.6rem;
-      line-height: 1.8;
-      color: var(--text);
-      background: var(--white);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      font-size: 1.6rem; line-height: 1.8;
+      color: var(--black); background: var(--white);
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; width: 100%; }
 
-    /* Oswald for English display text */
-    .en { font-family: 'Oswald', sans-serif; letter-spacing: .06em; }
+    /* =====================
+       斜めスラッシュ装飾パターン（参考サイトのslash.svgをCSS再現）
+    ===================== */
+    .slash-deco {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        var(--blue) 0px, var(--blue) 2px,
+        transparent 2px, transparent 9px
+      );
+      background-repeat: repeat-x;
+      background-position: left bottom;
+      background-size: 13px 13px;
+      padding-bottom: 8px;
+    }
+    .slash-deco--yellow {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        var(--yellow) 0px, var(--yellow) 2px,
+        transparent 2px, transparent 9px
+      );
+    }
+    .slash-deco--white {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 2px,
+        transparent 2px, transparent 9px
+      );
+    }
 
-    /* ===========================
+    /* =====================
+       しずく型バッジ（num01〜06のSVGをCSS再現）
+    ===================== */
+    .drop-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .drop-badge__circle {
+      width: 52px; height: 52px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .drop-badge__circle::after {
+      content: '';
+      position: absolute;
+      bottom: -9px; left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 10px solid var(--blue);
+    }
+    .drop-badge--yellow .drop-badge__circle { background: var(--yellow); }
+    .drop-badge--yellow .drop-badge__circle::after { border-top-color: var(--yellow); }
+    .drop-badge__num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--white); line-height: 1;
+    }
+    .drop-badge--yellow .drop-badge__num { color: var(--black); }
+
+    /* =====================
+       縦書き装飾英語テキスト
+    ===================== */
+    .vert-en {
+      position: absolute;
+      writing-mode: vertical-rl;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(5rem, 10vw, 10rem);
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: rgba(0,87,184,.06);
+      pointer-events: none;
+      user-select: none;
+      line-height: 1;
+      z-index: 0;
+    }
+    .vert-en--right { right: 0; top: 50%; transform: translateY(-50%); }
+    .vert-en--left { left: 0; top: 50%; transform: translateY(-50%); }
+    .vert-en--white { color: rgba(255,255,255,.06); }
+    .vert-en--dark { color: rgba(255,255,255,.04); }
+
+    /* =====================
+       コピーバナー（横からワイプイン）
+    ===================== */
+    .copy-banner { overflow: hidden; margin: 0; }
+    .copy-banner__inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 32px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      padding: 14px 32px;
+      white-space: nowrap;
+      transform: translateX(-100%);
+      transition: transform .85s cubic-bezier(.785,.135,.15,.86);
+    }
+    .copy-banner__inner.in { transform: translateX(0); }
+    .copy-banner--right .copy-banner__inner {
+      float: right; transform: translateX(100%);
+    }
+    .copy-banner--right .copy-banner__inner.in { transform: translateX(0); }
+    .copy-banner__sep {
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--yellow);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+    .copy-banner--yellow .copy-banner__inner {
+      background: var(--yellow);
+      color: var(--black);
+    }
+    .copy-banner--yellow .copy-banner__sep { background: var(--blue); }
+
+    /* =====================
        PROGRESS + HEADER
-    =========================== */
-    .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--blue); z-index: 1000; width: 0; transition: width .1s linear; }
-
+    ===================== */
+    .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--blue); z-index: 1000; width: 0; transition: width .1s; }
     .header {
-      position: fixed;
-      top: 3px; left: 0; right: 0;
-      z-index: 900;
-      height: 54px;
-      background: rgba(255,255,255,.97);
+      position: fixed; top: 3px; left: 0; right: 0; z-index: 900;
+      height: 54px; background: rgba(255,255,255,.97);
       border-bottom: 2px solid var(--blue);
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 18px;
-      transition: box-shadow .3s;
+      padding: 0 18px; transition: box-shadow .3s;
     }
     .header.scrolled { box-shadow: 0 2px 20px rgba(0,87,184,.15); }
     .header__logo img { height: 30px; width: auto; }
     .header__cta {
       background: var(--blue); color: var(--white);
-      font-size: 1.3rem; font-weight: 900;
-      padding: 9px 18px; letter-spacing: .04em;
+      font-size: 1.3rem; font-weight: 900; padding: 9px 20px;
       transition: background .2s;
     }
     .header__cta:hover { background: var(--blue-dark); }
 
-    /* ===========================
+    /* =====================
        BUTTONS
-    =========================== */
+    ===================== */
     .btn {
-      display: flex; align-items: center; justify-content: center;
-      gap: 8px; font-size: 1.7rem; font-weight: 900;
-      padding: 16px 24px; letter-spacing: .04em;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 1.7rem; font-weight: 900; padding: 16px 24px;
       border: none; cursor: pointer; font-family: inherit;
-      transition: background .2s, transform .15s;
-      position: relative; overflow: hidden;
+      transition: background .2s, transform .15s; letter-spacing: .04em;
     }
-    .btn::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: rgba(255,255,255,.15);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform .3s ease;
-    }
-    .btn:hover::after { transform: scaleX(1); }
     .btn:active { transform: scale(.97); }
     .btn--blue { background: var(--blue); color: var(--white); }
     .btn--blue:hover { background: var(--blue-dark); }
     .btn--yellow { background: var(--yellow); color: var(--black); }
-    .btn--white { background: var(--white); color: var(--blue); }
     .btn--black { background: var(--black); color: var(--white); }
-    .btn--outline-white { background: transparent; border: 2px solid rgba(255,255,255,.65); color: var(--white); padding: 14px 22px; }
-    .btn--outline-white:hover { border-color: var(--white); }
+    .btn--outline-white { background: transparent; border: 2px solid rgba(255,255,255,.6); color: var(--white); padding: 14px 22px; }
+    .btn--outline-white:hover { border-color: #fff; }
+    .btn--white { background: var(--white); color: var(--blue); }
 
-    /* ===========================
+    /* =====================
        HERO
-    =========================== */
+    ===================== */
     .hero {
       position: relative;
       height: 100svh; min-height: 560px;
@@ -101,254 +198,248 @@
     .hero__bg {
       position: absolute; inset: 0;
       background: url('images/real-fleet-sunny.jpg') center 40% / cover no-repeat;
-      filter: brightness(.38);
+      filter: brightness(.35);
     }
-    /* 斜めベクター装飾 */
-    .hero__slash {
-      position: absolute;
-      bottom: -1px; left: 0; right: 0;
-      height: 80px; overflow: hidden;
+    /* 左側ブルー縦帯（参考サイトの左三角パネル） */
+    .hero__left-panel {
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 100vh 0 0 22vw;
+      border-color: transparent transparent transparent rgba(0,87,184,.55);
     }
-    .hero__slash::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: -5%;
-      width: 110%; height: 80px;
-      background: var(--white);
-      transform: skewY(-2.5deg);
-      transform-origin: bottom left;
+    /* 下部斜めカット */
+    .hero__cut {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 0; width: 0;
+      border-style: solid;
+      border-width: 60px 100vw 0 0;
+      border-color: var(--white) transparent transparent transparent;
     }
     .hero__content {
       position: relative; z-index: 1;
-      padding: 32px 20px 96px;
+      padding: 28px 20px 80px;
     }
-    .hero__en {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--blue); letter-spacing: .2em;
-      background: rgba(0,87,184,.9);
-      color: var(--white);
-      display: inline-block; padding: 4px 14px;
-      margin-bottom: 16px;
+    .hero__label {
+      display: inline-block;
+      background: var(--blue); color: var(--white);
+      font-size: 1.1rem; font-weight: 900; letter-spacing: .14em;
+      padding: 4px 14px; margin-bottom: 16px;
     }
     .hero__copy {
-      font-size: clamp(3rem, 8.5vw, 5.6rem);
+      font-size: clamp(3.2rem, 9vw, 5.8rem);
       font-weight: 900; color: var(--white);
-      line-height: 1.2; letter-spacing: -.01em;
-      margin-bottom: 16px;
+      line-height: 1.2; letter-spacing: -.01em; margin-bottom: 16px;
     }
     .hero__copy .accent { color: var(--yellow); }
-    .hero__sub {
-      font-size: 1.45rem; color: rgba(255,255,255,.8);
-      line-height: 1.8; margin-bottom: 28px;
-    }
-    .hero__badges {
-      display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px;
-    }
+    .hero__sub { font-size: 1.45rem; color: rgba(255,255,255,.8); line-height: 1.8; margin-bottom: 28px; }
+    .hero__badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px; }
     .hero__badge {
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.28);
       color: var(--white); font-size: 1.2rem; font-weight: 700; padding: 5px 12px;
     }
     .hero__badge--filled { background: var(--blue); border-color: var(--blue); }
     .hero__btns { display: flex; flex-direction: column; gap: 10px; }
-
-    /* scroll indicator */
     .scroll-hint {
-      position: absolute; bottom: 88px; left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
     .scroll-hint__label {
       font-family: 'Oswald', sans-serif;
-      font-size: 1rem; letter-spacing: .2em; color: rgba(255,255,255,.5);
+      font-size: 1rem; letter-spacing: .22em; color: rgba(255,255,255,.45);
     }
     .scroll-hint__line {
-      width: 1px; height: 40px;
-      background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent);
-      animation: scrollLine 1.8s ease-in-out infinite;
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.45), transparent);
+      animation: sl 1.8s ease-in-out infinite;
     }
-    @keyframes scrollLine { 0%,100%{transform:scaleY(1);opacity:.5} 50%{transform:scaleY(1.3);opacity:1} }
+    @keyframes sl { 0%,100%{opacity:.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
 
-    /* ===========================
-       APPEAL STRIP（月収）
-    =========================== */
+    /* =====================
+       APPEAL STRIP
+    ===================== */
     .appeal {
-      background: var(--blue);
-      padding: 36px 20px 40px;
-      text-align: center;
-      position: relative;
+      background: var(--blue); padding: 40px 20px 44px;
+      text-align: center; position: relative; overflow: hidden;
     }
-    .appeal__en {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1rem; letter-spacing: .24em;
-      color: rgba(255,255,255,.55); margin-bottom: 6px;
-    }
-    .appeal__num {
-      font-size: clamp(5rem, 14vw, 8rem);
-      font-weight: 900; color: var(--yellow);
-      line-height: 1; letter-spacing: -.02em;
-      font-family: 'Oswald', sans-serif;
-    }
-    .appeal__unit { font-size: .35em; font-family: 'Noto Sans JP', sans-serif; font-weight: 900; }
-    .appeal__note { font-size: 1.2rem; color: rgba(255,255,255,.65); margin-top: 6px; }
-    .appeal__chips {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 8px; margin-top: 20px;
-    }
-    .appeal__chip {
-      background: rgba(255,255,255,.13);
-      border: 1px solid rgba(255,255,255,.22);
-      color: var(--white); font-size: 1.3rem; font-weight: 700; padding: 7px 16px;
-    }
-    /* 斜め下カット */
+    .appeal .vert-en { color: rgba(255,255,255,.05); font-size: clamp(6rem,14vw,14rem); right: -10px; top: 50%; transform: translateY(-50%); }
     .appeal::after {
       content: '';
-      position: absolute; bottom: -44px; left: 0; right: 0;
-      height: 44px; overflow: hidden; pointer-events: none;
-    }
-    .appeal::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
+      position: absolute; bottom: 0; left: 0; right: 0;
       height: 0; width: 0;
       border-style: solid;
-      border-width: 44px 100vw 0 0;
-      border-color: var(--blue) transparent transparent transparent;
+      border-width: 0 0 48px 100vw;
+      border-color: transparent transparent var(--white) transparent;
+    }
+    .appeal__label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; letter-spacing: .22em;
+      color: rgba(255,255,255,.5); margin-bottom: 8px;
+    }
+    .appeal__num {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(6rem, 16vw, 10rem);
+      font-weight: 700; color: var(--yellow);
+      line-height: 1; letter-spacing: -.02em;
+    }
+    .appeal__unit { font-size: .32em; font-family: 'Noto Sans JP', sans-serif; font-weight: 900; }
+    .appeal__note { font-size: 1.2rem; color: rgba(255,255,255,.6); margin-top: 6px; }
+    .appeal__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+    .appeal__chip {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      color: var(--white); font-size: 1.3rem; font-weight: 700; padding: 7px 16px;
     }
 
-    /* ===========================
+    /* =====================
        PAIN SECTION
-    =========================== */
+    ===================== */
     .pain {
-      background: var(--black);
-      padding: 80px 20px 64px;
-      position: relative;
+      background: var(--black); padding: 72px 20px 64px;
+      position: relative; overflow: hidden;
     }
-    .pain__en {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1rem; letter-spacing: .2em;
-      color: rgba(255,255,255,.35); margin-bottom: 14px;
-      text-align: center;
-    }
-    .pain__heading {
-      font-size: clamp(2.2rem, 6vw, 3.2rem);
-      font-weight: 900; color: var(--white);
-      line-height: 1.45; margin-bottom: 28px; text-align: center;
-    }
-    .pain__heading .accent { color: var(--yellow); }
-    .pain__list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
-    .pain__item {
-      background: #1c1c1c;
-      padding: 14px 18px 14px 44px;
-      color: rgba(255,255,255,.82);
-      font-size: 1.45rem; font-weight: 700;
-      line-height: 1.5; position: relative;
-    }
-    .pain__item::before {
-      content: '✓';
-      position: absolute; left: 16px;
-      color: var(--blue); font-weight: 900;
-    }
-    .pain__resolve {
-      background: var(--blue); padding: 24px 20px;
-      text-align: center; color: var(--white);
-      font-size: 1.6rem; font-weight: 900; line-height: 1.6;
-    }
-    .pain__resolve .big { font-size: 2rem; display: block; margin-top: 6px; }
-    /* 下斜めカット */
+    .pain .vert-en { color: rgba(255,255,255,.035); font-size: clamp(6rem,13vw,13rem); right: -8px; top: 50%; transform: translateY(-50%); }
     .pain::after {
       content: '';
       position: absolute; bottom: 0; right: 0;
       width: 0; height: 0;
       border-style: solid;
-      border-width: 0 0 52px 100vw;
+      border-width: 0 0 56px 100vw;
       border-color: transparent transparent var(--white) transparent;
     }
+    .pain__label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; letter-spacing: .2em;
+      color: rgba(255,255,255,.3); margin-bottom: 12px; text-align: center;
+    }
+    .pain__heading {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.45; margin-bottom: 28px; text-align: center;
+    }
+    /* 斜めスラッシュ強調 */
+    .pain__heading .em {
+      color: var(--yellow);
+      padding-bottom: 6px;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        var(--yellow) 0px, var(--yellow) 2px,
+        transparent 2px, transparent 9px
+      );
+      background-repeat: repeat-x;
+      background-position: left bottom;
+      background-size: 13px 13px;
+    }
+    .pain__list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+    .pain__item {
+      background: #1d1d1d; padding: 14px 18px 14px 44px;
+      color: rgba(255,255,255,.82); font-size: 1.45rem; font-weight: 700;
+      line-height: 1.5; position: relative;
+    }
+    .pain__item::before { content: '✓'; position: absolute; left: 16px; color: var(--blue); font-weight: 900; }
+    .pain__resolve {
+      background: var(--blue); padding: 24px 20px;
+      text-align: center; color: var(--white);
+      font-size: 1.6rem; font-weight: 900; line-height: 1.65;
+    }
+    .pain__resolve .big {
+      font-size: 2rem; display: block; margin-top: 6px;
+      padding-bottom: 4px;
+      background-image: repeating-linear-gradient(
+        -45deg, rgba(255,255,255,.3) 0px, rgba(255,255,255,.3) 2px,
+        transparent 2px, transparent 9px
+      );
+      background-repeat: repeat-x;
+      background-position: left bottom;
+      background-size: 13px 13px;
+    }
 
-    /* ===========================
+    /* =====================
        PHOTO MOSAIC
-    =========================== */
+    ===================== */
     .photo-mosaic { display: grid; gap: 3px; background: #ddd; }
-    .photo-mosaic__main { grid-column: 1 / -1; aspect-ratio: 16/8; overflow: hidden; }
+    .photo-mosaic__main { grid-column: 1/-1; aspect-ratio: 16/8; overflow: hidden; }
     .photo-mosaic__main img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
-    .photo-mosaic__main:hover img { transform: scale(1.03); }
-    .photo-mosaic__sub { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
-    .photo-mosaic__thumb { aspect-ratio: 1; overflow: hidden; }
-    .photo-mosaic__thumb img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
-    .photo-mosaic__thumb:hover img { transform: scale(1.06); }
+    .photo-mosaic__main:hover img { transform:scale(1.03); }
+    .photo-mosaic__subs { display: grid; grid-template-columns: repeat(4,1fr); gap: 3px; }
+    .photo-thumb { aspect-ratio: 1; overflow: hidden; }
+    .photo-thumb img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+    .photo-thumb:hover img { transform:scale(1.06); }
 
-    /* ===========================
+    /* =====================
        SECTION BASE
-    =========================== */
-    .section { padding: 64px 20px; }
+    ===================== */
+    .section { padding: 64px 20px; position: relative; overflow: hidden; }
     .section--gray { background: var(--gray); }
     .section--blue { background: var(--blue); }
     .section--black { background: var(--black); }
 
-    .section__eyebrow {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
-    }
-    .section__en {
+    .section__head { margin-bottom: 36px; }
+    .section__label {
       font-family: 'Oswald', sans-serif;
-      font-size: 1.15rem; letter-spacing: .2em;
-      color: var(--blue); font-weight: 700;
+      font-size: 1.05rem; letter-spacing: .2em; color: var(--blue);
+      margin-bottom: 8px; display: block;
     }
-    .section--blue .section__en,
-    .section--black .section__en { color: rgba(255,255,255,.55); }
-    .section__line { flex: 1; height: 1px; background: #ddd; }
-    .section--blue .section__line,
-    .section--black .section__line { background: rgba(255,255,255,.15); }
+    .section--blue .section__label,
+    .section--black .section__label { color: rgba(255,255,255,.45); }
 
     .section__title {
-      font-size: clamp(2.6rem, 7vw, 4.2rem);
-      font-weight: 900; line-height: 1.25; letter-spacing: -.01em; margin-bottom: 14px;
+      font-size: clamp(2.6rem, 7vw, 4.4rem);
+      font-weight: 900; line-height: 1.25; letter-spacing: -.01em;
     }
     .section--blue .section__title,
     .section--black .section__title { color: var(--white); }
-    .section__title .accent { color: var(--blue); }
-    .section--blue .section__title .accent { color: var(--yellow); }
-    .section--black .section__title .accent { color: var(--blue); }
 
-    .section__lead { font-size: 1.45rem; color: #666; line-height: 1.85; margin-bottom: 36px; }
+    /* 斜めスラッシュ強調テキスト */
+    .section__title .slash {
+      padding-bottom: 6px;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        var(--blue) 0px, var(--blue) 2px,
+        transparent 2px, transparent 9px
+      );
+      background-repeat: repeat-x;
+      background-position: left bottom;
+      background-size: 13px 13px;
+    }
+    .section--blue .section__title .slash,
+    .section--black .section__title .slash {
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,.4) 0px, rgba(255,255,255,.4) 2px,
+        transparent 2px, transparent 9px
+      );
+    }
+
+    .section__lead { font-size: 1.45rem; color: #666; line-height: 1.85; margin-top: 12px; }
     .section--blue .section__lead,
-    .section--black .section__lead { color: rgba(255,255,255,.7); }
+    .section--black .section__lead { color: rgba(255,255,255,.68); }
 
-    /* ===========================
-       FEATURES（斜め番号＋カード）
-    =========================== */
-    .features { display: flex; flex-direction: column; gap: 3px; background: #d8d8d8; }
+    /* =====================
+       FEATURES（しずくバッジ）
+    ===================== */
+    .features { display: flex; flex-direction: column; gap: 3px; background: #d5d5d5; }
     .feature {
-      background: var(--white); display: grid;
-      grid-template-columns: 64px 1fr; align-items: stretch;
-      transition: background .2s; position: relative; overflow: hidden;
+      background: var(--white); padding: 24px 20px 24px 16px;
+      display: flex; align-items: flex-start; gap: 18px;
+      position: relative; overflow: hidden; transition: background .2s;
     }
     .feature:hover { background: #f0f5ff; }
     .feature--blue { background: var(--blue); }
     .feature--blue:hover { background: var(--blue-dark); }
 
-    .feature__num {
-      background: var(--blue);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.8rem; font-weight: 700; color: var(--white);
-      writing-mode: horizontal-tb;
-    }
-    .feature--blue .feature__num { background: rgba(255,255,255,.15); }
-
-    /* 斜めアクセントライン */
-    .feature::after {
+    /* 装飾的な斜め線 */
+    .feature::before {
       content: '';
-      position: absolute; top: -20px; right: 24px;
-      width: 2px; height: 80px;
-      background: rgba(0,87,184,.07);
+      position: absolute; top: -30px; right: 20px;
+      width: 1px; height: 110px;
+      background: rgba(0,87,184,.08);
       transform: rotate(20deg);
     }
-    .feature--blue::after { background: rgba(255,255,255,.08); }
+    .feature--blue::before { background: rgba(255,255,255,.1); }
 
-    .feature__body { padding: 20px 18px; }
-    .feature__title { font-size: 1.55rem; font-weight: 900; margin-bottom: 6px; line-height: 1.4; }
+    .feature__badge { flex-shrink: 0; padding-top: 4px; }
+    .feature__body { flex: 1; }
+    .feature__title { font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; line-height: 1.4; }
     .feature--blue .feature__title { color: var(--white); }
     .feature__text { font-size: 1.3rem; color: #555; line-height: 1.75; }
     .feature--blue .feature__text { color: rgba(255,255,255,.8); }
@@ -358,35 +449,75 @@
       font-size: 1.1rem; font-weight: 700; padding: 3px 10px;
     }
     .feature--blue .feature__chip { background: rgba(255,255,255,.18); }
+    .feature--blue .drop-badge__circle { background: rgba(255,255,255,.25); }
+    .feature--blue .drop-badge__circle::after { border-top-color: rgba(255,255,255,.25); }
+    .feature--blue .drop-badge__num { color: var(--white); }
 
-    /* ===========================
-       NUMBERS STRIP
-    =========================== */
+    /* =====================
+       NUMBERS STRIP（カラーブロック型）
+    ===================== */
     .numbers-strip {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2px; background: #222;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px; background: #e0e0e0;
     }
-    .number-cell { background: var(--black); padding: 24px 16px; text-align: center; }
-    .number-cell:nth-child(even) { background: #1a1a1a; }
+    @media (min-width: 768px) {
+      .numbers-strip { grid-template-columns: repeat(5, 1fr); }
+    }
+    .number-cell {
+      padding: 26px 14px 22px;
+      text-align: center; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .number-cell:nth-child(1) { background: #0057B8; }
+    .number-cell:nth-child(2) { background: #0072E5; }
+    .number-cell:nth-child(3) { background: #005099; }
+    .number-cell:nth-child(4) { background: #1B449C; }
+    .number-cell:nth-child(5) { background: #003670; }
+    /* 斜め光沢線 */
+    .number-cell::before {
+      content: '';
+      position: absolute; top: -20px; right: 18px;
+      width: 1px; height: 120px;
+      background: rgba(255,255,255,.15);
+      transform: rotate(15deg);
+    }
+    .number-cell::after {
+      content: '';
+      position: absolute; top: -20px; right: 28px;
+      width: 1px; height: 120px;
+      background: rgba(255,255,255,.07);
+      transform: rotate(15deg);
+    }
     .number-cell__en {
       font-family: 'Oswald', sans-serif;
-      font-size: .9rem; letter-spacing: .16em;
-      color: rgba(255,255,255,.3); margin-bottom: 4px;
+      font-size: .85rem; letter-spacing: .18em;
+      color: rgba(255,255,255,.55); margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    /* ラベル下のライン */
+    .number-cell__line {
+      width: 28px; height: 1px;
+      background: rgba(255,255,255,.35);
+      margin-bottom: 10px;
     }
     .number-cell__val {
       font-family: 'Oswald', sans-serif;
-      font-size: 3.8rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 4px;
+      font-size: 4.2rem; font-weight: 700;
+      color: var(--white); line-height: 1;
+      margin-bottom: 8px; position: relative; z-index: 1;
     }
-    .number-cell__val em { font-style: normal; font-size: .45em; font-family: 'Noto Sans JP', sans-serif; }
-    .number-cell__label { font-size: 1.2rem; color: rgba(255,255,255,.6); font-weight: 700; }
+    .number-cell__val em { font-style: normal; font-size: .38em; font-family: 'Noto Sans JP', sans-serif; vertical-align: middle; }
+    .number-cell__label {
+      font-size: 1.1rem; color: rgba(255,255,255,.8);
+      font-weight: 700; position: relative; z-index: 1;
+    }
 
-    /* ===========================
+    /* =====================
        REPRESENTATIVE
-    =========================== */
-    .rep-img {
-      position: relative;
-      aspect-ratio: 4/3; overflow: hidden;
-    }
+    ===================== */
+    .rep-wrap { position: relative; }
+    .rep-img { position: relative; aspect-ratio: 4/3; overflow: hidden; }
     .rep-img img { width:100%;height:100%;object-fit:cover;object-position:top center; }
     .rep-img__overlay {
       position: absolute; inset: 0;
@@ -395,76 +526,71 @@
       padding: 20px;
     }
     .rep-img__role { font-size: 1.1rem; color: rgba(255,255,255,.7); font-weight: 700; }
-    .rep-img__name { font-size: 2.6rem; font-weight: 900; color: var(--white); }
+    .rep-img__name { font-size: 2.8rem; font-weight: 900; color: var(--white); }
 
-    /* 斜めセパレーター */
-    .skew-sep {
-      height: 56px; background: var(--gray); overflow: hidden; position: relative;
-    }
-    .skew-sep::before {
-      content: '';
-      position: absolute; top: 0; left: -5%; right: -5%;
-      height: 100%;
-      background: var(--white);
-      transform: skewY(-2deg);
-    }
-    .skew-sep--rev::before { transform: skewY(2deg); }
-    .skew-sep--blue { background: var(--blue); }
-    .skew-sep--blue::before { background: var(--gray); }
-    .skew-sep--black::before { background: var(--black); }
-
-    .rep-text { padding: 28px 20px 36px; background: var(--white); }
+    .rep-text { padding: 36px 20px; background: var(--white); position: relative; overflow: hidden; }
+    .rep-text .vert-en { right: -4px; top: 50%; transform: translateY(-50%); }
     .rep-quote {
-      font-size: 2rem; font-weight: 900; line-height: 1.5;
-      margin-bottom: 20px;
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 900; line-height: 1.5; margin-bottom: 20px;
       border-left: 4px solid var(--blue); padding-left: 16px;
+      position: relative; z-index: 1;
     }
-    .rep-body { font-size: 1.45rem; color: #444; line-height: 1.95; margin-bottom: 14px; }
+    .rep-body { font-size: 1.45rem; color: #444; line-height: 1.95; margin-bottom: 14px; position: relative; z-index: 1; }
     .rep-history {
       background: var(--gray); padding: 12px 16px;
       font-size: 1.3rem; color: #555;
       border-left: 3px solid var(--blue); line-height: 1.8;
+      position: relative; z-index: 1;
     }
     .rep-history strong { color: var(--black); font-weight: 900; }
 
-    /* ===========================
-       SUGIMOTO（杉本さん）
-    =========================== */
-    .sugimoto-section { background: var(--gray); }
-    .sugimoto-img {
-      aspect-ratio: 3/2; overflow: hidden; position: relative;
-    }
+    /* =====================
+       SUGIMOTO（全幅→テキスト）
+    ===================== */
+    .sugimoto-img { position: relative; aspect-ratio: 3/2; overflow: hidden; }
     .sugimoto-img img { width:100%;height:100%;object-fit:cover;object-position:center top; }
-    .sugimoto-img__label {
+    .sugimoto-img__cap {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.7));
-      padding: 20px 18px 14px;
+      background: linear-gradient(transparent, rgba(0,0,0,.72));
+      padding: 24px 20px 16px;
     }
     .sugimoto-img__role { font-size: 1.1rem; color: rgba(255,255,255,.7); font-weight: 700; margin-bottom: 2px; }
-    .sugimoto-img__name { font-size: 2.8rem; font-weight: 900; color: var(--white); }
-    .sugimoto-text { padding: 28px 20px 32px; }
+    .sugimoto-img__name { font-size: 3rem; font-weight: 900; color: var(--white); }
+    .sugimoto-text { padding: 32px 20px 36px; background: var(--gray); }
     .sugimoto-msg { font-size: 1.5rem; color: #444; line-height: 1.9; margin-bottom: 24px; }
 
-    /* ===========================
-       AGE BARS
-    =========================== */
-    .age-bars { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
-    .age-row { display: grid; grid-template-columns: 52px 1fr 44px; align-items: center; gap: 12px; }
-    .age-row__label { font-size: 1.25rem; font-weight: 700; color: rgba(255,255,255,.5); text-align: right; }
-    .age-bar-bg { background: rgba(255,255,255,.1); height: 8px; overflow: hidden; }
-    .age-bar-fill { height: 8px; background: var(--blue); width: 0; transition: width 1.3s cubic-bezier(.22,1,.36,1); }
-    .age-row__count { font-size: 1.3rem; font-weight: 900; color: var(--white); }
+    /* =====================
+       AGE DONUT CHART（円グラフ）
+    ===================== */
+    .age-chart-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+    @media (min-width: 600px) {
+      .age-chart-wrap { flex-direction: row; justify-content: center; align-items: center; }
+    }
+    .age-donut { flex-shrink: 0; }
+    .age-donut circle { transition: stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1); }
+    .age-legend { display: flex; flex-direction: column; gap: 10px; }
+    .age-legend-item { display: flex; align-items: center; gap: 10px; }
+    .age-legend-dot {
+      width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+    }
+    .age-legend-label { font-size: 1.3rem; color: rgba(255,255,255,.75); font-weight: 700; min-width: 44px; }
+    .age-legend-bar-wrap { flex: 1; background: rgba(255,255,255,.1); height: 6px; min-width: 80px; }
+    .age-legend-bar { height: 6px; width: 0; transition: width 1.3s cubic-bezier(.22,1,.36,1); }
+    .age-legend-count { font-size: 1.3rem; font-weight: 900; color: var(--white); min-width: 32px; text-align: right; }
 
-    /* ===========================
+    /* =====================
        JOB TABLE
-    =========================== */
+    ===================== */
     .job-table { width: 100%; border-collapse: collapse; }
     .job-table tr { border-bottom: 1px solid #e5e5e5; }
     .job-table th {
       background: var(--blue); color: var(--white);
       font-size: 1.25rem; font-weight: 700;
-      padding: 13px 14px; text-align: left;
-      width: 88px; vertical-align: top; white-space: nowrap;
+      padding: 13px 12px; text-align: left;
+      width: 82px; vertical-align: top; white-space: nowrap;
     }
     .job-table td { padding: 13px 14px; font-size: 1.4rem; line-height: 1.75; color: #333; background: var(--white); }
     .chip {
@@ -472,20 +598,25 @@
       font-size: 1.15rem; font-weight: 700; padding: 3px 10px; margin: 2px 4px 2px 0;
     }
 
-    /* ===========================
+    /* =====================
        WELCOME GRID
-    =========================== */
-    .welcome-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 3px; background: #ccc;
-    }
+    ===================== */
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #ccc; }
     .welcome-cell {
       background: var(--white); padding: 22px 14px; text-align: center;
-      transition: background .2s, transform .2s;
+      transition: background .2s, transform .2s; position: relative; overflow: hidden;
     }
     .welcome-cell:hover { background: var(--blue); transform: translateY(-2px); }
     .welcome-cell:hover .welcome-cell__text,
     .welcome-cell:hover .welcome-cell__sub { color: var(--white); }
+    /* セル内の斜め装飾線 */
+    .welcome-cell::after {
+      content: '';
+      position: absolute; top: -15px; right: 12px;
+      width: 1px; height: 70px;
+      background: rgba(0,87,184,.08);
+      transform: rotate(20deg);
+    }
     .welcome-cell--blue { background: var(--blue); }
     .welcome-cell--blue .welcome-cell__text { color: var(--white); }
     .welcome-cell--blue .welcome-cell__sub { color: rgba(255,255,255,.7); }
@@ -493,19 +624,19 @@
     .welcome-cell__text { font-size: 1.35rem; font-weight: 900; color: var(--black); line-height: 1.4; }
     .welcome-cell__sub { font-size: 1.1rem; color: #888; margin-top: 4px; }
 
-    /* ===========================
+    /* =====================
        ACCESS
-    =========================== */
+    ===================== */
     .map-wrap { aspect-ratio: 16/9; overflow: hidden; }
     .map-wrap iframe { width:100%;height:100%;border:0;display:block; }
     .company-rows { margin-top: 24px; border-top: 1px solid #e5e5e5; }
-    .company-row { display: grid; grid-template-columns: 80px 1fr; border-bottom: 1px solid #e5e5e5; }
+    .company-row { display: grid; grid-template-columns: 76px 1fr; border-bottom: 1px solid #e5e5e5; }
     .company-row__th { font-size: 1.25rem; font-weight: 700; color: #888; padding: 12px 0; }
     .company-row__td { font-size: 1.4rem; color: #222; padding: 12px 0; line-height: 1.65; }
 
-    /* ===========================
+    /* =====================
        FORM
-    =========================== */
+    ===================== */
     .form { display: flex; flex-direction: column; gap: 18px; }
     .form__field { display: flex; flex-direction: column; gap: 5px; }
     .form__label { font-size: 1.3rem; font-weight: 700; color: #333; }
@@ -524,45 +655,37 @@
     .form__field.has-error .form__textarea { border-color: #e53e3e; }
     .form__field.has-error .form__error { display: block; }
 
-    /* ===========================
+    /* =====================
        FINAL CTA
-    =========================== */
+    ===================== */
     .final-cta {
-      background: var(--blue); padding: 64px 20px;
-      text-align: center; position: relative;
+      background: var(--blue); padding: 80px 20px;
+      text-align: center; position: relative; overflow: hidden;
     }
-    /* 上部斜め */
+    .final-cta .vert-en { color: rgba(255,255,255,.05); font-size: clamp(6rem,14vw,14rem); right: -8px; top: 50%; transform: translateY(-50%); }
     .final-cta::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 0; width: 0;
+      position: absolute; top: 0; left: 0;
+      width: 0; height: 0;
       border-style: solid;
-      border-width: 52px 100vw 0 0;
+      border-width: 56px 100vw 0 0;
       border-color: var(--white) transparent transparent transparent;
     }
-    .final-cta__en {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1rem; letter-spacing: .24em;
-      color: rgba(255,255,255,.5); margin-bottom: 10px;
-    }
-    .final-cta__title {
-      font-size: clamp(3rem, 9vw, 5.5rem);
-      font-weight: 900; color: var(--white);
-      line-height: 1.2; margin-bottom: 14px;
-    }
-    .final-cta__sub { font-size: 1.5rem; color: rgba(255,255,255,.8); margin-bottom: 36px; line-height: 1.8; }
-    .final-cta__btns { display: flex; flex-direction: column; gap: 10px; }
+    .final-cta__label { font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: .24em; color: rgba(255,255,255,.45); margin-bottom: 12px; position: relative; z-index: 1; }
+    .final-cta__title { font-size: clamp(3.2rem, 9vw, 5.8rem); font-weight: 900; color: var(--white); line-height: 1.2; margin-bottom: 14px; position: relative; z-index: 1; }
+    .final-cta__sub { font-size: 1.5rem; color: rgba(255,255,255,.78); margin-bottom: 36px; line-height: 1.8; position: relative; z-index: 1; }
+    .final-cta__btns { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
 
-    /* ===========================
+    /* =====================
        FOOTER
-    =========================== */
+    ===================== */
     footer { background: var(--black); padding: 40px 20px 100px; text-align: center; }
     .footer__logo img { height: 34px; width: auto; margin: 0 auto 12px; }
-    .footer__info { font-size: 1.2rem; color: rgba(255,255,255,.4); line-height: 1.9; }
+    .footer__info { font-size: 1.2rem; color: rgba(255,255,255,.38); line-height: 1.9; }
 
-    /* ===========================
-       STICKY CTA（スマホ）
-    =========================== */
+    /* =====================
+       STICKY CTA
+    ===================== */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 800;
       display: grid; grid-template-columns: 1fr 1fr;
@@ -570,60 +693,58 @@
     }
     .sticky-cta a {
       display: flex; align-items: center; justify-content: center; gap: 6px;
-      padding: 14px 8px; font-size: 1.5rem; font-weight: 900; letter-spacing: .03em;
+      padding: 14px 8px; font-size: 1.5rem; font-weight: 900;
     }
     .sticky-cta__tel { background: var(--black); color: var(--white); }
     .sticky-cta__apply { background: var(--blue); color: var(--white); }
 
-    /* ===========================
+    /* =====================
        ANIMATIONS
-    =========================== */
-    .js-fade { opacity: 0; transform: translateY(30px); transition: opacity .65s ease, transform .7s cubic-bezier(.165,.84,.44,1); }
+    ===================== */
+    .js-fade { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .7s cubic-bezier(.165,.84,.44,1); }
     .js-fade.in { opacity: 1; transform: translateY(0); }
     .js-fade-d1 { transition-delay: .12s; }
     .js-fade-d2 { transition-delay: .24s; }
 
-    /* ===========================
+    /* =====================
        FORM SUCCESS
-    =========================== */
-    .form-success {
-      display: none; background: #EFF6FF;
-      border: 2px solid var(--blue); padding: 40px 20px; text-align: center;
-    }
+    ===================== */
+    .form-success { display: none; background: #EFF6FF; border: 2px solid var(--blue); padding: 40px 20px; text-align: center; }
     .form-success__icon { font-size: 4.8rem; margin-bottom: 12px; }
     .form-success__title { font-size: 2.2rem; font-weight: 900; color: var(--blue); margin-bottom: 8px; }
     .form-success__body { font-size: 1.45rem; color: #444; }
 
-    /* ===========================
-       TABLET / PC（768px+）
-    =========================== */
+    /* =====================
+       PC（768px+）
+    ===================== */
     @media (min-width: 768px) {
       .header { padding: 0 40px; }
-      .hero__content { padding: 60px 8vw 100px; max-width: 700px; }
+      .hero__content { padding: 60px 8vw 100px; max-width: 720px; }
       .hero__btns { flex-direction: row; }
       .section { padding: 80px 8vw; }
-      .sugimoto-section { padding: 80px 8vw; }
-      .numbers-strip { grid-template-columns: repeat(5, 1fr); }
+      .sugimoto-text { padding: 48px 8vw; }
+      .numbers-strip { grid-template-columns: repeat(5,1fr); }
       .features { display: grid; grid-template-columns: 1fr 1fr; }
-      .welcome-grid { grid-template-columns: repeat(4, 1fr); }
-      /* 杉本さん：PC時は横並び */
-      .sugimoto-layout { display: grid; grid-template-columns: 360px 1fr; gap: 0; }
-      .sugimoto-img { aspect-ratio: auto; min-height: 420px; }
-      /* 代表：PC時は横並び */
+      .welcome-grid { grid-template-columns: repeat(4,1fr); }
+      /* 杉本：PC横並び */
+      .sugimoto-layout { display: grid; grid-template-columns: 420px 1fr; }
+      .sugimoto-img { aspect-ratio: auto; }
+      /* 代表：PC横並び */
       .rep-layout { display: grid; grid-template-columns: 1fr 1fr; }
       .rep-img { aspect-ratio: auto; }
-      .age-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+      .rep-text { padding: 48px; }
+      /* 年齢 */
+      .age-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+      /* アクセス */
       .access-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
       .company-rows { margin-top: 0; }
+      /* CTA */
       .final-cta__btns { flex-direction: row; justify-content: center; }
       footer { padding-bottom: 48px; }
       .sticky-cta { display: none; }
-      .pain { padding: 80px 8vw; }
-      .appeal { padding: 48px 8vw; }
     }
     @media (min-width: 1100px) {
-      .section { padding: 96px 6vw; }
-      .pain, .appeal { padding: 96px 6vw; }
+      .section { padding: 96px 7vw; }
     }
   </style>
 </head>
@@ -640,8 +761,9 @@
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero__bg"></div>
+  <div class="hero__left-panel"></div>
   <div class="hero__content js-fade">
-    <div class="hero__en">CHIBA / SAITAMA — FOOD LOGISTICS</div>
+    <div class="hero__label">CHIBA / SAITAMA — FOOD LOGISTICS DRIVER</div>
     <h1 class="hero__copy">
       頑張りが、<br>ちゃんと<br><span class="accent">報われる会社</span><br>があります。
     </h1>
@@ -663,13 +785,16 @@
     <span class="scroll-hint__label">SCROLL</span>
     <span class="scroll-hint__line"></span>
   </div>
-  <div class="hero__slash"></div>
+  <div class="hero__cut"></div>
 </section>
 
 <!-- 月収アピール -->
 <div class="appeal">
-  <div class="appeal__en">MONTHLY SALARY — ACTUAL RECORD</div>
-  <div class="appeal__num js-counter" data-target="338"><span class="appeal__unit">月</span>0<span class="appeal__unit">円〜</span></div>
+  <span class="vert-en">SALARY</span>
+  <div class="appeal__label">MONTHLY SALARY — ACTUAL RECORD</div>
+  <div class="appeal__num">
+    <span class="appeal__unit">月</span><span class="js-counter" data-target="338000">0</span><span class="appeal__unit">円〜</span>
+  </div>
   <div class="appeal__note">※週1休み・月26日稼働の場合 ／ 日給13,000円〜 ／ 賞与は別途年2回</div>
   <div class="appeal__chips">
     <span class="appeal__chip">💰 賞与年2回</span>
@@ -679,11 +804,23 @@
   </div>
 </div>
 
+<!-- コピーバナー1（左からワイプイン） -->
+<div class="copy-banner js-wipe">
+  <div class="copy-banner__inner">
+    <span class="copy-banner__sep"></span>
+    20年以上、一度も賞与を欠かしていない
+    <span class="copy-banner__sep"></span>
+    20年以上、一度も賞与を欠かしていない
+    <span class="copy-banner__sep"></span>
+  </div>
+</div>
+
 <!-- ペインポイント -->
 <div class="pain">
-  <div class="pain__en">ARE YOU FEELING THIS?</div>
+  <span class="vert-en">PROBLEM</span>
+  <div class="pain__label">ARE YOU FEELING THIS WAY?</div>
   <h2 class="pain__heading">
-    今の仕事、<span class="accent">こんな悩み</span><br>ありませんか？
+    今の仕事、<span class="em">こんな悩み</span><br>ありませんか？
   </h2>
   <ul class="pain__list js-fade">
     <li class="pain__item">どれだけ頑張っても給料が上がらない</li>
@@ -703,25 +840,38 @@
   <div class="photo-mosaic__main">
     <img src="images/real-staff-advance.jpg" alt="アドヴァンスのスタッフとトラック" loading="lazy" />
   </div>
-  <div class="photo-mosaic__sub">
-    <div class="photo-mosaic__thumb"><img src="images/real-truck-isuzu.jpg" alt="いすゞGIGAトラック" loading="lazy" /></div>
-    <div class="photo-mosaic__thumb"><img src="images/real-truck-hino.jpg" alt="日野冷凍車" loading="lazy" /></div>
-    <div class="photo-mosaic__thumb"><img src="images/real-staff-wing.jpg" alt="スタッフとウィング車" loading="lazy" /></div>
-    <div class="photo-mosaic__thumb"><img src="images/real-fleet-rainy.jpg" alt="車列" loading="lazy" /></div>
+  <div class="photo-mosaic__subs">
+    <div class="photo-thumb"><img src="images/real-truck-isuzu.jpg" alt="" loading="lazy" /></div>
+    <div class="photo-thumb"><img src="images/real-truck-hino.jpg" alt="" loading="lazy" /></div>
+    <div class="photo-thumb"><img src="images/real-staff-wing.jpg" alt="" loading="lazy" /></div>
+    <div class="photo-thumb"><img src="images/real-fleet-rainy.jpg" alt="" loading="lazy" /></div>
+  </div>
+</div>
+
+<!-- コピーバナー2（右からワイプイン） -->
+<div class="copy-banner copy-banner--right copy-banner--yellow js-wipe-r">
+  <div class="copy-banner__inner">
+    <span class="copy-banner__sep"></span>
+    全67台 エアサス搭載・体に優しい職場
+    <span class="copy-banner__sep"></span>
+    全67台 エアサス搭載・体に優しい職場
+    <span class="copy-banner__sep"></span>
   </div>
 </div>
 
 <!-- 6つの魅力 -->
 <section class="section section--gray" id="features">
-  <div class="section__eyebrow">
-    <span class="section__en">WHY ADVANCE</span>
-    <span class="section__line"></span>
+  <span class="vert-en vert-en--left" style="color:rgba(0,87,184,.04);font-size:clamp(5rem,9vw,9rem);top:50%;transform:translateY(-50%)">FEATURES</span>
+  <div class="section__head">
+    <span class="section__label">WHY ADVANCE</span>
+    <h2 class="section__title">選ばれる<span class="slash">6つの理由</span></h2>
+    <p class="section__lead">稼げて・体にやさしく・長く続けられる。ドライバーが主役の職場です。</p>
   </div>
-  <h2 class="section__title">アドヴァンスが<br><span class="accent">選ばれる6つの理由</span></h2>
-  <p class="section__lead">稼げて・体にやさしく・長く続けられる。ドライバーが主役の職場です。</p>
   <div class="features js-fade">
     <div class="feature">
-      <div class="feature__num">01</div>
+      <div class="feature__badge">
+        <div class="drop-badge"><div class="drop-badge__circle"><span class="drop-badge__num">01</span></div></div>
+      </div>
       <div class="feature__body">
         <div class="feature__title">賞与年2回・月給33万円以上も可</div>
         <p class="feature__text">日給13,000円〜。月26日稼働で338,000円の実績。創業以来20年以上、一度も賞与を欠かしていません。</p>
@@ -729,15 +879,19 @@
       </div>
     </div>
     <div class="feature feature--blue">
-      <div class="feature__num">02</div>
+      <div class="feature__badge">
+        <div class="drop-badge"><div class="drop-badge__circle"><span class="drop-badge__num">02</span></div></div>
+      </div>
       <div class="feature__body">
-        <div class="feature__title">全車エアサス搭載・腰への負担が少ない</div>
+        <div class="feature__title">全車エアサス搭載・体への負担が少ない</div>
         <p class="feature__text">67台全てにエアサス＋パワーゲートを完備。手積み・手降ろしはほぼなし。体に長く優しい環境です。</p>
         <span class="feature__chip">パワーゲート・バックカメラ完備</span>
       </div>
     </div>
     <div class="feature">
-      <div class="feature__num">03</div>
+      <div class="feature__badge">
+        <div class="drop-badge"><div class="drop-badge__circle"><span class="drop-badge__num">03</span></div></div>
+      </div>
       <div class="feature__body">
         <div class="feature__title">近距離・固定ルートで1日200〜250km</div>
         <p class="feature__text">首都圏中心の食品配送。ほぼ固定ルートなので、慣れれば安心して働けます。</p>
@@ -745,7 +899,9 @@
       </div>
     </div>
     <div class="feature feature--blue">
-      <div class="feature__num">04</div>
+      <div class="feature__badge">
+        <div class="drop-badge"><div class="drop-badge__circle"><span class="drop-badge__num">04</span></div></div>
+      </div>
       <div class="feature__body">
         <div class="feature__title">3週間〜1ヶ月の長期研修あり</div>
         <p class="feature__text">未経験・普通免許のみでもOK。丁寧な研修と資格取得補助で、一からしっかり育てます。</p>
@@ -753,7 +909,9 @@
       </div>
     </div>
     <div class="feature">
-      <div class="feature__num">05</div>
+      <div class="feature__badge">
+        <div class="drop-badge"><div class="drop-badge__circle"><span class="drop-badge__num">05</span></div></div>
+      </div>
       <div class="feature__body">
         <div class="feature__title">社宅家賃半額・社用車貸与で移住も安心</div>
         <p class="feature__text">遠方からの転居もしっかりサポート。社宅の家賃を半額負担、社用車の貸与も相談可能です。</p>
@@ -761,7 +919,9 @@
       </div>
     </div>
     <div class="feature feature--blue">
-      <div class="feature__num">06</div>
+      <div class="feature__badge">
+        <div class="drop-badge"><div class="drop-badge__circle"><span class="drop-badge__num">06</span></div></div>
+      </div>
       <div class="feature__body">
         <div class="feature__title">週休1〜2日・出勤時間も自分で選べる</div>
         <p class="feature__text">出勤時間は14〜18時の5パターンから選択可。ライフスタイルに合わせた働き方ができます。</p>
@@ -775,33 +935,38 @@
 <div class="numbers-strip">
   <div class="number-cell">
     <div class="number-cell__en">VEHICLES</div>
+    <div class="number-cell__line"></div>
     <div class="number-cell__val js-counter" data-target="67">0<em>台</em></div>
     <div class="number-cell__label">稼働車両数</div>
   </div>
   <div class="number-cell">
     <div class="number-cell__en">DRIVERS</div>
+    <div class="number-cell__line"></div>
     <div class="number-cell__val js-counter" data-target="67">0<em>名</em></div>
     <div class="number-cell__label">ドライバー数</div>
   </div>
   <div class="number-cell">
     <div class="number-cell__en">BONUS</div>
-    <div class="number-cell__val">20<em>年+</em></div>
+    <div class="number-cell__line"></div>
+    <div class="number-cell__val"><span class="js-counter" data-target="20">0</span><em>年+</em></div>
     <div class="number-cell__label">毎年賞与支給</div>
   </div>
   <div class="number-cell">
-    <div class="number-cell__en">AIR SUSPENSION</div>
+    <div class="number-cell__en">AIR SUSP.</div>
+    <div class="number-cell__line"></div>
     <div class="number-cell__val">100<em>%</em></div>
     <div class="number-cell__label">全車エアサス</div>
   </div>
   <div class="number-cell">
     <div class="number-cell__en">VETERAN</div>
-    <div class="number-cell__val">15<em>年+</em></div>
+    <div class="number-cell__line"></div>
+    <div class="number-cell__val"><span class="js-counter" data-target="15">0</span><em>年+</em></div>
     <div class="number-cell__label">勤続ベテラン在籍</div>
   </div>
 </div>
 
 <!-- 代表メッセージ -->
-<section id="message" style="padding:0;background:var(--white);">
+<section id="message" style="padding:0;background:var(--white);position:relative;overflow:hidden;">
   <div class="rep-layout">
     <div class="rep-img js-fade">
       <img src="images/president-real.jpg" alt="代表取締役 櫻井謙治" />
@@ -811,11 +976,9 @@
       </div>
     </div>
     <div class="rep-text js-fade js-fade-d1">
-      <div class="section__eyebrow" style="margin-bottom:10px">
-        <span class="section__en" style="color:var(--blue)">MESSAGE FROM CEO</span>
-        <span class="section__line"></span>
-      </div>
-      <p class="rep-quote">「ドライバーがちゃんと<br>報われる会社を作りたい」</p>
+      <span class="vert-en" style="right:-4px;top:50%;transform:translateY(-50%)">MESSAGE</span>
+      <span class="section__label">MESSAGE FROM CEO</span>
+      <p class="rep-quote">「ドライバーがちゃんと<br><span class="slash-deco">報われる会社を作りたい</span>」</p>
       <p class="rep-body">私はもともと証券会社の営業職でした。33歳でドライバーに転職し、独立してアドヴァンスを設立しました。</p>
       <p class="rep-body">ドライバーは日本の物流を支える大切な仕事です。それなのに賞与がない、評価されない会社が多い。だから私は「ドライバーがちゃんと報われる会社」を作ることを使命にしてきました。</p>
       <p class="rep-body"><strong>20年以上、一度も賞与を欠かしていません。</strong>それが私の誇りであり、みなさんへの約束です。</p>
@@ -828,11 +991,10 @@
 
 <!-- こんな方歓迎 -->
 <section class="section section--gray">
-  <div class="section__eyebrow">
-    <span class="section__en">WHO WE WELCOME</span>
-    <span class="section__line"></span>
+  <div class="section__head">
+    <span class="section__label">WHO WE WELCOME</span>
+    <h2 class="section__title">こんな方を<span class="slash">お待ちしています</span></h2>
   </div>
-  <h2 class="section__title">こんな方を<br><span class="accent">お待ちしています</span></h2>
   <div class="welcome-grid js-fade">
     <div class="welcome-cell"><span class="welcome-cell__icon">🚗</span><div class="welcome-cell__text">普通免許のみの方</div><div class="welcome-cell__sub">資格補助あり</div></div>
     <div class="welcome-cell welcome-cell--blue"><span class="welcome-cell__icon">🔰</span><div class="welcome-cell__text">ドライバー未経験</div><div class="welcome-cell__sub">長期研修で安心</div></div>
@@ -846,34 +1008,100 @@
 </section>
 
 <!-- 年齢構成 -->
-<section class="section section--black">
-  <div class="age-section-inner">
+<section class="section section--black" style="overflow:hidden;">
+  <span class="vert-en vert-en--dark" style="font-size:clamp(5rem,10vw,10rem);right:0;top:50%;transform:translateY(-50%)">MEMBERS</span>
+  <div class="age-inner">
     <div class="js-fade">
-      <div class="section__eyebrow">
-        <span class="section__en">OUR MEMBERS</span>
-        <span class="section__line"></span>
-      </div>
-      <h2 class="section__title">幅広い年代が<br><span class="accent">長く活躍中</span></h2>
+      <span class="section__label">OUR MEMBERS</span>
+      <h2 class="section__title" style="color:white">幅広い年代が<br><span class="slash" style="background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.35) 0px,rgba(255,255,255,.35) 2px,transparent 2px,transparent 9px)">長く活躍中</span></h2>
       <p class="section__lead">40代・50代が中心。年齢・学歴不問で採用中。社歴15年以上のベテランも多く在籍しています。</p>
     </div>
-    <div class="age-bars js-fade js-fade-d1" id="ageBars">
-      <div class="age-row"><div class="age-row__label">20代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="2"></div></div><div class="age-row__count">1名</div></div>
-      <div class="age-row"><div class="age-row__label">30代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="11"></div></div><div class="age-row__count">7名</div></div>
-      <div class="age-row"><div class="age-row__label">40代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="32"></div></div><div class="age-row__count">20名</div></div>
-      <div class="age-row"><div class="age-row__label">50代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="48"></div></div><div class="age-row__count">30名</div></div>
-      <div class="age-row"><div class="age-row__label">60代〜</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="7"></div></div><div class="age-row__count">4名+</div></div>
+    <div class="age-chart-wrap js-fade js-fade-d1" id="ageBars">
+      <!--
+        SVGドーナツ円グラフ（総62名: 20代1名, 30代7名, 40代20名, 50代30名, 60代4名）
+        r=54 → 周長=2π×54≈339.3
+        セグメントは12時から時計回り。rotate(-90deg)で12時スタート。
+        stroke-dashoffset = -(累積length) で位置決め。
+        50代(30名): 164.2px → offset 0
+        40代(20名): 109.5px → offset -164.2
+        30代(7名):   38.3px → offset -273.7
+        20代(1名):    5.5px → offset -312.0
+        60代(4名):   21.9px → offset -317.5
+        合計≈339.4≒周長
+      -->
+      <svg class="age-donut" width="200" height="200" viewBox="0 0 120 120" aria-hidden="true"
+           style="transform:rotate(-90deg)">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="18"/>
+        <!-- 50代: 30名 → 164.2px, offset=0（12時から始まる） -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#0057B8" stroke-width="18"
+          stroke-dasharray="162.2 177.1" stroke-dashoffset="0"
+          data-final-offset="0" class="donut-seg"/>
+        <!-- 40代: 20名 → 109.5px -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#2176AE" stroke-width="18"
+          stroke-dasharray="107.5 231.8" stroke-dashoffset="-162.2"
+          data-final-offset="-162.2" class="donut-seg"/>
+        <!-- 30代: 7名 → 38.3px -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#5BA4CF" stroke-width="18"
+          stroke-dasharray="36.3 303.0" stroke-dashoffset="-269.7"
+          data-final-offset="-269.7" class="donut-seg"/>
+        <!-- 20代: 1名 → 5.5px -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#B0D4F1" stroke-width="18"
+          stroke-dasharray="4.5 334.8" stroke-dashoffset="-306.0"
+          data-final-offset="-306.0" class="donut-seg"/>
+        <!-- 60代〜: 4名 → 21.9px -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#7EC8E3" stroke-width="18"
+          stroke-dasharray="19.9 319.4" stroke-dashoffset="-310.5"
+          data-final-offset="-310.5" class="donut-seg"/>
+        <!-- 中央テキスト（回転を打ち消す） -->
+        <g style="transform:rotate(90deg);transform-origin:60px 60px">
+          <text x="60" y="55" text-anchor="middle" font-family="Oswald,sans-serif" font-size="20" font-weight="700" fill="white">62名</text>
+          <text x="60" y="68" text-anchor="middle" font-family="Noto Sans JP,sans-serif" font-size="7" fill="rgba(255,255,255,.6)">在籍ドライバー</text>
+        </g>
+      </svg>
+      <!-- 凡例 -->
+      <div class="age-legend">
+        <div class="age-legend-item">
+          <div class="age-legend-dot" style="background:#0057B8"></div>
+          <div class="age-legend-label">50代</div>
+          <div class="age-legend-bar-wrap"><div class="age-legend-bar" style="background:#0057B8" data-width="48"></div></div>
+          <div class="age-legend-count">30名</div>
+        </div>
+        <div class="age-legend-item">
+          <div class="age-legend-dot" style="background:#2176AE"></div>
+          <div class="age-legend-label">40代</div>
+          <div class="age-legend-bar-wrap"><div class="age-legend-bar" style="background:#2176AE" data-width="32"></div></div>
+          <div class="age-legend-count">20名</div>
+        </div>
+        <div class="age-legend-item">
+          <div class="age-legend-dot" style="background:#5BA4CF"></div>
+          <div class="age-legend-label">30代</div>
+          <div class="age-legend-bar-wrap"><div class="age-legend-bar" style="background:#5BA4CF" data-width="11"></div></div>
+          <div class="age-legend-count">7名</div>
+        </div>
+        <div class="age-legend-item">
+          <div class="age-legend-dot" style="background:#7EC8E3"></div>
+          <div class="age-legend-label">60代〜</div>
+          <div class="age-legend-bar-wrap"><div class="age-legend-bar" style="background:#7EC8E3" data-width="6"></div></div>
+          <div class="age-legend-count">4名</div>
+        </div>
+        <div class="age-legend-item">
+          <div class="age-legend-dot" style="background:#B0D4F1"></div>
+          <div class="age-legend-label">20代</div>
+          <div class="age-legend-bar-wrap"><div class="age-legend-bar" style="background:#B0D4F1" data-width="2"></div></div>
+          <div class="age-legend-count">1名</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- 求人詳細 -->
 <section class="section" id="job">
-  <div class="section__eyebrow">
-    <span class="section__en">JOB DETAILS</span>
-    <span class="section__line"></span>
+  <div class="section__head">
+    <span class="section__label">JOB DETAILS</span>
+    <h2 class="section__title">求人 <span class="slash">詳細</span></h2>
+    <p class="section__lead">食品輸送を中心とした、安定・安心のお仕事です。</p>
   </div>
-  <h2 class="section__title">求人 <span class="accent">詳細</span></h2>
-  <p class="section__lead">食品輸送を中心とした、安定・安心のお仕事です。</p>
   <table class="job-table js-fade">
     <tr><th>職種</th><td>食品配送ドライバー（トラック）</td></tr>
     <tr><th>給与</th><td><span class="chip">日給 13,000円〜</span>月26日稼働で338,000円以上も可<br><small style="color:#999">※賞与年2回（20年以上毎年支給）</small></td></tr>
@@ -890,17 +1118,16 @@
 </section>
 
 <!-- 杉本さん -->
-<section class="sugimoto-section" id="contact">
-  <div class="section__eyebrow">
-    <span class="section__en">CONTACT & INTERVIEW</span>
-    <span class="section__line"></span>
+<section class="section--gray" id="contact">
+  <div style="padding:64px 20px 0;max-width:100%">
+    <span class="section__label" style="display:block;padding:0 0 8px">CONTACT & INTERVIEW</span>
+    <h2 class="section__title" style="margin-bottom:28px;padding:0">まずは<span class="slash">気軽に話しましょう</span></h2>
   </div>
-  <h2 class="section__title" style="margin-bottom:24px">まずは<br><span class="accent">気軽に話しましょう</span></h2>
-  <div class="sugimoto-layout js-fade">
-    <!-- 画像：モバイルでは3:2比率で全面表示 -->
+  <!-- 杉本さん：スマホは全幅画像→テキスト、PCは横並び -->
+  <div class="sugimoto-layout">
     <div class="sugimoto-img">
       <img src="images/sugimoto-desk.jpg" alt="面談担当 杉本" />
-      <div class="sugimoto-img__label">
+      <div class="sugimoto-img__cap">
         <div class="sugimoto-img__role">統括部長 ／ 面談担当</div>
         <div class="sugimoto-img__name">杉本</div>
       </div>
@@ -917,11 +1144,10 @@
 
 <!-- アクセス -->
 <section class="section" id="access">
-  <div class="section__eyebrow">
-    <span class="section__en">ACCESS & COMPANY INFO</span>
-    <span class="section__line"></span>
+  <div class="section__head">
+    <span class="section__label">ACCESS & COMPANY INFO</span>
+    <h2 class="section__title" style="margin-bottom:28px">会社情報 <span class="slash">・アクセス</span></h2>
   </div>
-  <h2 class="section__title" style="margin-bottom:28px">会社情報 <span class="accent">・アクセス</span></h2>
   <div class="access-layout js-fade">
     <div class="map-wrap">
       <iframe src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E9%87%8E%E7%94%B0%E5%B8%82%E5%90%89%E6%98%A525-1&output=embed" allowfullscreen loading="lazy"></iframe>
@@ -939,12 +1165,11 @@
 
 <!-- 応募フォーム -->
 <section class="section section--gray" id="apply">
-  <div class="section__eyebrow">
-    <span class="section__en">APPLICATION FORM</span>
-    <span class="section__line"></span>
+  <div class="section__head">
+    <span class="section__label">APPLICATION FORM</span>
+    <h2 class="section__title" style="margin-bottom:12px">応募 <span class="slash">フォーム</span></h2>
+    <p class="section__lead">「話だけ聞きたい」でも大丈夫。お気軽にどうぞ。</p>
   </div>
-  <h2 class="section__title" style="margin-bottom:12px">応募 <span class="accent">フォーム</span></h2>
-  <p class="section__lead">「話だけ聞きたい」でも大丈夫。お気軽にどうぞ。</p>
   <form class="form js-fade" id="applyForm" novalidate>
     <div class="form__field" id="field-name">
       <label class="form__label">お名前<span class="form__req">*</span></label>
@@ -983,7 +1208,8 @@
 
 <!-- 最後のCTA -->
 <div class="final-cta">
-  <div class="final-cta__en">JOIN US — ADVANCE CO., LTD.</div>
+  <span class="vert-en" style="color:rgba(255,255,255,.05);font-size:clamp(5rem,11vw,11rem);right:0;top:50%;transform:translateY(-50%)">JOIN US</span>
+  <div class="final-cta__label">JOIN US — ADVANCE CO., LTD.</div>
   <h2 class="final-cta__title">一緒に<br>走りましょう。</h2>
   <p class="final-cta__sub">ドライバーを大切にする会社で、<br>長く安心して働きませんか。</p>
   <div class="final-cta__btns">
@@ -992,7 +1218,6 @@
   </div>
 </div>
 
-<!-- フッター -->
 <footer>
   <div class="footer__logo"><img src="images/logo.png" alt="有限会社アドヴァンス" /></div>
   <div class="footer__info">
@@ -1001,7 +1226,6 @@
   </div>
 </footer>
 
-<!-- スマホ固定CTA -->
 <div class="sticky-cta">
   <a href="tel:0471262003" class="sticky-cta__tel">📞 電話する</a>
   <a href="#apply" class="sticky-cta__apply">✉️ 応募する</a>
@@ -1025,24 +1249,41 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// フェードイン
+// 汎用フェードイン
 const fadeObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); fadeObs.unobserve(e.target); } });
 }, { threshold: 0.08 });
 document.querySelectorAll('.js-fade').forEach(el => fadeObs.observe(el));
 
-// カウントアップ
+// コピーバナー（左からワイプイン）
+const wipeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelector('.copy-banner__inner').classList.add('in');
+      wipeObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.js-wipe, .js-wipe-r').forEach(el => wipeObs.observe(el));
+
+// カウントアップ（テキストノードのみ書き換え・span保持版）
 const cntObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
-    const el = e.target, target = parseInt(el.dataset.target);
-    const html = el.innerHTML;
-    const before = html.replace(/\d[\d,]*/, '').split(/\d/)[0];
-    const after = html.replace(/^[^0-9]*\d[\d,]*/, '');
+    const el = e.target;
+    const target = parseInt(el.dataset.target);
+    // テキストノードを探す（span以外の数字部分）
+    let textNode = null;
+    for (const node of el.childNodes) {
+      if (node.nodeType === Node.TEXT_NODE && /\d/.test(node.textContent)) {
+        textNode = node; break;
+      }
+    }
+    if (!textNode) { el.textContent = target.toLocaleString(); cntObs.unobserve(el); return; }
     let v = 0, step = target / 60;
     const t = setInterval(() => {
       v = Math.min(v + step, target);
-      el.innerHTML = before + Math.floor(v).toLocaleString() + after;
+      textNode.textContent = Math.floor(v).toLocaleString();
       if (v >= target) clearInterval(t);
     }, 16);
     cntObs.unobserve(el);
@@ -1050,16 +1291,32 @@ const cntObs = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.js-counter').forEach(el => cntObs.observe(el));
 
-// 年齢バー
-const ageObs = new IntersectionObserver(entries => {
-  if (!entries[0].isIntersecting) return;
-  document.querySelectorAll('.age-bar-fill').forEach(b => { b.style.width = b.dataset.width + '%'; });
-  ageObs.disconnect();
-}, { threshold: 0.3 });
+// 年齢円グラフ＋凡例バー
 const ab = document.getElementById('ageBars');
-if (ab) ageObs.observe(ab);
+if (ab) {
+  // 初期状態：全セグメントを非表示（dashoffset=周長）
+  const circ = 339.3;
+  document.querySelectorAll('.donut-seg').forEach(seg => {
+    seg.style.transition = 'none';
+    seg.style.strokeDashoffset = circ;
+  });
+  const ageObs = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    // アニメーション開始：各セグメントを最終offset値へ
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.donut-seg').forEach(seg => {
+        seg.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1)';
+        seg.style.strokeDashoffset = seg.dataset.finalOffset;
+      });
+    });
+    // 凡例バー
+    document.querySelectorAll('.age-legend-bar').forEach(b => { b.style.width = b.dataset.width + '%'; });
+    ageObs.disconnect();
+  }, { threshold: 0.3 });
+  ageObs.observe(ab);
+}
 
-// フォーム
+// フォームバリデーション
 document.getElementById('applyForm').addEventListener('submit', e => {
   e.preventDefault();
   let ok = true;
