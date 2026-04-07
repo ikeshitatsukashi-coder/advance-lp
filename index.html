@@ -10,8 +10,9 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --blue: #0057B8;
-      --blue-dark: #003d8a;
+      --blue: #1A8DC8;
+      --blue-dark: #0E6FA0;
+      --blue-pale: #E6F4FB;
       --yellow: #FFD600;
       --black: #111;
       --white: #fff;
@@ -101,7 +102,7 @@
       font-size: clamp(5rem, 10vw, 10rem);
       font-weight: 700;
       letter-spacing: .08em;
-      color: rgba(0,87,184,.06);
+      color: rgba(26,141,200,.06);
       pointer-events: none;
       user-select: none;
       line-height: 1;
@@ -158,7 +159,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 18px; transition: box-shadow .3s;
     }
-    .header.scrolled { box-shadow: 0 2px 20px rgba(0,87,184,.15); }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(26,141,200,.15); }
     .header__logo img { height: 30px; width: auto; }
     .header__cta {
       background: var(--blue); color: var(--white);
@@ -186,6 +187,88 @@
     .btn--white { background: var(--white); color: var(--blue); }
 
     /* =====================
+       雑誌コラム風イントロ
+    ===================== */
+    .mag-intro {
+      background: var(--white);
+      border-bottom: 1px solid #e8edf2;
+      position: relative;
+      overflow: hidden;
+    }
+    /* 斜め背景装飾 */
+    .mag-intro::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 38%; height: 100%;
+      background: var(--blue-pale);
+      clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+    .mag-intro__inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 22px 20px 22px;
+      display: flex; align-items: center;
+      gap: 20px; position: relative; z-index: 1;
+    }
+    /* 左：カテゴリタグ縦並び */
+    .mag-intro__left {
+      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 6px;
+    }
+    .mag-intro__tag {
+      background: var(--blue); color: var(--white);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.05rem; font-weight: 700; letter-spacing: .08em;
+      padding: 4px 10px; white-space: nowrap;
+    }
+    .mag-intro__vol {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem; color: var(--blue);
+      letter-spacing: .1em; opacity: .7;
+    }
+    /* セパレータ縦線 */
+    .mag-intro__sep {
+      width: 1px; height: 52px;
+      background: linear-gradient(to bottom, transparent, var(--blue), transparent);
+      flex-shrink: 0; opacity: .3;
+    }
+    /* 中央：見出しテキスト */
+    .mag-intro__center { flex: 1; min-width: 0; }
+    .mag-intro__kicker {
+      font-size: 1.05rem; color: var(--blue);
+      font-weight: 700; letter-spacing: .1em;
+      margin-bottom: 4px; display: flex; align-items: center; gap: 8px;
+    }
+    .mag-intro__kicker::before {
+      content: '';
+      display: inline-block; width: 18px; height: 2px;
+      background: var(--blue); flex-shrink: 0;
+    }
+    .mag-intro__headline {
+      font-size: clamp(1.55rem, 3.5vw, 2.2rem);
+      font-weight: 900; line-height: 1.4; color: var(--black);
+    }
+    .mag-intro__headline em {
+      font-style: normal; color: var(--blue);
+    }
+    .mag-intro__desc {
+      font-size: 1.15rem; color: #666; margin-top: 5px;
+      display: none;
+    }
+    /* 右：ロゴ */
+    .mag-intro__right {
+      flex-shrink: 0; width: 110px; opacity: .85;
+    }
+    @media (min-width: 600px) {
+      .mag-intro__desc { display: block; }
+    }
+    @media (min-width: 768px) {
+      .mag-intro__inner { padding: 24px 40px; }
+      .mag-intro__right { width: 140px; }
+    }
+
+    /* =====================
        HERO
     ===================== */
     .hero {
@@ -206,7 +289,7 @@
       width: 0; height: 0;
       border-style: solid;
       border-width: 100vh 0 0 22vw;
-      border-color: transparent transparent transparent rgba(0,87,184,.55);
+      border-color: transparent transparent transparent rgba(26,141,200,.55);
     }
     /* 下部斜めカット */
     .hero__cut {
@@ -432,7 +515,7 @@
       content: '';
       position: absolute; top: -30px; right: 20px;
       width: 1px; height: 110px;
-      background: rgba(0,87,184,.08);
+      background: rgba(26,141,200,.08);
       transform: rotate(20deg);
     }
     .feature--blue::before { background: rgba(255,255,255,.1); }
@@ -469,11 +552,11 @@
       text-align: center; position: relative; overflow: hidden;
       display: flex; flex-direction: column; align-items: center;
     }
-    .number-cell:nth-child(1) { background: #0057B8; }
-    .number-cell:nth-child(2) { background: #0072E5; }
-    .number-cell:nth-child(3) { background: #005099; }
-    .number-cell:nth-child(4) { background: #1B449C; }
-    .number-cell:nth-child(5) { background: #003670; }
+    .number-cell:nth-child(1) { background: #1A8DC8; }
+    .number-cell:nth-child(2) { background: #1579AD; }
+    .number-cell:nth-child(3) { background: #106593; }
+    .number-cell:nth-child(4) { background: #0E6FA0; }
+    .number-cell:nth-child(5) { background: #0A5A87; }
     /* 斜め光沢線 */
     .number-cell::before {
       content: '';
@@ -570,7 +653,7 @@
       .age-chart-wrap { flex-direction: row; justify-content: center; align-items: center; }
     }
     .age-donut { flex-shrink: 0; }
-    .age-donut circle { transition: stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1); }
+    .age-donut circle { /* transition はJS側で制御 */ }
     .age-legend { display: flex; flex-direction: column; gap: 10px; }
     .age-legend-item { display: flex; align-items: center; gap: 10px; }
     .age-legend-dot {
@@ -614,7 +697,7 @@
       content: '';
       position: absolute; top: -15px; right: 12px;
       width: 1px; height: 70px;
-      background: rgba(0,87,184,.08);
+      background: rgba(26,141,200,.08);
       transform: rotate(20deg);
     }
     .welcome-cell--blue { background: var(--blue); }
@@ -647,7 +730,7 @@
       transition: border-color .2s, box-shadow .2s; background: var(--white);
     }
     .form__input:focus, .form__select:focus, .form__textarea:focus {
-      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,87,184,.1);
+      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,141,200,.1);
     }
     .form__textarea { resize: vertical; }
     .form__error { font-size: 1.2rem; color: #e53e3e; display: none; }
@@ -758,6 +841,25 @@
   <a href="#apply" class="header__cta">今すぐ応募</a>
 </header>
 
+<!-- 雑誌コラム風イントロ -->
+<div class="mag-intro">
+  <div class="mag-intro__inner">
+    <div class="mag-intro__left">
+      <div class="mag-intro__tag">求人特集</div>
+      <div class="mag-intro__vol">No.01</div>
+    </div>
+    <div class="mag-intro__sep"></div>
+    <div class="mag-intro__center">
+      <div class="mag-intro__kicker">千葉・埼玉エリア｜食品配送ドライバー募集</div>
+      <h2 class="mag-intro__headline"><em>稼げて・休めて</em>、長く続けられる運送会社</h2>
+      <p class="mag-intro__desc">有限会社アドヴァンス ／ 創業20年以上 ／ 賞与年2回・毎年支給継続中</p>
+    </div>
+    <div class="mag-intro__right">
+      <img src="images/logo.png" alt="有限会社アドヴァンス" />
+    </div>
+  </div>
+</div>
+
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero__bg"></div>
@@ -861,7 +963,7 @@
 
 <!-- 6つの魅力 -->
 <section class="section section--gray" id="features">
-  <span class="vert-en vert-en--left" style="color:rgba(0,87,184,.04);font-size:clamp(5rem,9vw,9rem);top:50%;transform:translateY(-50%)">FEATURES</span>
+  <span class="vert-en vert-en--left" style="color:rgba(26,141,200,.04);font-size:clamp(5rem,9vw,9rem);top:50%;transform:translateY(-50%)">FEATURES</span>
   <div class="section__head">
     <span class="section__label">WHY ADVANCE</span>
     <h2 class="section__title">選ばれる<span class="slash">6つの理由</span></h2>
@@ -1018,52 +1120,49 @@
     </div>
     <div class="age-chart-wrap js-fade js-fade-d1" id="ageBars">
       <!--
-        SVGドーナツ円グラフ（総62名: 20代1名, 30代7名, 40代20名, 50代30名, 60代4名）
-        r=54 → 周長=2π×54≈339.3
-        セグメントは12時から時計回り。rotate(-90deg)で12時スタート。
-        stroke-dashoffset = -(累積length) で位置決め。
-        50代(30名): 164.2px → offset 0
-        40代(20名): 109.5px → offset -164.2
-        30代(7名):   38.3px → offset -273.7
-        20代(1名):    5.5px → offset -312.0
-        60代(4名):   21.9px → offset -317.5
-        合計≈339.4≒周長
+        SVGドーナツ円グラフ（総62名）
+        r=54 → 周長C=2π×54=339.292
+        各セグメント長: 50代=164.17, 40代=109.45, 30代=38.31, 20代=5.47, 60代=21.89 合計=339.29≈C
+        rotate(-90deg)で12時スタート・時計回り
+        配置: stroke-dashoffset=-(累積offset) で各セグメントを正しい位置に配置
+        アニメ: 初期はstroke-dasharray="0 C"→最終値にJSで切り替え
       -->
       <svg class="age-donut" width="200" height="200" viewBox="0 0 120 120" aria-hidden="true"
-           style="transform:rotate(-90deg)">
-        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="18"/>
-        <!-- 50代: 30名 → 164.2px, offset=0（12時から始まる） -->
-        <circle cx="60" cy="60" r="54" fill="none" stroke="#0057B8" stroke-width="18"
-          stroke-dasharray="162.2 177.1" stroke-dashoffset="0"
-          data-final-offset="0" class="donut-seg"/>
-        <!-- 40代: 20名 → 109.5px -->
-        <circle cx="60" cy="60" r="54" fill="none" stroke="#2176AE" stroke-width="18"
-          stroke-dasharray="107.5 231.8" stroke-dashoffset="-162.2"
-          data-final-offset="-162.2" class="donut-seg"/>
-        <!-- 30代: 7名 → 38.3px -->
-        <circle cx="60" cy="60" r="54" fill="none" stroke="#5BA4CF" stroke-width="18"
-          stroke-dasharray="36.3 303.0" stroke-dashoffset="-269.7"
-          data-final-offset="-269.7" class="donut-seg"/>
-        <!-- 20代: 1名 → 5.5px -->
-        <circle cx="60" cy="60" r="54" fill="none" stroke="#B0D4F1" stroke-width="18"
-          stroke-dasharray="4.5 334.8" stroke-dashoffset="-306.0"
-          data-final-offset="-306.0" class="donut-seg"/>
-        <!-- 60代〜: 4名 → 21.9px -->
-        <circle cx="60" cy="60" r="54" fill="none" stroke="#7EC8E3" stroke-width="18"
-          stroke-dasharray="19.9 319.4" stroke-dashoffset="-310.5"
-          data-final-offset="-310.5" class="donut-seg"/>
+           style="transform:rotate(-90deg);overflow:visible">
+        <!-- トラック -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="16"/>
+        <!-- 50代 (30名=48.4%) → 164.17px, offset=0 -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#1A8DC8" stroke-width="16"
+          stroke-dasharray="0 339.29" stroke-dashoffset="0"
+          data-da="164.17 175.12" data-do="0" class="donut-seg"/>
+        <!-- 40代 (20名=32.3%) → 109.45px, offset=-164.17 -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#3BABD8" stroke-width="16"
+          stroke-dasharray="0 339.29" stroke-dashoffset="-164.17"
+          data-da="109.45 229.84" data-do="-164.17" class="donut-seg"/>
+        <!-- 30代 (7名=11.3%) → 38.31px, offset=-273.62 -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#6EC5E8" stroke-width="16"
+          stroke-dasharray="0 339.29" stroke-dashoffset="-273.62"
+          data-da="38.31 300.98" data-do="-273.62" class="donut-seg"/>
+        <!-- 20代 (1名=1.6%) → 5.47px, offset=-311.93 -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#A8DFF2" stroke-width="16"
+          stroke-dasharray="0 339.29" stroke-dashoffset="-311.93"
+          data-da="5.47 333.82" data-do="-311.93" class="donut-seg"/>
+        <!-- 60代〜 (4名=6.5%) → 21.89px, offset=-317.40 -->
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#CFEEf9" stroke-width="16"
+          stroke-dasharray="0 339.29" stroke-dashoffset="-317.40"
+          data-da="21.89 317.40" data-do="-317.40" class="donut-seg"/>
         <!-- 中央テキスト（回転を打ち消す） -->
         <g style="transform:rotate(90deg);transform-origin:60px 60px">
-          <text x="60" y="55" text-anchor="middle" font-family="Oswald,sans-serif" font-size="20" font-weight="700" fill="white">62名</text>
-          <text x="60" y="68" text-anchor="middle" font-family="Noto Sans JP,sans-serif" font-size="7" fill="rgba(255,255,255,.6)">在籍ドライバー</text>
+          <text x="60" y="53" text-anchor="middle" font-family="Oswald,sans-serif" font-size="22" font-weight="700" fill="white">62名</text>
+          <text x="60" y="67" text-anchor="middle" font-family="Noto Sans JP,sans-serif" font-size="7" fill="rgba(255,255,255,.6)">在籍ドライバー</text>
         </g>
       </svg>
       <!-- 凡例 -->
       <div class="age-legend">
         <div class="age-legend-item">
-          <div class="age-legend-dot" style="background:#0057B8"></div>
+          <div class="age-legend-dot" style="background:#1A8DC8"></div>
           <div class="age-legend-label">50代</div>
-          <div class="age-legend-bar-wrap"><div class="age-legend-bar" style="background:#0057B8" data-width="48"></div></div>
+          <div class="age-legend-bar-wrap"><div class="age-legend-bar" style="background:#1A8DC8" data-width="48"></div></div>
           <div class="age-legend-count">30名</div>
         </div>
         <div class="age-legend-item">
@@ -1294,23 +1393,25 @@ document.querySelectorAll('.js-counter').forEach(el => cntObs.observe(el));
 // 年齢円グラフ＋凡例バー
 const ab = document.getElementById('ageBars');
 if (ab) {
-  // 初期状態：全セグメントを非表示（dashoffset=周長）
-  const circ = 339.3;
-  document.querySelectorAll('.donut-seg').forEach(seg => {
-    seg.style.transition = 'none';
-    seg.style.strokeDashoffset = circ;
-  });
   const ageObs = new IntersectionObserver(entries => {
     if (!entries[0].isIntersecting) return;
-    // アニメーション開始：各セグメントを最終offset値へ
     requestAnimationFrame(() => {
-      document.querySelectorAll('.donut-seg').forEach(seg => {
-        seg.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.22,1,.36,1)';
-        seg.style.strokeDashoffset = seg.dataset.finalOffset;
+      // 各セグメントのdasharray（描画長）をアニメーション
+      document.querySelectorAll('.donut-seg').forEach((seg, i) => {
+        const finalDa = seg.dataset.da;   // e.g. "164.17 175.12"
+        const finalDo = seg.dataset.do;   // e.g. "0"
+        // dashoffsetは即座に設定（位置確定）
+        seg.style.strokeDashoffset = finalDo;
+        // dasharrayを0→最終値へトランジション（遅延でセグメントごとにずらす）
+        seg.style.transition = `stroke-dasharray 1.2s ${0.05 * i}s cubic-bezier(.22,1,.36,1)`;
+        seg.style.strokeDasharray = finalDa;
       });
     });
     // 凡例バー
-    document.querySelectorAll('.age-legend-bar').forEach(b => { b.style.width = b.dataset.width + '%'; });
+    document.querySelectorAll('.age-legend-bar').forEach(b => {
+      b.style.transition = 'width 1.2s cubic-bezier(.22,1,.36,1)';
+      b.style.width = b.dataset.width + '%';
+    });
     ageObs.disconnect();
   }, { threshold: 0.3 });
   ageObs.observe(ab);
