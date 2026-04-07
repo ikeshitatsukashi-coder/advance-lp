@@ -6,15 +6,16 @@
   <title>ドライバー募集｜有限会社アドヴァンス【千葉・埼玉エリア食品輸送】</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Oswald:wght@700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --blue: #0057B8;
       --blue-dark: #003d8a;
+      --yellow: #FFD600;
       --black: #111;
       --white: #fff;
-      --gray: #f5f5f5;
+      --gray: #f4f5f7;
       --text: #222;
     }
     html { font-size: 62.5%; scroll-behavior: smooth; }
@@ -30,513 +31,481 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; width: 100%; }
 
-    /* ==============================
-       STICKY HEADER
-    ============================== */
+    /* Oswald for English display text */
+    .en { font-family: 'Oswald', sans-serif; letter-spacing: .06em; }
+
+    /* ===========================
+       PROGRESS + HEADER
+    =========================== */
+    .progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--blue); z-index: 1000; width: 0; transition: width .1s linear; }
+
     .header {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 3px; left: 0; right: 0;
       z-index: 900;
-      background: rgba(255,255,255,0.97);
-      border-bottom: 3px solid var(--blue);
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
+      height: 54px;
+      background: rgba(255,255,255,.97);
+      border-bottom: 2px solid var(--blue);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 18px;
       transition: box-shadow .3s;
     }
-    .header.scrolled { box-shadow: 0 2px 16px rgba(0,87,184,.15); }
-    .header__logo img { height: 32px; width: auto; }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(0,87,184,.15); }
+    .header__logo img { height: 30px; width: auto; }
     .header__cta {
-      background: var(--blue);
-      color: var(--white);
-      font-size: 1.3rem;
-      font-weight: 900;
-      padding: 9px 18px;
-      letter-spacing: .04em;
+      background: var(--blue); color: var(--white);
+      font-size: 1.3rem; font-weight: 900;
+      padding: 9px 18px; letter-spacing: .04em;
       transition: background .2s;
     }
     .header__cta:hover { background: var(--blue-dark); }
 
-    /* ==============================
-       PROGRESS BAR
-    ============================== */
-    .progress { position: fixed; top: 56px; left: 0; height: 3px; background: var(--blue); z-index: 901; width: 0; transition: width .1s linear; }
+    /* ===========================
+       BUTTONS
+    =========================== */
+    .btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; font-size: 1.7rem; font-weight: 900;
+      padding: 16px 24px; letter-spacing: .04em;
+      border: none; cursor: pointer; font-family: inherit;
+      transition: background .2s, transform .15s;
+      position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,.15);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .btn:hover::after { transform: scaleX(1); }
+    .btn:active { transform: scale(.97); }
+    .btn--blue { background: var(--blue); color: var(--white); }
+    .btn--blue:hover { background: var(--blue-dark); }
+    .btn--yellow { background: var(--yellow); color: var(--black); }
+    .btn--white { background: var(--white); color: var(--blue); }
+    .btn--black { background: var(--black); color: var(--white); }
+    .btn--outline-white { background: transparent; border: 2px solid rgba(255,255,255,.65); color: var(--white); padding: 14px 22px; }
+    .btn--outline-white:hover { border-color: var(--white); }
 
-    /* ==============================
+    /* ===========================
        HERO
-    ============================== */
+    =========================== */
     .hero {
       position: relative;
-      min-height: 100svh;
+      height: 100svh; min-height: 560px;
       background: var(--black);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding-top: 56px;
-      overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding-top: 57px; overflow: hidden;
     }
     .hero__bg {
+      position: absolute; inset: 0;
+      background: url('images/real-fleet-sunny.jpg') center 40% / cover no-repeat;
+      filter: brightness(.38);
+    }
+    /* 斜めベクター装飾 */
+    .hero__slash {
       position: absolute;
-      inset: 0;
-      background: url('images/real-fleet-sunny.jpg') center center / cover no-repeat;
-      filter: brightness(.45);
+      bottom: -1px; left: 0; right: 0;
+      height: 80px; overflow: hidden;
+    }
+    .hero__slash::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -5%;
+      width: 110%; height: 80px;
+      background: var(--white);
+      transform: skewY(-2.5deg);
+      transform-origin: bottom left;
     }
     .hero__content {
-      position: relative;
-      z-index: 1;
-      padding: 40px 20px 32px;
+      position: relative; z-index: 1;
+      padding: 32px 20px 96px;
     }
-    .hero__label {
-      display: inline-block;
-      background: var(--blue);
+    .hero__en {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--blue); letter-spacing: .2em;
+      background: rgba(0,87,184,.9);
       color: var(--white);
-      font-size: 1.1rem;
-      font-weight: 900;
-      letter-spacing: .12em;
-      padding: 4px 14px;
+      display: inline-block; padding: 4px 14px;
       margin-bottom: 16px;
     }
     .hero__copy {
-      font-size: clamp(2.8rem, 8vw, 4.8rem);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.2;
-      letter-spacing: -.01em;
+      font-size: clamp(3rem, 8.5vw, 5.6rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.2; letter-spacing: -.01em;
       margin-bottom: 16px;
     }
-    .hero__copy .accent { color: #FFD600; display: inline; }
+    .hero__copy .accent { color: var(--yellow); }
     .hero__sub {
-      font-size: 1.4rem;
-      color: rgba(255,255,255,.82);
-      line-height: 1.8;
-      margin-bottom: 28px;
+      font-size: 1.45rem; color: rgba(255,255,255,.8);
+      line-height: 1.8; margin-bottom: 28px;
     }
     .hero__badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 28px;
+      display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px;
     }
     .hero__badge {
       background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.35);
-      color: var(--white);
-      font-size: 1.2rem;
-      font-weight: 700;
-      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,.3);
+      color: var(--white); font-size: 1.2rem; font-weight: 700; padding: 5px 12px;
     }
     .hero__badge--filled { background: var(--blue); border-color: var(--blue); }
     .hero__btns { display: flex; flex-direction: column; gap: 10px; }
 
-    /* ==============================
-       BUTTONS
-    ============================== */
-    .btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 1.7rem;
-      font-weight: 900;
-      padding: 16px 24px;
-      letter-spacing: .04em;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      transition: background .2s, transform .15s;
-      text-align: center;
-    }
-    .btn:active { transform: scale(.97); }
-    .btn--blue { background: var(--blue); color: var(--white); }
-    .btn--blue:hover { background: var(--blue-dark); }
-    .btn--white { background: var(--white); color: var(--blue); }
-    .btn--white:hover { background: #e8f0fb; }
-    .btn--outline-white { background: transparent; border: 2px solid rgba(255,255,255,.6); color: var(--white); }
-    .btn--outline-white:hover { background: rgba(255,255,255,.1); }
-    .btn--tel { background: var(--black); color: var(--white); font-size: 2rem; }
-    .btn--tel:hover { background: #333; }
-    .btn--black { background: var(--black); color: var(--white); }
-    .btn--black:hover { background: #333; }
-
-    /* ==============================
-       SCROLL DOWN
-    ============================== */
-    .scroll-down {
-      position: absolute;
-      bottom: 20px; left: 50%;
+    /* scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 88px; left: 50%;
       transform: translateX(-50%);
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255,255,255,.5);
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      animation: bounce 1.8s infinite;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    .scroll-down::after {
-      content: '';
-      width: 1px;
-      height: 36px;
-      background: rgba(255,255,255,.4);
+    .scroll-hint__label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; letter-spacing: .2em; color: rgba(255,255,255,.5);
     }
-    @keyframes bounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
+    .scroll-hint__line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent);
+      animation: scrollLine 1.8s ease-in-out infinite;
     }
+    @keyframes scrollLine { 0%,100%{transform:scaleY(1);opacity:.5} 50%{transform:scaleY(1.3);opacity:1} }
 
-    /* ==============================
+    /* ===========================
        APPEAL STRIP（月収）
-    ============================== */
-    .appeal-strip {
+    =========================== */
+    .appeal {
       background: var(--blue);
-      padding: 28px 20px;
+      padding: 36px 20px 40px;
       text-align: center;
+      position: relative;
     }
-    .appeal-strip__label {
-      font-size: 1.2rem;
-      color: rgba(255,255,255,.75);
-      font-weight: 700;
-      letter-spacing: .08em;
-      margin-bottom: 6px;
+    .appeal__en {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; letter-spacing: .24em;
+      color: rgba(255,255,255,.55); margin-bottom: 6px;
     }
-    .appeal-strip__num {
-      font-size: clamp(4rem, 12vw, 7rem);
-      font-weight: 900;
-      color: #FFD600;
-      line-height: 1;
-      letter-spacing: -.02em;
+    .appeal__num {
+      font-size: clamp(5rem, 14vw, 8rem);
+      font-weight: 900; color: var(--yellow);
+      line-height: 1; letter-spacing: -.02em;
+      font-family: 'Oswald', sans-serif;
     }
-    .appeal-strip__num span { font-size: .45em; vertical-align: baseline; }
-    .appeal-strip__note {
-      font-size: 1.2rem;
-      color: rgba(255,255,255,.7);
-      margin-top: 6px;
+    .appeal__unit { font-size: .35em; font-family: 'Noto Sans JP', sans-serif; font-weight: 900; }
+    .appeal__note { font-size: 1.2rem; color: rgba(255,255,255,.65); margin-top: 6px; }
+    .appeal__chips {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 8px; margin-top: 20px;
     }
-    .appeal-strip__sub {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 16px;
-      flex-wrap: wrap;
+    .appeal__chip {
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.22);
+      color: var(--white); font-size: 1.3rem; font-weight: 700; padding: 7px 16px;
     }
-    .appeal-strip__item {
-      background: rgba(255,255,255,.15);
-      color: var(--white);
-      font-size: 1.25rem;
-      font-weight: 700;
-      padding: 6px 16px;
-      border: 1px solid rgba(255,255,255,.25);
+    /* 斜め下カット */
+    .appeal::after {
+      content: '';
+      position: absolute; bottom: -44px; left: 0; right: 0;
+      height: 44px; overflow: hidden; pointer-events: none;
+    }
+    .appeal::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 0; width: 0;
+      border-style: solid;
+      border-width: 44px 100vw 0 0;
+      border-color: var(--blue) transparent transparent transparent;
     }
 
-    /* ==============================
-       PAIN POINT（共感コピー）
-    ============================== */
+    /* ===========================
+       PAIN SECTION
+    =========================== */
     .pain {
       background: var(--black);
-      padding: 56px 20px;
+      padding: 80px 20px 64px;
+      position: relative;
     }
-    .pain__heading {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.5;
-      margin-bottom: 28px;
+    .pain__en {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; letter-spacing: .2em;
+      color: rgba(255,255,255,.35); margin-bottom: 14px;
       text-align: center;
     }
-    .pain__heading .accent { color: #FFD600; }
-    .pain__list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
+    .pain__heading {
+      font-size: clamp(2.2rem, 6vw, 3.2rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.45; margin-bottom: 28px; text-align: center;
     }
+    .pain__heading .accent { color: var(--yellow); }
+    .pain__list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
     .pain__item {
       background: #1c1c1c;
-      padding: 14px 18px 14px 48px;
-      color: rgba(255,255,255,.85);
-      font-size: 1.45rem;
-      font-weight: 700;
-      line-height: 1.5;
-      position: relative;
+      padding: 14px 18px 14px 44px;
+      color: rgba(255,255,255,.82);
+      font-size: 1.45rem; font-weight: 700;
+      line-height: 1.5; position: relative;
     }
     .pain__item::before {
       content: '✓';
-      position: absolute;
-      left: 16px;
-      color: var(--blue);
-      font-weight: 900;
+      position: absolute; left: 16px;
+      color: var(--blue); font-weight: 900;
     }
     .pain__resolve {
-      background: var(--blue);
-      padding: 20px;
-      text-align: center;
-      color: var(--white);
-      font-size: 1.6rem;
-      font-weight: 900;
-      line-height: 1.6;
+      background: var(--blue); padding: 24px 20px;
+      text-align: center; color: var(--white);
+      font-size: 1.6rem; font-weight: 900; line-height: 1.6;
     }
-    .pain__resolve .big { font-size: 2.2rem; display: block; margin-top: 4px; }
-
-    /* ==============================
-       PHOTO SECTION
-    ============================== */
-    .photo-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-      background: #ddd;
+    .pain__resolve .big { font-size: 2rem; display: block; margin-top: 6px; }
+    /* 下斜めカット */
+    .pain::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 0 52px 100vw;
+      border-color: transparent transparent var(--white) transparent;
     }
-    .photo-strip__item { aspect-ratio: 4/3; overflow: hidden; }
-    .photo-strip__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
-    .photo-strip__item:hover img { transform: scale(1.04); }
-    .photo-strip__wide { grid-column: 1 / -1; aspect-ratio: 16/7; }
 
-    /* ==============================
+    /* ===========================
+       PHOTO MOSAIC
+    =========================== */
+    .photo-mosaic { display: grid; gap: 3px; background: #ddd; }
+    .photo-mosaic__main { grid-column: 1 / -1; aspect-ratio: 16/8; overflow: hidden; }
+    .photo-mosaic__main img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+    .photo-mosaic__main:hover img { transform: scale(1.03); }
+    .photo-mosaic__sub { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+    .photo-mosaic__thumb { aspect-ratio: 1; overflow: hidden; }
+    .photo-mosaic__thumb img { width:100%;height:100%;object-fit:cover;transition:transform .5s; }
+    .photo-mosaic__thumb:hover img { transform: scale(1.06); }
+
+    /* ===========================
        SECTION BASE
-    ============================== */
-    .section { padding: 56px 20px; }
+    =========================== */
+    .section { padding: 64px 20px; }
     .section--gray { background: var(--gray); }
     .section--blue { background: var(--blue); }
     .section--black { background: var(--black); }
 
-    .section__tag {
-      display: inline-block;
-      font-size: 1rem;
-      font-weight: 900;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--blue);
-      border-bottom: 2px solid var(--blue);
-      padding-bottom: 3px;
-      margin-bottom: 10px;
+    .section__eyebrow {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
     }
-    .section--blue .section__tag,
-    .section--black .section__tag { color: rgba(255,255,255,.7); border-color: rgba(255,255,255,.4); }
+    .section__en {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem; letter-spacing: .2em;
+      color: var(--blue); font-weight: 700;
+    }
+    .section--blue .section__en,
+    .section--black .section__en { color: rgba(255,255,255,.55); }
+    .section__line { flex: 1; height: 1px; background: #ddd; }
+    .section--blue .section__line,
+    .section--black .section__line { background: rgba(255,255,255,.15); }
 
     .section__title {
-      font-size: clamp(2.4rem, 7vw, 4rem);
-      font-weight: 900;
-      line-height: 1.25;
-      letter-spacing: -.01em;
-      margin-bottom: 12px;
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      font-weight: 900; line-height: 1.25; letter-spacing: -.01em; margin-bottom: 14px;
     }
     .section--blue .section__title,
     .section--black .section__title { color: var(--white); }
     .section__title .accent { color: var(--blue); }
-    .section--blue .section__title .accent { color: #FFD600; }
+    .section--blue .section__title .accent { color: var(--yellow); }
+    .section--black .section__title .accent { color: var(--blue); }
 
-    .section__lead {
-      font-size: 1.45rem;
-      color: #666;
-      line-height: 1.85;
-      margin-bottom: 36px;
-    }
+    .section__lead { font-size: 1.45rem; color: #666; line-height: 1.85; margin-bottom: 36px; }
     .section--blue .section__lead,
-    .section--black .section__lead { color: rgba(255,255,255,.72); }
+    .section--black .section__lead { color: rgba(255,255,255,.7); }
 
-    /* ==============================
-       FEATURES
-    ============================== */
-    .features { display: flex; flex-direction: column; gap: 3px; background: #ddd; }
+    /* ===========================
+       FEATURES（斜め番号＋カード）
+    =========================== */
+    .features { display: flex; flex-direction: column; gap: 3px; background: #d8d8d8; }
     .feature {
-      background: var(--white);
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 0;
-      align-items: stretch;
-      position: relative;
-      overflow: hidden;
-      transition: background .2s;
+      background: var(--white); display: grid;
+      grid-template-columns: 64px 1fr; align-items: stretch;
+      transition: background .2s; position: relative; overflow: hidden;
     }
     .feature:hover { background: #f0f5ff; }
     .feature--blue { background: var(--blue); }
     .feature--blue:hover { background: var(--blue-dark); }
+
     .feature__num {
       background: var(--blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--white);
-      padding: 24px 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.8rem; font-weight: 700; color: var(--white);
+      writing-mode: horizontal-tb;
     }
     .feature--blue .feature__num { background: rgba(255,255,255,.15); }
+
+    /* 斜めアクセントライン */
+    .feature::after {
+      content: '';
+      position: absolute; top: -20px; right: 24px;
+      width: 2px; height: 80px;
+      background: rgba(0,87,184,.07);
+      transform: rotate(20deg);
+    }
+    .feature--blue::after { background: rgba(255,255,255,.08); }
+
     .feature__body { padding: 20px 18px; }
     .feature__title { font-size: 1.55rem; font-weight: 900; margin-bottom: 6px; line-height: 1.4; }
     .feature--blue .feature__title { color: var(--white); }
     .feature__text { font-size: 1.3rem; color: #555; line-height: 1.75; }
     .feature--blue .feature__text { color: rgba(255,255,255,.8); }
     .feature__chip {
-      display: inline-block;
-      margin-top: 8px;
-      background: var(--blue);
-      color: var(--white);
-      font-size: 1.1rem;
-      font-weight: 700;
-      padding: 3px 10px;
+      display: inline-block; margin-top: 8px;
+      background: var(--blue); color: var(--white);
+      font-size: 1.1rem; font-weight: 700; padding: 3px 10px;
     }
-    .feature--blue .feature__chip { background: rgba(255,255,255,.2); color: var(--white); }
+    .feature--blue .feature__chip { background: rgba(255,255,255,.18); }
 
-    /* ==============================
+    /* ===========================
        NUMBERS STRIP
-    ============================== */
+    =========================== */
     .numbers-strip {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: #ddd;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: #222;
     }
-    .number-cell {
-      background: var(--black);
-      padding: 24px 16px;
-      text-align: center;
+    .number-cell { background: var(--black); padding: 24px 16px; text-align: center; }
+    .number-cell:nth-child(even) { background: #1a1a1a; }
+    .number-cell__en {
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem; letter-spacing: .16em;
+      color: rgba(255,255,255,.3); margin-bottom: 4px;
     }
-    .number-cell:nth-child(odd) { background: #1a1a1a; }
     .number-cell__val {
-      font-size: 3.6rem;
-      font-weight: 900;
-      color: var(--blue);
-      line-height: 1;
-      margin-bottom: 6px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 3.8rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 4px;
     }
-    .number-cell__val em { font-style: normal; font-size: .48em; }
-    .number-cell__label { font-size: 1.2rem; color: rgba(255,255,255,.65); font-weight: 700; }
+    .number-cell__val em { font-style: normal; font-size: .45em; font-family: 'Noto Sans JP', sans-serif; }
+    .number-cell__label { font-size: 1.2rem; color: rgba(255,255,255,.6); font-weight: 700; }
 
-    /* ==============================
+    /* ===========================
        REPRESENTATIVE
-    ============================== */
-    .rep-photo-wrap {
+    =========================== */
+    .rep-img {
       position: relative;
-      aspect-ratio: 4/3;
-      overflow: hidden;
+      aspect-ratio: 4/3; overflow: hidden;
     }
-    .rep-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-    .rep-photo-wrap__overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,.75));
-      padding: 20px 18px 16px;
+    .rep-img img { width:100%;height:100%;object-fit:cover;object-position:top center; }
+    .rep-img__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px;
     }
-    .rep-photo-wrap__role { font-size: 1.1rem; color: rgba(255,255,255,.7); font-weight: 700; margin-bottom: 2px; }
-    .rep-photo-wrap__name { font-size: 2.4rem; font-weight: 900; color: var(--white); }
-    .rep-content { padding: 28px 20px; background: var(--white); }
+    .rep-img__role { font-size: 1.1rem; color: rgba(255,255,255,.7); font-weight: 700; }
+    .rep-img__name { font-size: 2.6rem; font-weight: 900; color: var(--white); }
+
+    /* 斜めセパレーター */
+    .skew-sep {
+      height: 56px; background: var(--gray); overflow: hidden; position: relative;
+    }
+    .skew-sep::before {
+      content: '';
+      position: absolute; top: 0; left: -5%; right: -5%;
+      height: 100%;
+      background: var(--white);
+      transform: skewY(-2deg);
+    }
+    .skew-sep--rev::before { transform: skewY(2deg); }
+    .skew-sep--blue { background: var(--blue); }
+    .skew-sep--blue::before { background: var(--gray); }
+    .skew-sep--black::before { background: var(--black); }
+
+    .rep-text { padding: 28px 20px 36px; background: var(--white); }
     .rep-quote {
-      font-size: 1.9rem;
-      font-weight: 900;
-      line-height: 1.55;
-      margin-bottom: 18px;
-      border-left: 4px solid var(--blue);
-      padding-left: 16px;
+      font-size: 2rem; font-weight: 900; line-height: 1.5;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--blue); padding-left: 16px;
     }
     .rep-body { font-size: 1.45rem; color: #444; line-height: 1.95; margin-bottom: 14px; }
     .rep-history {
-      background: var(--gray);
-      padding: 12px 16px;
-      font-size: 1.3rem;
-      color: #555;
-      border-left: 3px solid var(--blue);
-      line-height: 1.7;
+      background: var(--gray); padding: 12px 16px;
+      font-size: 1.3rem; color: #555;
+      border-left: 3px solid var(--blue); line-height: 1.8;
     }
     .rep-history strong { color: var(--black); font-weight: 900; }
 
-    /* ==============================
-       SUGIMOTO / CONTACT
-    ============================== */
-    .sugimoto {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 0;
-      background: var(--gray);
+    /* ===========================
+       SUGIMOTO（杉本さん）
+    =========================== */
+    .sugimoto-section { background: var(--gray); }
+    .sugimoto-img {
+      aspect-ratio: 3/2; overflow: hidden; position: relative;
     }
-    .sugimoto__photo { overflow: hidden; }
-    .sugimoto__photo img { width: 100%; height: 100%; object-fit: cover; }
-    .sugimoto__body { padding: 24px 20px; }
-    .sugimoto__role { font-size: 1.1rem; color: var(--blue); font-weight: 700; margin-bottom: 2px; }
-    .sugimoto__name { font-size: 2.4rem; font-weight: 900; margin-bottom: 10px; }
-    .sugimoto__msg { font-size: 1.4rem; color: #444; line-height: 1.85; margin-bottom: 20px; }
+    .sugimoto-img img { width:100%;height:100%;object-fit:cover;object-position:center top; }
+    .sugimoto-img__label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.7));
+      padding: 20px 18px 14px;
+    }
+    .sugimoto-img__role { font-size: 1.1rem; color: rgba(255,255,255,.7); font-weight: 700; margin-bottom: 2px; }
+    .sugimoto-img__name { font-size: 2.8rem; font-weight: 900; color: var(--white); }
+    .sugimoto-text { padding: 28px 20px 32px; }
+    .sugimoto-msg { font-size: 1.5rem; color: #444; line-height: 1.9; margin-bottom: 24px; }
 
-    /* ==============================
+    /* ===========================
+       AGE BARS
+    =========================== */
+    .age-bars { display: flex; flex-direction: column; gap: 16px; margin-top: 12px; }
+    .age-row { display: grid; grid-template-columns: 52px 1fr 44px; align-items: center; gap: 12px; }
+    .age-row__label { font-size: 1.25rem; font-weight: 700; color: rgba(255,255,255,.5); text-align: right; }
+    .age-bar-bg { background: rgba(255,255,255,.1); height: 8px; overflow: hidden; }
+    .age-bar-fill { height: 8px; background: var(--blue); width: 0; transition: width 1.3s cubic-bezier(.22,1,.36,1); }
+    .age-row__count { font-size: 1.3rem; font-weight: 900; color: var(--white); }
+
+    /* ===========================
        JOB TABLE
-    ============================== */
+    =========================== */
     .job-table { width: 100%; border-collapse: collapse; }
-    .job-table tr { border-bottom: 1px solid #e0e0e0; }
+    .job-table tr { border-bottom: 1px solid #e5e5e5; }
     .job-table th {
-      background: var(--blue);
-      color: var(--white);
-      font-size: 1.25rem;
-      font-weight: 700;
-      padding: 14px 14px;
-      text-align: left;
-      width: 100px;
-      vertical-align: top;
-      white-space: nowrap;
+      background: var(--blue); color: var(--white);
+      font-size: 1.25rem; font-weight: 700;
+      padding: 13px 14px; text-align: left;
+      width: 88px; vertical-align: top; white-space: nowrap;
     }
-    .job-table td { padding: 14px 16px; font-size: 1.4rem; line-height: 1.75; color: #333; background: var(--white); }
+    .job-table td { padding: 13px 14px; font-size: 1.4rem; line-height: 1.75; color: #333; background: var(--white); }
     .chip {
-      display: inline-block;
-      background: var(--blue);
-      color: var(--white);
-      font-size: 1.15rem;
-      font-weight: 700;
-      padding: 3px 10px;
-      margin: 2px 4px 2px 0;
+      display: inline-block; background: var(--blue); color: var(--white);
+      font-size: 1.15rem; font-weight: 700; padding: 3px 10px; margin: 2px 4px 2px 0;
     }
 
-    /* ==============================
-       WELCOME
-    ============================== */
+    /* ===========================
+       WELCOME GRID
+    =========================== */
     .welcome-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3px;
-      background: #ccc;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3px; background: #ccc;
     }
     .welcome-cell {
-      background: var(--white);
-      padding: 20px 14px;
-      text-align: center;
-      transition: background .2s;
+      background: var(--white); padding: 22px 14px; text-align: center;
+      transition: background .2s, transform .2s;
     }
-    .welcome-cell:hover { background: var(--blue); }
+    .welcome-cell:hover { background: var(--blue); transform: translateY(-2px); }
     .welcome-cell:hover .welcome-cell__text,
     .welcome-cell:hover .welcome-cell__sub { color: var(--white); }
     .welcome-cell--blue { background: var(--blue); }
     .welcome-cell--blue .welcome-cell__text { color: var(--white); }
-    .welcome-cell--blue .welcome-cell__sub { color: rgba(255,255,255,.75); }
+    .welcome-cell--blue .welcome-cell__sub { color: rgba(255,255,255,.7); }
     .welcome-cell__icon { font-size: 2.8rem; display: block; margin-bottom: 8px; }
     .welcome-cell__text { font-size: 1.35rem; font-weight: 900; color: var(--black); line-height: 1.4; }
     .welcome-cell__sub { font-size: 1.1rem; color: #888; margin-top: 4px; }
 
-    /* ==============================
-       AGE BARS
-    ============================== */
-    .age-bars { display: flex; flex-direction: column; gap: 16px; }
-    .age-row { display: grid; grid-template-columns: 52px 1fr 44px; align-items: center; gap: 12px; }
-    .age-row__label { font-size: 1.25rem; font-weight: 700; color: rgba(255,255,255,.55); text-align: right; }
-    .age-bar-bg { background: rgba(255,255,255,.1); height: 8px; overflow: hidden; }
-    .age-bar-fill { height: 8px; background: var(--blue); width: 0; transition: width 1.2s cubic-bezier(.22,1,.36,1); }
-    .age-row__count { font-size: 1.3rem; font-weight: 900; color: var(--white); }
-
-    /* ==============================
+    /* ===========================
        ACCESS
-    ============================== */
-    .map-wrap { aspect-ratio: 16/9; overflow: hidden; background: #eee; }
-    .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
-    .company-list { margin-top: 24px; display: flex; flex-direction: column; gap: 0; border-top: 1px solid #e5e5e5; }
-    .company-row { display: grid; grid-template-columns: 90px 1fr; border-bottom: 1px solid #e5e5e5; }
+    =========================== */
+    .map-wrap { aspect-ratio: 16/9; overflow: hidden; }
+    .map-wrap iframe { width:100%;height:100%;border:0;display:block; }
+    .company-rows { margin-top: 24px; border-top: 1px solid #e5e5e5; }
+    .company-row { display: grid; grid-template-columns: 80px 1fr; border-bottom: 1px solid #e5e5e5; }
     .company-row__th { font-size: 1.25rem; font-weight: 700; color: #888; padding: 12px 0; }
     .company-row__td { font-size: 1.4rem; color: #222; padding: 12px 0; line-height: 1.65; }
 
-    /* ==============================
+    /* ===========================
        FORM
-    ============================== */
+    =========================== */
     .form { display: flex; flex-direction: column; gap: 18px; }
     .form__field { display: flex; flex-direction: column; gap: 5px; }
     .form__label { font-size: 1.3rem; font-weight: 700; color: #333; }
@@ -555,100 +524,68 @@
     .form__field.has-error .form__textarea { border-color: #e53e3e; }
     .form__field.has-error .form__error { display: block; }
 
-    /* ==============================
+    /* ===========================
        FINAL CTA
-    ============================== */
+    =========================== */
     .final-cta {
-      background: var(--blue);
-      padding: 56px 20px;
-      text-align: center;
+      background: var(--blue); padding: 64px 20px;
+      text-align: center; position: relative;
+    }
+    /* 上部斜め */
+    .final-cta::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 0; width: 0;
+      border-style: solid;
+      border-width: 52px 100vw 0 0;
+      border-color: var(--white) transparent transparent transparent;
+    }
+    .final-cta__en {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; letter-spacing: .24em;
+      color: rgba(255,255,255,.5); margin-bottom: 10px;
     }
     .final-cta__title {
-      font-size: clamp(2.8rem, 8vw, 5rem);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.25;
-      margin-bottom: 10px;
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.2; margin-bottom: 14px;
     }
-    .final-cta__sub { font-size: 1.45rem; color: rgba(255,255,255,.8); margin-bottom: 36px; line-height: 1.8; }
+    .final-cta__sub { font-size: 1.5rem; color: rgba(255,255,255,.8); margin-bottom: 36px; line-height: 1.8; }
     .final-cta__btns { display: flex; flex-direction: column; gap: 10px; }
 
-    /* ==============================
+    /* ===========================
        FOOTER
-    ============================== */
+    =========================== */
     footer { background: var(--black); padding: 40px 20px 100px; text-align: center; }
-    .footer__logo img { height: 36px; width: auto; margin: 0 auto 12px; }
+    .footer__logo img { height: 34px; width: auto; margin: 0 auto 12px; }
     .footer__info { font-size: 1.2rem; color: rgba(255,255,255,.4); line-height: 1.9; }
 
-    /* ==============================
-       STICKY BOTTOM CTA（スマホ）
-    ============================== */
+    /* ===========================
+       STICKY CTA（スマホ）
+    =========================== */
     .sticky-cta {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      z-index: 800;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 800;
+      display: grid; grid-template-columns: 1fr 1fr;
       border-top: 2px solid var(--blue);
     }
     .sticky-cta a {
-      display: flex; align-items: center; justify-content: center;
-      gap: 6px; padding: 14px 8px;
-      font-size: 1.5rem; font-weight: 900;
-      text-decoration: none; letter-spacing: .03em;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 14px 8px; font-size: 1.5rem; font-weight: 900; letter-spacing: .03em;
     }
     .sticky-cta__tel { background: var(--black); color: var(--white); }
     .sticky-cta__apply { background: var(--blue); color: var(--white); }
 
-    /* ==============================
+    /* ===========================
        ANIMATIONS
-    ============================== */
-    .js-fade { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .75s cubic-bezier(.165,.84,.44,1); }
+    =========================== */
+    .js-fade { opacity: 0; transform: translateY(30px); transition: opacity .65s ease, transform .7s cubic-bezier(.165,.84,.44,1); }
     .js-fade.in { opacity: 1; transform: translateY(0); }
-    .js-fade-d1 { transition-delay: .1s; }
-    .js-fade-d2 { transition-delay: .2s; }
+    .js-fade-d1 { transition-delay: .12s; }
+    .js-fade-d2 { transition-delay: .24s; }
 
-    /* ==============================
-       DESKTOP OVERRIDES（768px+）
-    ============================== */
-    @media (min-width: 768px) {
-      .header { padding: 0 40px; }
-      .hero__content { padding: 60px 10vw 48px; max-width: 700px; }
-      .hero__copy { font-size: clamp(4rem, 5.5vw, 6.4rem); }
-      .hero__btns { flex-direction: row; }
-      .hero__btns .btn { min-width: 220px; }
-      .section { padding: 80px 10vw; }
-      .section--rep { padding: 0; }
-      .numbers-strip { grid-template-columns: repeat(5, 1fr); }
-      .number-cell:nth-child(odd) { background: var(--black); }
-      .number-cell:nth-child(even) { background: #1a1a1a; }
-      .photo-strip { grid-template-columns: repeat(4, 1fr); }
-      .photo-strip__wide { grid-column: 1 / -1; aspect-ratio: 21/7; }
-      .features { display: grid; grid-template-columns: 1fr 1fr; }
-      .welcome-grid { grid-template-columns: repeat(4, 1fr); }
-      .sugimoto { grid-template-columns: 200px 1fr; }
-      .rep-layout-desktop { display: grid; grid-template-columns: 1fr 1fr; }
-      .rep-layout-desktop .rep-photo-wrap { aspect-ratio: auto; min-height: 460px; }
-      .rep-layout-desktop .rep-content { padding: 48px 48px; display: flex; flex-direction: column; justify-content: center; }
-      .age-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-      .access-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-      .company-list { margin-top: 0; }
-      .final-cta__btns { flex-direction: row; justify-content: center; }
-      footer { padding-bottom: 48px; }
-      .sticky-cta { display: none; }
-      .pain { padding: 80px 10vw; }
-      .appeal-strip { padding: 48px 10vw; }
-    }
-
-    @media (min-width: 1100px) {
-      .hero__content { max-width: 800px; }
-      .section { padding: 96px 8vw; }
-      .pain { padding: 96px 8vw; }
-    }
-
-    /* ==============================
-       SUCCESS
-    ============================== */
+    /* ===========================
+       FORM SUCCESS
+    =========================== */
     .form-success {
       display: none; background: #EFF6FF;
       border: 2px solid var(--blue); padding: 40px 20px; text-align: center;
@@ -657,50 +594,59 @@
     .form-success__title { font-size: 2.2rem; font-weight: 900; color: var(--blue); margin-bottom: 8px; }
     .form-success__body { font-size: 1.45rem; color: #444; }
 
-    /* ==============================
-       DIVIDER CUTS
-    ============================== */
-    .cut-top-blue::before {
-      content: '';
-      display: block;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 44px 100vw 0 0;
-      border-color: var(--white) transparent transparent transparent;
+    /* ===========================
+       TABLET / PC（768px+）
+    =========================== */
+    @media (min-width: 768px) {
+      .header { padding: 0 40px; }
+      .hero__content { padding: 60px 8vw 100px; max-width: 700px; }
+      .hero__btns { flex-direction: row; }
+      .section { padding: 80px 8vw; }
+      .sugimoto-section { padding: 80px 8vw; }
+      .numbers-strip { grid-template-columns: repeat(5, 1fr); }
+      .features { display: grid; grid-template-columns: 1fr 1fr; }
+      .welcome-grid { grid-template-columns: repeat(4, 1fr); }
+      /* 杉本さん：PC時は横並び */
+      .sugimoto-layout { display: grid; grid-template-columns: 360px 1fr; gap: 0; }
+      .sugimoto-img { aspect-ratio: auto; min-height: 420px; }
+      /* 代表：PC時は横並び */
+      .rep-layout { display: grid; grid-template-columns: 1fr 1fr; }
+      .rep-img { aspect-ratio: auto; }
+      .age-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+      .access-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+      .company-rows { margin-top: 0; }
+      .final-cta__btns { flex-direction: row; justify-content: center; }
+      footer { padding-bottom: 48px; }
+      .sticky-cta { display: none; }
+      .pain { padding: 80px 8vw; }
+      .appeal { padding: 48px 8vw; }
     }
-    .cut-bottom-white::after {
-      content: '';
-      display: block;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 0 0 44px 100vw;
-      border-color: transparent transparent var(--white) transparent;
+    @media (min-width: 1100px) {
+      .section { padding: 96px 6vw; }
+      .pain, .appeal { padding: 96px 6vw; }
     }
   </style>
 </head>
 <body>
 
-<!-- ヘッダー -->
+<div class="progress" id="progressBar"></div>
+
+<!-- HEADER -->
 <header class="header" id="siteHeader">
   <a href="#top" class="header__logo"><img src="images/logo.png" alt="有限会社アドヴァンス" /></a>
   <a href="#apply" class="header__cta">今すぐ応募</a>
 </header>
-<div class="progress" id="progressBar"></div>
 
-<!-- ヒーロー -->
+<!-- HERO -->
 <section class="hero" id="top">
   <div class="hero__bg"></div>
   <div class="hero__content js-fade">
-    <span class="hero__label">千葉・埼玉エリア ／ 食品輸送</span>
+    <div class="hero__en">CHIBA / SAITAMA — FOOD LOGISTICS</div>
     <h1 class="hero__copy">
-      頑張りが、<br>
-      ちゃんと<br>
-      <span class="accent">報われる会社</span><br>
-      があります。
+      頑張りが、<br>ちゃんと<br><span class="accent">報われる会社</span><br>があります。
     </h1>
     <p class="hero__sub">
-      20年以上、毎年欠かさず賞与を支給。<br>
-      ドライバーを大切にする運送会社です。
+      20年以上、毎年欠かさず賞与を支給。<br>ドライバーを大切にする運送会社です。
     </p>
     <div class="hero__badges">
       <span class="hero__badge hero__badge--filled">月給33万円以上も可</span>
@@ -709,37 +655,42 @@
       <span class="hero__badge">週休1〜2日選択可</span>
     </div>
     <div class="hero__btns">
-      <a href="#apply" class="btn btn--blue">今すぐ応募する</a>
+      <a href="#apply" class="btn btn--blue" style="min-width:180px">今すぐ応募する</a>
       <a href="tel:0471262003" class="btn btn--outline-white">📞 04-7126-2003</a>
     </div>
   </div>
-  <span class="scroll-down">SCROLL</span>
+  <div class="scroll-hint">
+    <span class="scroll-hint__label">SCROLL</span>
+    <span class="scroll-hint__line"></span>
+  </div>
+  <div class="hero__slash"></div>
 </section>
 
-<!-- 月収アピールストリップ -->
-<div class="appeal-strip">
-  <div class="appeal-strip__label">週1休み・月26日稼働の場合</div>
-  <div class="appeal-strip__num js-counter" data-target="338"><span>月</span>0<span>円〜</span></div>
-  <div class="appeal-strip__note">※日給13,000円〜 ／ 賞与は別途年2回</div>
-  <div class="appeal-strip__sub">
-    <span class="appeal-strip__item">💰 賞与年2回</span>
-    <span class="appeal-strip__item">📅 週休1〜2日選択</span>
-    <span class="appeal-strip__item">🏠 社宅家賃半額</span>
-    <span class="appeal-strip__item">🚗 社用車貸与可</span>
+<!-- 月収アピール -->
+<div class="appeal">
+  <div class="appeal__en">MONTHLY SALARY — ACTUAL RECORD</div>
+  <div class="appeal__num js-counter" data-target="338"><span class="appeal__unit">月</span>0<span class="appeal__unit">円〜</span></div>
+  <div class="appeal__note">※週1休み・月26日稼働の場合 ／ 日給13,000円〜 ／ 賞与は別途年2回</div>
+  <div class="appeal__chips">
+    <span class="appeal__chip">💰 賞与年2回</span>
+    <span class="appeal__chip">📅 週休1〜2日選択</span>
+    <span class="appeal__chip">🏠 社宅家賃半額</span>
+    <span class="appeal__chip">🚗 社用車貸与可</span>
   </div>
 </div>
 
-<!-- 共感コピー（ペインポイント） -->
-<div class="pain cut-top-blue cut-bottom-white">
-  <div class="pain__heading">
+<!-- ペインポイント -->
+<div class="pain">
+  <div class="pain__en">ARE YOU FEELING THIS?</div>
+  <h2 class="pain__heading">
     今の仕事、<span class="accent">こんな悩み</span><br>ありませんか？
-  </div>
+  </h2>
   <ul class="pain__list js-fade">
     <li class="pain__item">どれだけ頑張っても給料が上がらない</li>
     <li class="pain__item">賞与がない、または毎年減らされている</li>
-    <li class="pain__item">体がきつい仕事なのに正当に評価されない</li>
-    <li class="pain__item">年齢や経歴で転職を諦めている</li>
-    <li class="pain__item">安定して長く働ける職場を探している</li>
+    <li class="pain__item">体がきつい割に正当に評価されない</li>
+    <li class="pain__item">年齢や経歴で転職を諦めかけている</li>
+    <li class="pain__item">長く安定して働ける職場を探している</li>
   </ul>
   <div class="pain__resolve js-fade js-fade-d1">
     アドヴァンスは、そんな方のために<br>
@@ -747,41 +698,38 @@
   </div>
 </div>
 
-<!-- 写真ストリップ -->
-<div class="photo-strip">
-  <div class="photo-strip__item photo-strip__wide">
+<!-- フォトモザイク -->
+<div class="photo-mosaic">
+  <div class="photo-mosaic__main">
     <img src="images/real-staff-advance.jpg" alt="アドヴァンスのスタッフとトラック" loading="lazy" />
   </div>
-  <div class="photo-strip__item">
-    <img src="images/real-truck-isuzu.jpg" alt="いすゞGIGAトラック" loading="lazy" />
-  </div>
-  <div class="photo-strip__item">
-    <img src="images/real-truck-hino.jpg" alt="日野冷凍車" loading="lazy" />
-  </div>
-  <div class="photo-strip__item">
-    <img src="images/real-staff-wing.jpg" alt="スタッフとウィング車" loading="lazy" />
-  </div>
-  <div class="photo-strip__item">
-    <img src="images/real-fleet-rainy.jpg" alt="アドヴァンス車列" loading="lazy" />
+  <div class="photo-mosaic__sub">
+    <div class="photo-mosaic__thumb"><img src="images/real-truck-isuzu.jpg" alt="いすゞGIGAトラック" loading="lazy" /></div>
+    <div class="photo-mosaic__thumb"><img src="images/real-truck-hino.jpg" alt="日野冷凍車" loading="lazy" /></div>
+    <div class="photo-mosaic__thumb"><img src="images/real-staff-wing.jpg" alt="スタッフとウィング車" loading="lazy" /></div>
+    <div class="photo-mosaic__thumb"><img src="images/real-fleet-rainy.jpg" alt="車列" loading="lazy" /></div>
   </div>
 </div>
 
 <!-- 6つの魅力 -->
 <section class="section section--gray" id="features">
-  <span class="section__tag">FEATURES</span>
+  <div class="section__eyebrow">
+    <span class="section__en">WHY ADVANCE</span>
+    <span class="section__line"></span>
+  </div>
   <h2 class="section__title">アドヴァンスが<br><span class="accent">選ばれる6つの理由</span></h2>
   <p class="section__lead">稼げて・体にやさしく・長く続けられる。ドライバーが主役の職場です。</p>
   <div class="features js-fade">
     <div class="feature">
-      <div class="feature__num">1</div>
+      <div class="feature__num">01</div>
       <div class="feature__body">
         <div class="feature__title">賞与年2回・月給33万円以上も可</div>
-        <p class="feature__text">日給13,000円〜。月26日稼働で338,000円の実績あり。創業以来20年以上、一度も賞与を欠かしていません。</p>
+        <p class="feature__text">日給13,000円〜。月26日稼働で338,000円の実績。創業以来20年以上、一度も賞与を欠かしていません。</p>
         <span class="feature__chip">日給 13,000円〜</span>
       </div>
     </div>
     <div class="feature feature--blue">
-      <div class="feature__num">2</div>
+      <div class="feature__num">02</div>
       <div class="feature__body">
         <div class="feature__title">全車エアサス搭載・腰への負担が少ない</div>
         <p class="feature__text">67台全てにエアサス＋パワーゲートを完備。手積み・手降ろしはほぼなし。体に長く優しい環境です。</p>
@@ -789,7 +737,7 @@
       </div>
     </div>
     <div class="feature">
-      <div class="feature__num">3</div>
+      <div class="feature__num">03</div>
       <div class="feature__body">
         <div class="feature__title">近距離・固定ルートで1日200〜250km</div>
         <p class="feature__text">首都圏中心の食品配送。ほぼ固定ルートなので、慣れれば安心して働けます。</p>
@@ -797,7 +745,7 @@
       </div>
     </div>
     <div class="feature feature--blue">
-      <div class="feature__num">4</div>
+      <div class="feature__num">04</div>
       <div class="feature__body">
         <div class="feature__title">3週間〜1ヶ月の長期研修あり</div>
         <p class="feature__text">未経験・普通免許のみでもOK。丁寧な研修と資格取得補助で、一からしっかり育てます。</p>
@@ -805,7 +753,7 @@
       </div>
     </div>
     <div class="feature">
-      <div class="feature__num">5</div>
+      <div class="feature__num">05</div>
       <div class="feature__body">
         <div class="feature__title">社宅家賃半額・社用車貸与で移住も安心</div>
         <p class="feature__text">遠方からの転居もしっかりサポート。社宅の家賃を半額負担、社用車の貸与も相談可能です。</p>
@@ -813,7 +761,7 @@
       </div>
     </div>
     <div class="feature feature--blue">
-      <div class="feature__num">6</div>
+      <div class="feature__num">06</div>
       <div class="feature__body">
         <div class="feature__title">週休1〜2日・出勤時間も自分で選べる</div>
         <p class="feature__text">出勤時間は14〜18時の5パターンから選択可。ライフスタイルに合わせた働き方ができます。</p>
@@ -826,39 +774,47 @@
 <!-- 実績ナンバーズ -->
 <div class="numbers-strip">
   <div class="number-cell">
+    <div class="number-cell__en">VEHICLES</div>
     <div class="number-cell__val js-counter" data-target="67">0<em>台</em></div>
     <div class="number-cell__label">稼働車両数</div>
   </div>
   <div class="number-cell">
+    <div class="number-cell__en">DRIVERS</div>
     <div class="number-cell__val js-counter" data-target="67">0<em>名</em></div>
     <div class="number-cell__label">ドライバー数</div>
   </div>
   <div class="number-cell">
+    <div class="number-cell__en">BONUS</div>
     <div class="number-cell__val">20<em>年+</em></div>
     <div class="number-cell__label">毎年賞与支給</div>
   </div>
   <div class="number-cell">
+    <div class="number-cell__en">AIR SUSPENSION</div>
     <div class="number-cell__val">100<em>%</em></div>
     <div class="number-cell__label">全車エアサス</div>
   </div>
   <div class="number-cell">
+    <div class="number-cell__en">VETERAN</div>
     <div class="number-cell__val">15<em>年+</em></div>
     <div class="number-cell__label">勤続ベテラン在籍</div>
   </div>
 </div>
 
 <!-- 代表メッセージ -->
-<section class="section--rep" id="message">
-  <div class="rep-layout-desktop">
-    <div class="rep-photo-wrap">
+<section id="message" style="padding:0;background:var(--white);">
+  <div class="rep-layout">
+    <div class="rep-img js-fade">
       <img src="images/president-real.jpg" alt="代表取締役 櫻井謙治" />
-      <div class="rep-photo-wrap__overlay">
-        <div class="rep-photo-wrap__role">代表取締役 ／ 現役ドライバー</div>
-        <div class="rep-photo-wrap__name">櫻井 謙治（53歳）</div>
+      <div class="rep-img__overlay">
+        <div class="rep-img__role">代表取締役 ／ 現役ドライバー</div>
+        <div class="rep-img__name">櫻井 謙治（53歳）</div>
       </div>
     </div>
-    <div class="rep-content js-fade">
-      <span class="section__tag">REPRESENTATIVE MESSAGE</span>
+    <div class="rep-text js-fade js-fade-d1">
+      <div class="section__eyebrow" style="margin-bottom:10px">
+        <span class="section__en" style="color:var(--blue)">MESSAGE FROM CEO</span>
+        <span class="section__line"></span>
+      </div>
       <p class="rep-quote">「ドライバーがちゃんと<br>報われる会社を作りたい」</p>
       <p class="rep-body">私はもともと証券会社の営業職でした。33歳でドライバーに転職し、独立してアドヴァンスを設立しました。</p>
       <p class="rep-body">ドライバーは日本の物流を支える大切な仕事です。それなのに賞与がない、評価されない会社が多い。だから私は「ドライバーがちゃんと報われる会社」を作ることを使命にしてきました。</p>
@@ -872,7 +828,10 @@
 
 <!-- こんな方歓迎 -->
 <section class="section section--gray">
-  <span class="section__tag">WHO WE WELCOME</span>
+  <div class="section__eyebrow">
+    <span class="section__en">WHO WE WELCOME</span>
+    <span class="section__line"></span>
+  </div>
   <h2 class="section__title">こんな方を<br><span class="accent">お待ちしています</span></h2>
   <div class="welcome-grid js-fade">
     <div class="welcome-cell"><span class="welcome-cell__icon">🚗</span><div class="welcome-cell__text">普通免許のみの方</div><div class="welcome-cell__sub">資格補助あり</div></div>
@@ -890,9 +849,12 @@
 <section class="section section--black">
   <div class="age-section-inner">
     <div class="js-fade">
-      <span class="section__tag">MEMBERS</span>
+      <div class="section__eyebrow">
+        <span class="section__en">OUR MEMBERS</span>
+        <span class="section__line"></span>
+      </div>
       <h2 class="section__title">幅広い年代が<br><span class="accent">長く活躍中</span></h2>
-      <p class="section__lead">40代・50代が中心。年齢不問・学歴不問で採用中。社歴15年以上のベテランも多く在籍しています。</p>
+      <p class="section__lead">40代・50代が中心。年齢・学歴不問で採用中。社歴15年以上のベテランも多く在籍しています。</p>
     </div>
     <div class="age-bars js-fade js-fade-d1" id="ageBars">
       <div class="age-row"><div class="age-row__label">20代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="2"></div></div><div class="age-row__count">1名</div></div>
@@ -906,7 +868,10 @@
 
 <!-- 求人詳細 -->
 <section class="section" id="job">
-  <span class="section__tag">JOB DETAILS</span>
+  <div class="section__eyebrow">
+    <span class="section__en">JOB DETAILS</span>
+    <span class="section__line"></span>
+  </div>
   <h2 class="section__title">求人 <span class="accent">詳細</span></h2>
   <p class="section__lead">食品輸送を中心とした、安定・安心のお仕事です。</p>
   <table class="job-table js-fade">
@@ -915,31 +880,36 @@
     <tr><th>勤務時間</th><td>14:00〜 / 15:00〜 / 16:00〜 / 17:00〜 / 18:00〜<br><small style="color:#999">※相談可</small></td></tr>
     <tr><th>休日</th><td>週休1日または週休2日（ご自身で選択可）</td></tr>
     <tr><th>エリア</th><td>首都圏中心（1日200〜250km程度）</td></tr>
-    <tr><th>配送</th><td>ラウンド型（2〜3便）またはルート型（10〜15件）<br>ほぼ固定ルート</td></tr>
-    <tr><th>荷物</th><td>パレット・カゴ車など<br><span class="chip">手積み・手降ろしほぼなし</span></td></tr>
-    <tr><th>車両</th><td>冷凍車・ウィング車（4t〜10t）<br>全車エアサス＋パワーゲート＋バックカメラ</td></tr>
-    <tr><th>資格</th><td>普通免許以上<br><span class="chip">未経験OK</span><span class="chip">年齢不問</span><span class="chip">学歴不問</span></td></tr>
+    <tr><th>配送</th><td>ラウンド型（2〜3便）またはルート型（10〜15件）</td></tr>
+    <tr><th>荷物</th><td>パレット・カゴ車など <span class="chip">手積みほぼなし</span></td></tr>
+    <tr><th>車両</th><td>冷凍車・ウィング車（4t〜10t）全車エアサス＋パワーゲート</td></tr>
+    <tr><th>資格</th><td>普通免許以上 <span class="chip">未経験OK</span><span class="chip">年齢不問</span><span class="chip">学歴不問</span></td></tr>
     <tr><th>待遇</th><td>社宅補助（家賃半額）／社用車貸与（相談）<br>資格取得補助／試用期間なし／入社日柔軟</td></tr>
     <tr><th>勤務地</th><td>千葉県野田市吉春25-1<br><small style="color:#999">清水公園駅より車5分 / マイカー通勤OK</small></td></tr>
   </table>
 </section>
 
-<!-- 面談担当 -->
-<section class="section section--gray" id="contact">
-  <span class="section__tag">CONTACT</span>
-  <h2 class="section__title">まずは<br><span class="accent">気軽に話しましょう</span></h2>
-  <p class="section__lead">堅苦しい面接ではありません。「少し興味がある」程度でも大歓迎です。</p>
-  <div class="sugimoto js-fade">
-    <div class="sugimoto__photo">
+<!-- 杉本さん -->
+<section class="sugimoto-section" id="contact">
+  <div class="section__eyebrow">
+    <span class="section__en">CONTACT & INTERVIEW</span>
+    <span class="section__line"></span>
+  </div>
+  <h2 class="section__title" style="margin-bottom:24px">まずは<br><span class="accent">気軽に話しましょう</span></h2>
+  <div class="sugimoto-layout js-fade">
+    <!-- 画像：モバイルでは3:2比率で全面表示 -->
+    <div class="sugimoto-img">
       <img src="images/sugimoto-desk.jpg" alt="面談担当 杉本" />
+      <div class="sugimoto-img__label">
+        <div class="sugimoto-img__role">統括部長 ／ 面談担当</div>
+        <div class="sugimoto-img__name">杉本</div>
+      </div>
     </div>
-    <div class="sugimoto__body">
-      <div class="sugimoto__role">統括部長 ／ 面談担当</div>
-      <div class="sugimoto__name">杉本</div>
-      <p class="sugimoto__msg">「今すぐじゃないけど気になる」「未経験でも大丈夫か聞いてみたい」そんな気持ちで連絡してくれて大丈夫です。まずは話だけでも聞きに来てください。</p>
+    <div class="sugimoto-text">
+      <p class="sugimoto-msg">「今すぐじゃないけど気になる」「未経験でも大丈夫か聞いてみたい」そんな気持ちで連絡してくれて大丈夫です。まずは話だけでも聞きに来てください。堅苦しい面接ではありません。</p>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <a href="tel:0471262003" class="btn btn--blue">📞 04-7126-2003 に電話する</a>
-        <a href="#apply" class="btn btn--black">✉️ フォームで問い合わせ</a>
+        <a href="tel:0471262003" class="btn btn--blue" style="width:100%">📞 04-7126-2003 に電話する</a>
+        <a href="#apply" class="btn btn--black" style="width:100%">✉️ フォームで問い合わせ</a>
       </div>
     </div>
   </div>
@@ -947,16 +917,19 @@
 
 <!-- アクセス -->
 <section class="section" id="access">
-  <span class="section__tag">ACCESS</span>
-  <h2 class="section__title">会社情報 <span class="accent">・アクセス</span></h2>
+  <div class="section__eyebrow">
+    <span class="section__en">ACCESS & COMPANY INFO</span>
+    <span class="section__line"></span>
+  </div>
+  <h2 class="section__title" style="margin-bottom:28px">会社情報 <span class="accent">・アクセス</span></h2>
   <div class="access-layout js-fade">
     <div class="map-wrap">
       <iframe src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E9%87%8E%E7%94%B0%E5%B8%82%E5%90%89%E6%98%A525-1&output=embed" allowfullscreen loading="lazy"></iframe>
     </div>
-    <div class="company-list">
+    <div class="company-rows">
       <div class="company-row"><div class="company-row__th">会社名</div><div class="company-row__td">有限会社アドヴァンス</div></div>
       <div class="company-row"><div class="company-row__th">所在地</div><div class="company-row__td">千葉県野田市吉春25-1<br><small style="color:#999">清水公園駅より車5分 / マイカー通勤OK</small></div></div>
-      <div class="company-row"><div class="company-row__th">電話</div><div class="company-row__td"><a href="tel:0471262003" style="color:var(--blue);font-weight:900;">04-7126-2003</a></div></div>
+      <div class="company-row"><div class="company-row__th">電話</div><div class="company-row__td"><a href="tel:0471262003" style="color:var(--blue);font-weight:900">04-7126-2003</a></div></div>
       <div class="company-row"><div class="company-row__th">事業</div><div class="company-row__td">一般貨物運送業（食品配送中心）</div></div>
       <div class="company-row"><div class="company-row__th">車両数</div><div class="company-row__td">67台</div></div>
       <div class="company-row"><div class="company-row__th">従業員</div><div class="company-row__td">67名（ドライバー）</div></div>
@@ -966,8 +939,11 @@
 
 <!-- 応募フォーム -->
 <section class="section section--gray" id="apply">
-  <span class="section__tag">APPLICATION</span>
-  <h2 class="section__title">応募 <span class="accent">フォーム</span></h2>
+  <div class="section__eyebrow">
+    <span class="section__en">APPLICATION FORM</span>
+    <span class="section__line"></span>
+  </div>
+  <h2 class="section__title" style="margin-bottom:12px">応募 <span class="accent">フォーム</span></h2>
   <p class="section__lead">「話だけ聞きたい」でも大丈夫。お気軽にどうぞ。</p>
   <form class="form js-fade" id="applyForm" novalidate>
     <div class="form__field" id="field-name">
@@ -996,7 +972,7 @@
       <textarea rows="4" class="form__textarea" placeholder="「話だけ聞きたい」「未経験でも大丈夫か聞きたい」など、なんでもどうぞ。"></textarea>
     </div>
     <button type="submit" class="btn btn--blue" style="width:100%">応募する</button>
-    <p style="font-size:1.2rem;color:#999;text-align:center;">内容確認後、担当者よりご連絡いたします。</p>
+    <p style="font-size:1.2rem;color:#999;text-align:center">内容確認後、担当者よりご連絡いたします。</p>
   </form>
   <div class="form-success" id="formSuccess">
     <div class="form-success__icon">✅</div>
@@ -1007,6 +983,7 @@
 
 <!-- 最後のCTA -->
 <div class="final-cta">
+  <div class="final-cta__en">JOIN US — ADVANCE CO., LTD.</div>
   <h2 class="final-cta__title">一緒に<br>走りましょう。</h2>
   <p class="final-cta__sub">ドライバーを大切にする会社で、<br>長く安心して働きませんか。</p>
   <div class="final-cta__btns">
@@ -1031,7 +1008,7 @@
 </div>
 
 <script>
-// スクロールプログレスバー・ヘッダー
+// プログレスバー + ヘッダー
 const bar = document.getElementById('progressBar');
 const hdr = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
@@ -1044,7 +1021,7 @@ window.addEventListener('scroll', () => {
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' }); }
   });
 });
 
@@ -1055,55 +1032,39 @@ const fadeObs = new IntersectionObserver(entries => {
 document.querySelectorAll('.js-fade').forEach(el => fadeObs.observe(el));
 
 // カウントアップ
-function countUp(el, target, duration) {
-  let v = 0, step = target / (duration / 16);
-  // 元のHTML内のテキストノードを探して保持
-  const inner = el.innerHTML;
-  const prefix = inner.match(/^[^0-9]*/)?.[0] || '';
-  const suffix = inner.match(/[^0-9]*$/)?.[0] || '';
-  const timer = setInterval(() => {
-    v = Math.min(v + step, target);
-    el.innerHTML = prefix + Math.floor(v).toLocaleString() + suffix;
-    if (v >= target) clearInterval(timer);
-  }, 16);
-}
 const cntObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = parseInt(el.dataset.target);
-      const inner = el.innerHTML;
-      const prefix = inner.replace(/\d+/, '').split(/\d/)[0];
-      const suffix = inner.replace(/.*\d/, '');
-      let v = 0, step = target / 60;
-      const timer = setInterval(() => {
-        v = Math.min(v + step, target);
-        el.innerHTML = prefix + Math.floor(v).toLocaleString() + suffix;
-        if (v >= target) clearInterval(timer);
-      }, 16);
-      cntObs.unobserve(el);
-    }
+    if (!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target);
+    const html = el.innerHTML;
+    const before = html.replace(/\d[\d,]*/, '').split(/\d/)[0];
+    const after = html.replace(/^[^0-9]*\d[\d,]*/, '');
+    let v = 0, step = target / 60;
+    const t = setInterval(() => {
+      v = Math.min(v + step, target);
+      el.innerHTML = before + Math.floor(v).toLocaleString() + after;
+      if (v >= target) clearInterval(t);
+    }, 16);
+    cntObs.unobserve(el);
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('.js-counter').forEach(el => cntObs.observe(el));
 
 // 年齢バー
 const ageObs = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) {
-    document.querySelectorAll('.age-bar-fill').forEach(b => { b.style.width = b.dataset.width + '%'; });
-    ageObs.disconnect();
-  }
+  if (!entries[0].isIntersecting) return;
+  document.querySelectorAll('.age-bar-fill').forEach(b => { b.style.width = b.dataset.width + '%'; });
+  ageObs.disconnect();
 }, { threshold: 0.3 });
 const ab = document.getElementById('ageBars');
 if (ab) ageObs.observe(ab);
 
-// フォームバリデーション
+// フォーム
 document.getElementById('applyForm').addEventListener('submit', e => {
   e.preventDefault();
   let ok = true;
-  ['field-name', 'field-tel'].forEach(id => {
-    const f = document.getElementById(id);
-    const inp = f.querySelector('input');
+  ['field-name','field-tel'].forEach(id => {
+    const f = document.getElementById(id), inp = f.querySelector('input');
     if (!inp.value.trim()) { f.classList.add('has-error'); ok = false; }
     else f.classList.remove('has-error');
   });
