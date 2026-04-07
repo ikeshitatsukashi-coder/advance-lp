@@ -3,690 +3,551 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ドライバー採用募集｜有限会社アドヴァンス</title>
+  <title>ドライバー募集｜有限会社アドヴァンス【千葉・埼玉エリア食品輸送】</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --blue: #0057B8;
       --blue-dark: #003d8a;
-      --black: #0d0d0d;
-      --white: #ffffff;
+      --black: #111;
+      --white: #fff;
+      --gray: #f5f5f5;
+      --text: #222;
     }
-
-    html { font-size: 62.5%; }
+    html { font-size: 62.5%; scroll-behavior: smooth; }
     body {
-      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: 1.6rem;
       line-height: 1.8;
-      color: var(--black);
+      color: var(--text);
       background: var(--white);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      font-feature-settings: 'palt';
     }
     a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; }
 
-    /* ============================
-       HEADER
-    ============================ */
-    .site-header {
+    /* ==============================
+       STICKY HEADER
+    ============================== */
+    .header {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 500;
-      height: 60px;
+      z-index: 900;
       background: rgba(255,255,255,0.97);
       border-bottom: 3px solid var(--blue);
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 5vw;
-      transition: box-shadow 0.3s;
+      padding: 0 16px;
+      transition: box-shadow .3s;
     }
-    .site-header.scrolled { box-shadow: 0 2px 20px rgba(0,87,184,0.15); }
-
-    .header-logo {
-      font-size: 1.4rem;
-      font-weight: 900;
-      color: var(--black);
-      letter-spacing: 0.04em;
-    }
-    .header-logo span { color: var(--blue); }
-
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-    .header-nav a {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #333;
-      letter-spacing: 0.04em;
-      position: relative;
-      transition: color 0.2s;
-    }
-    .header-nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0; height: 2px;
-      background: var(--blue);
-      transition: width 0.25s ease;
-    }
-    .header-nav a:hover { color: var(--blue); }
-    .header-nav a:hover::after { width: 100%; }
-
-    .header-cta {
-      background: var(--blue) !important;
-      color: var(--white) !important;
-      padding: 8px 20px !important;
-      font-size: 1.3rem !important;
-      transition: background 0.2s !important;
-    }
-    .header-cta::after { display: none !important; }
-    .header-cta:hover { background: var(--blue-dark) !important; color: var(--white) !important; }
-
-    /* hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 6px;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--black);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* mobile drawer */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 60px; left: 0; right: 0;
-      background: var(--white);
-      border-bottom: 3px solid var(--blue);
-      z-index: 499;
-      padding: 24px 5vw;
-      flex-direction: column;
-      gap: 20px;
-      transform: translateY(-10px);
-      opacity: 0;
-      transition: transform 0.3s, opacity 0.3s;
-    }
-    .mobile-nav.open { transform: translateY(0); opacity: 1; }
-    .mobile-nav a {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--black);
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .mobile-nav a.mobile-apply {
+    .header.scrolled { box-shadow: 0 2px 16px rgba(0,87,184,.15); }
+    .header__logo img { height: 32px; width: auto; }
+    .header__cta {
       background: var(--blue);
       color: var(--white);
-      text-align: center;
-      padding: 14px;
-      border-bottom: none;
-      font-size: 1.6rem;
-    }
-
-    /* ============================
-       BUTTONS
-    ============================ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 900;
-      padding: 1.2em 2em;
-      line-height: 1;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      font-family: inherit;
-      border: none;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
+      padding: 9px 18px;
+      letter-spacing: .04em;
+      transition: background .2s;
+    }
+    .header__cta:hover { background: var(--blue-dark); }
+
+    /* ==============================
+       PROGRESS BAR
+    ============================== */
+    .progress { position: fixed; top: 56px; left: 0; height: 3px; background: var(--blue); z-index: 901; width: 0; transition: width .1s linear; }
+
+    /* ==============================
+       HERO
+    ============================== */
+    .hero {
       position: relative;
+      min-height: 100svh;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-top: 56px;
       overflow: hidden;
     }
-    .btn::before {
-      content: '';
+    .hero__bg {
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.15);
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
+      background: url('images/real-fleet-sunny.jpg') center center / cover no-repeat;
+      filter: brightness(.45);
     }
-    .btn:hover::before { transform: translateX(0); }
-    .btn:active { transform: scale(0.98); }
-
-    .btn-arrow::after {
-      content: '';
-      display: inline-block;
-      width: 0.5em; height: 0.5em;
-      border-top: 2px solid currentColor;
-      border-right: 2px solid currentColor;
-      transform: rotate(45deg);
-      flex-shrink: 0;
-    }
-
-    .btn--blue { background: var(--blue); color: var(--white); }
-    .btn--blue:hover { background: var(--blue-dark); }
-    .btn--black { background: var(--black); color: var(--white); }
-    .btn--black:hover { background: #333; }
-    .btn--outline {
-      background: transparent;
-      color: var(--black);
-      border: 2px solid var(--black);
-      padding: calc(1.2em - 2px) calc(2em - 2px);
-    }
-    .btn--outline:hover { background: var(--black); color: var(--white); }
-    .btn--outline::before { background: rgba(0,0,0,0.08); }
-    .btn--white { background: var(--white); color: var(--blue); }
-    .btn--white:hover { background: #e8f0fb; }
-    .btn--white::before { background: rgba(0,87,184,0.08); }
-    .btn--outline-white {
-      background: transparent;
-      color: var(--white);
-      border: 2px solid rgba(255,255,255,0.7);
-      padding: calc(1.2em - 2px) calc(2em - 2px);
-    }
-    .btn--outline-white:hover { border-color: var(--white); background: rgba(255,255,255,0.12); }
-    .btn--tel {
-      background: transparent;
-      border: 2px solid var(--blue);
-      color: var(--blue);
-      padding: calc(1.2em - 2px) calc(2em - 2px);
-      font-size: 2rem;
-      justify-content: center;
-    }
-    .btn--tel:hover { background: var(--blue); color: var(--white); }
-
-    .btn-group { display: flex; flex-wrap: wrap; gap: 12px; }
-
-    /* ============================
-       HERO
-    ============================ */
-    .hero {
-      min-height: 100vh;
-      background: var(--white);
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding-top: 60px;
-    }
-
-    .hero__blue-left {
-      position: absolute;
-      top: 0; left: 0; bottom: 0;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 100vh 0 0 26vw;
-      border-color: transparent transparent transparent var(--blue);
-    }
-    .hero__blue-right {
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 0 0 28vh 18vw;
-      border-color: transparent transparent var(--blue) transparent;
-    }
-
-    .hero__inner {
+    .hero__content {
       position: relative;
       z-index: 1;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 5vw;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
+      padding: 40px 20px 32px;
     }
-
-    .hero__tag {
+    .hero__label {
       display: inline-block;
       background: var(--blue);
       color: var(--white);
       font-size: 1.1rem;
       font-weight: 900;
-      letter-spacing: 0.14em;
-      padding: 5px 14px;
-      margin-bottom: 20px;
+      letter-spacing: .12em;
+      padding: 4px 14px;
+      margin-bottom: 16px;
     }
-
-    .hero__title {
-      font-size: clamp(3rem, 4.5vw, 5.6rem);
+    .hero__copy {
+      font-size: clamp(2.8rem, 8vw, 4.8rem);
       font-weight: 900;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
+      color: var(--white);
+      line-height: 1.2;
+      letter-spacing: -.01em;
+      margin-bottom: 16px;
     }
-    .hero__title .blue { color: var(--blue); display: block; }
-
+    .hero__copy .accent { color: #FFD600; display: inline; }
     .hero__sub {
-      font-size: 1.5rem;
-      color: #555;
-      line-height: 1.9;
-      margin-bottom: 32px;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,.82);
+      line-height: 1.8;
+      margin-bottom: 28px;
     }
-
     .hero__badges {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
     }
     .hero__badge {
-      border: 2px solid #bbb;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.35);
+      color: var(--white);
       font-size: 1.2rem;
       font-weight: 700;
       padding: 5px 12px;
-      letter-spacing: 0.03em;
     }
-    .hero__badge--filled {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: var(--white);
-    }
+    .hero__badge--filled { background: var(--blue); border-color: var(--blue); }
+    .hero__btns { display: flex; flex-direction: column; gap: 10px; }
 
-    .hero__cta { display: flex; flex-direction: column; gap: 12px; max-width: 380px; }
-
-    /* hero right stat blocks */
-    .hero__stats { display: flex; flex-direction: column; gap: 3px; }
-
-    .stat-block {
-      background: var(--black);
-      padding: 22px 28px;
+    /* ==============================
+       BUTTONS
+    ============================== */
+    .btn {
       display: flex;
-      align-items: baseline;
-      gap: 16px;
-      opacity: 0;
-      transform: translateX(30px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .stat-block.in { opacity: 1; transform: translateX(0); }
-    .stat-block:nth-child(2) { transition-delay: 0.1s; }
-    .stat-block:nth-child(3) { transition-delay: 0.2s; }
-    .stat-block:nth-child(4) { transition-delay: 0.3s; }
-    .stat-block:nth-child(2n) { background: #1c1c1c; }
-
-    .stat-block__num {
-      font-size: 4.4rem;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 1.7rem;
       font-weight: 900;
-      color: var(--blue);
-      line-height: 1;
-      white-space: nowrap;
-    }
-    .stat-block__num sup { font-size: 0.42em; vertical-align: super; }
-    .stat-block__label {
-      font-size: 1.3rem;
-      color: rgba(255,255,255,0.7);
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    /* ============================
-       NUMBERS BAND
-    ============================ */
-    .numbers-band { background: var(--blue); position: relative; }
-    .numbers-band::before {
-      content: '';
-      display: block;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 56px 100vw 0 0;
-      border-color: var(--white) transparent transparent transparent;
-    }
-    .numbers-band::after {
-      content: '';
-      display: block;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 0 0 56px 100vw;
-      border-color: transparent transparent var(--white) transparent;
-    }
-    .numbers-band__grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 8px 5vw;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1px;
-      background: rgba(255,255,255,0.15);
-    }
-    .number-cell {
-      background: var(--blue);
-      padding: 28px 16px;
+      padding: 16px 24px;
+      letter-spacing: .04em;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s, transform .15s;
       text-align: center;
     }
-    .number-cell__val {
-      font-size: 3.8rem;
+    .btn:active { transform: scale(.97); }
+    .btn--blue { background: var(--blue); color: var(--white); }
+    .btn--blue:hover { background: var(--blue-dark); }
+    .btn--white { background: var(--white); color: var(--blue); }
+    .btn--white:hover { background: #e8f0fb; }
+    .btn--outline-white { background: transparent; border: 2px solid rgba(255,255,255,.6); color: var(--white); }
+    .btn--outline-white:hover { background: rgba(255,255,255,.1); }
+    .btn--tel { background: var(--black); color: var(--white); font-size: 2rem; }
+    .btn--tel:hover { background: #333; }
+    .btn--black { background: var(--black); color: var(--white); }
+    .btn--black:hover { background: #333; }
+
+    /* ==============================
+       SCROLL DOWN
+    ============================== */
+    .scroll-down {
+      position: absolute;
+      bottom: 20px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,.5);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      animation: bounce 1.8s infinite;
+    }
+    .scroll-down::after {
+      content: '';
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,.4);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ==============================
+       APPEAL STRIP（月収）
+    ============================== */
+    .appeal-strip {
+      background: var(--blue);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .appeal-strip__label {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,.75);
+      font-weight: 700;
+      letter-spacing: .08em;
+      margin-bottom: 6px;
+    }
+    .appeal-strip__num {
+      font-size: clamp(4rem, 12vw, 7rem);
+      font-weight: 900;
+      color: #FFD600;
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+    .appeal-strip__num span { font-size: .45em; vertical-align: baseline; }
+    .appeal-strip__note {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,.7);
+      margin-top: 6px;
+    }
+    .appeal-strip__sub {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .appeal-strip__item {
+      background: rgba(255,255,255,.15);
+      color: var(--white);
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border: 1px solid rgba(255,255,255,.25);
+    }
+
+    /* ==============================
+       PAIN POINT（共感コピー）
+    ============================== */
+    .pain {
+      background: var(--black);
+      padding: 56px 20px;
+    }
+    .pain__heading {
+      font-size: 2rem;
       font-weight: 900;
       color: var(--white);
-      line-height: 1;
-      margin-bottom: 8px;
+      line-height: 1.5;
+      margin-bottom: 28px;
+      text-align: center;
     }
-    .number-cell__val em { font-style: normal; font-size: 0.48em; }
-    .number-cell__label { font-size: 1.2rem; color: rgba(255,255,255,0.8); font-weight: 700; }
+    .pain__heading .accent { color: #FFD600; }
+    .pain__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .pain__item {
+      background: #1c1c1c;
+      padding: 14px 18px 14px 48px;
+      color: rgba(255,255,255,.85);
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1.5;
+      position: relative;
+    }
+    .pain__item::before {
+      content: '✓';
+      position: absolute;
+      left: 16px;
+      color: var(--blue);
+      font-weight: 900;
+    }
+    .pain__resolve {
+      background: var(--blue);
+      padding: 20px;
+      text-align: center;
+      color: var(--white);
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1.6;
+    }
+    .pain__resolve .big { font-size: 2.2rem; display: block; margin-top: 4px; }
 
-    /* ============================
-       SECTIONS
-    ============================ */
-    .section { padding: 96px 5vw; }
-    .section--gray { background: #f4f5f7; }
-    .section--black { background: var(--black); }
+    /* ==============================
+       PHOTO SECTION
+    ============================== */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      background: #ddd;
+    }
+    .photo-strip__item { aspect-ratio: 4/3; overflow: hidden; }
+    .photo-strip__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .photo-strip__item:hover img { transform: scale(1.04); }
+    .photo-strip__wide { grid-column: 1 / -1; aspect-ratio: 16/7; }
+
+    /* ==============================
+       SECTION BASE
+    ============================== */
+    .section { padding: 56px 20px; }
+    .section--gray { background: var(--gray); }
     .section--blue { background: var(--blue); }
-
-    .section__inner { max-width: 1200px; margin: 0 auto; }
+    .section--black { background: var(--black); }
 
     .section__tag {
       display: inline-block;
       font-size: 1rem;
       font-weight: 900;
-      letter-spacing: 0.18em;
+      letter-spacing: .16em;
       text-transform: uppercase;
-      border-bottom: 2px solid var(--blue);
-      padding-bottom: 4px;
-      margin-bottom: 14px;
       color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 3px;
+      margin-bottom: 10px;
     }
-    .section--black .section__tag,
-    .section--blue .section__tag { color: var(--white); border-bottom-color: rgba(255,255,255,0.5); }
+    .section--blue .section__tag,
+    .section--black .section__tag { color: rgba(255,255,255,.7); border-color: rgba(255,255,255,.4); }
 
     .section__title {
-      font-size: clamp(2.6rem, 3.8vw, 4.6rem);
+      font-size: clamp(2.4rem, 7vw, 4rem);
       font-weight: 900;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin-bottom: 16px;
+      line-height: 1.25;
+      letter-spacing: -.01em;
+      margin-bottom: 12px;
     }
-    .section--black .section__title,
-    .section--blue .section__title { color: var(--white); }
+    .section--blue .section__title,
+    .section--black .section__title { color: var(--white); }
     .section__title .accent { color: var(--blue); }
-    .section--blue .section__title .accent { color: var(--white); text-decoration: underline; text-underline-offset: 4px; }
+    .section--blue .section__title .accent { color: #FFD600; }
 
     .section__lead {
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       color: #666;
-      line-height: 1.9;
-      max-width: 680px;
-      margin-bottom: 56px;
+      line-height: 1.85;
+      margin-bottom: 36px;
     }
-    .section--black .section__lead,
-    .section--blue .section__lead { color: rgba(255,255,255,0.72); }
+    .section--blue .section__lead,
+    .section--black .section__lead { color: rgba(255,255,255,.72); }
 
-    /* ============================
-       FEATURES GRID
-    ============================ */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      background: #d8d8d8;
-    }
-
+    /* ==============================
+       FEATURES
+    ============================== */
+    .features { display: flex; flex-direction: column; gap: 3px; background: #ddd; }
     .feature {
       background: var(--white);
-      padding: 40px 32px;
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0;
+      align-items: stretch;
       position: relative;
       overflow: hidden;
-      transition: background 0.25s;
+      transition: background .2s;
     }
     .feature:hover { background: #f0f5ff; }
     .feature--blue { background: var(--blue); }
     .feature--blue:hover { background: var(--blue-dark); }
-
     .feature__num {
-      position: absolute;
-      top: 12px; right: 18px;
-      font-size: 7rem;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
       font-weight: 900;
-      color: rgba(0,0,0,0.05);
-      line-height: 1;
+      color: var(--white);
+      padding: 24px 0;
     }
-    .feature--blue .feature__num { color: rgba(255,255,255,0.08); }
-
-    .feature__icon { font-size: 3.2rem; display: block; margin-bottom: 16px; }
-    .feature__title { font-size: 1.7rem; font-weight: 900; margin-bottom: 12px; line-height: 1.4; }
+    .feature--blue .feature__num { background: rgba(255,255,255,.15); }
+    .feature__body { padding: 20px 18px; }
+    .feature__title { font-size: 1.55rem; font-weight: 900; margin-bottom: 6px; line-height: 1.4; }
     .feature--blue .feature__title { color: var(--white); }
-    .feature__body { font-size: 1.35rem; color: #555; line-height: 1.85; }
-    .feature--blue .feature__body { color: rgba(255,255,255,0.82); }
+    .feature__text { font-size: 1.3rem; color: #555; line-height: 1.75; }
+    .feature--blue .feature__text { color: rgba(255,255,255,.8); }
     .feature__chip {
       display: inline-block;
-      margin-top: 14px;
+      margin-top: 8px;
       background: var(--blue);
       color: var(--white);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      padding: 4px 12px;
+      padding: 3px 10px;
     }
-    .feature--blue .feature__chip { background: var(--white); color: var(--blue); }
+    .feature--blue .feature__chip { background: rgba(255,255,255,.2); color: var(--white); }
 
-    /* ============================
-       REPRESENTATIVE
-    ============================ */
-    .rep-layout {
-      display: grid;
-      grid-template-columns: 360px 1fr;
-      gap: 72px;
-      align-items: center;
-    }
-
-    .rep-photo {
-      background: var(--blue);
-      aspect-ratio: 3/4;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 28px;
-      position: relative;
-      overflow: hidden;
-    }
-    .rep-photo::before {
-      content: '🚛';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -55%);
-      font-size: 11rem;
-      opacity: 0.1;
-    }
-    .rep-photo__plate {
-      background: rgba(0,0,0,0.55);
-      padding: 18px 20px;
-    }
-    .rep-photo__role { font-size: 1.1rem; color: rgba(255,255,255,0.65); font-weight: 700; margin-bottom: 4px; }
-    .rep-photo__name { font-size: 2.6rem; font-weight: 900; color: var(--white); }
-    .rep-photo__age { font-size: 1.2rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
-
-    .rep-quote {
-      font-size: clamp(1.8rem, 2vw, 2.6rem);
-      font-weight: 900;
-      line-height: 1.55;
-      margin-bottom: 24px;
-      border-left: 4px solid var(--blue);
-      padding-left: 20px;
-    }
-    .rep-body { font-size: 1.5rem; color: #444; line-height: 1.95; margin-bottom: 16px; }
-    .rep-history {
-      background: #f4f5f7;
-      padding: 14px 18px;
-      font-size: 1.35rem;
-      color: #555;
-      border-left: 3px solid var(--blue);
-    }
-    .rep-history strong { color: var(--black); }
-
-    /* ============================
-       AGE SECTION
-    ============================ */
-    .age-section {
-      background: var(--black);
-      padding: 0 5vw;
-      position: relative;
-    }
-    .age-section::before {
-      content: '';
-      display: block;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 64px 100vw 0 0;
-      border-color: var(--white) transparent transparent transparent;
-    }
-    .age-section::after {
-      content: '';
-      display: block;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 0 0 64px 100vw;
-      border-color: transparent transparent var(--white) transparent;
-    }
-    .age-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 72px 0;
+    /* ==============================
+       NUMBERS STRIP
+    ============================== */
+    .numbers-strip {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
+      gap: 2px;
+      background: #ddd;
     }
-    .age-bars { display: flex; flex-direction: column; gap: 20px; }
-    .age-row { display: grid; grid-template-columns: 56px 1fr 56px; align-items: center; gap: 14px; }
-    .age-row__label { font-size: 1.3rem; font-weight: 700; color: rgba(255,255,255,0.55); text-align: right; }
-    .age-bar-bg { background: rgba(255,255,255,0.1); height: 8px; overflow: hidden; }
-    .age-bar-fill { height: 8px; background: var(--blue); width: 0; transition: width 1.2s cubic-bezier(.22,1,.36,1); }
-    .age-row__count { font-size: 1.35rem; font-weight: 900; color: var(--white); }
+    .number-cell {
+      background: var(--black);
+      padding: 24px 16px;
+      text-align: center;
+    }
+    .number-cell:nth-child(odd) { background: #1a1a1a; }
+    .number-cell__val {
+      font-size: 3.6rem;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .number-cell__val em { font-style: normal; font-size: .48em; }
+    .number-cell__label { font-size: 1.2rem; color: rgba(255,255,255,.65); font-weight: 700; }
 
-    /* ============================
+    /* ==============================
+       REPRESENTATIVE
+    ============================== */
+    .rep-photo-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .rep-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .rep-photo-wrap__overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,.75));
+      padding: 20px 18px 16px;
+    }
+    .rep-photo-wrap__role { font-size: 1.1rem; color: rgba(255,255,255,.7); font-weight: 700; margin-bottom: 2px; }
+    .rep-photo-wrap__name { font-size: 2.4rem; font-weight: 900; color: var(--white); }
+    .rep-content { padding: 28px 20px; background: var(--white); }
+    .rep-quote {
+      font-size: 1.9rem;
+      font-weight: 900;
+      line-height: 1.55;
+      margin-bottom: 18px;
+      border-left: 4px solid var(--blue);
+      padding-left: 16px;
+    }
+    .rep-body { font-size: 1.45rem; color: #444; line-height: 1.95; margin-bottom: 14px; }
+    .rep-history {
+      background: var(--gray);
+      padding: 12px 16px;
+      font-size: 1.3rem;
+      color: #555;
+      border-left: 3px solid var(--blue);
+      line-height: 1.7;
+    }
+    .rep-history strong { color: var(--black); font-weight: 900; }
+
+    /* ==============================
+       SUGIMOTO / CONTACT
+    ============================== */
+    .sugimoto {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0;
+      background: var(--gray);
+    }
+    .sugimoto__photo { overflow: hidden; }
+    .sugimoto__photo img { width: 100%; height: 100%; object-fit: cover; }
+    .sugimoto__body { padding: 24px 20px; }
+    .sugimoto__role { font-size: 1.1rem; color: var(--blue); font-weight: 700; margin-bottom: 2px; }
+    .sugimoto__name { font-size: 2.4rem; font-weight: 900; margin-bottom: 10px; }
+    .sugimoto__msg { font-size: 1.4rem; color: #444; line-height: 1.85; margin-bottom: 20px; }
+
+    /* ==============================
        JOB TABLE
-    ============================ */
+    ============================== */
     .job-table { width: 100%; border-collapse: collapse; }
     .job-table tr { border-bottom: 1px solid #e0e0e0; }
     .job-table th {
       background: var(--blue);
       color: var(--white);
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
-      padding: 18px 20px;
+      padding: 14px 14px;
       text-align: left;
-      width: 160px;
+      width: 100px;
       vertical-align: top;
       white-space: nowrap;
     }
-    .job-table td { padding: 18px 24px; font-size: 1.4rem; line-height: 1.8; color: #333; background: var(--white); }
+    .job-table td { padding: 14px 16px; font-size: 1.4rem; line-height: 1.75; color: #333; background: var(--white); }
     .chip {
       display: inline-block;
       background: var(--blue);
       color: var(--white);
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      padding: 3px 12px;
-      margin-right: 6px;
-      margin-bottom: 4px;
+      padding: 3px 10px;
+      margin: 2px 4px 2px 0;
     }
 
-    /* ============================
-       TWO COL
-    ============================ */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #d8d8d8; margin-top: 3px; }
-    .info-box { background: var(--white); padding: 32px; }
-    .info-box--blue { background: var(--blue); }
-    .info-box__title {
-      font-size: 1.5rem; font-weight: 900; margin-bottom: 18px;
-      padding-bottom: 12px; border-bottom: 2px solid var(--blue); color: var(--black);
-    }
-    .info-box--blue .info-box__title { color: var(--white); border-bottom-color: rgba(255,255,255,0.35); }
-    .check-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-    .check-list li {
-      font-size: 1.4rem; color: #333;
-      display: flex; align-items: flex-start; gap: 10px; line-height: 1.55;
-    }
-    .check-list li::before { content: '✓'; color: var(--blue); font-weight: 900; flex-shrink: 0; }
-    .info-box--blue .check-list li { color: rgba(255,255,255,0.9); }
-    .info-box--blue .check-list li::before { color: var(--white); }
-
-    /* ============================
-       WELCOME GRID
-    ============================ */
+    /* ==============================
+       WELCOME
+    ============================== */
     .welcome-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 3px;
-      background: #d0d0d0;
+      background: #ccc;
     }
     .welcome-cell {
       background: var(--white);
-      padding: 28px 18px;
+      padding: 20px 14px;
       text-align: center;
-      cursor: default;
-      transition: background 0.2s, transform 0.2s;
+      transition: background .2s;
     }
-    .welcome-cell:hover { background: var(--blue); transform: translateY(-3px); }
+    .welcome-cell:hover { background: var(--blue); }
     .welcome-cell:hover .welcome-cell__text,
     .welcome-cell:hover .welcome-cell__sub { color: var(--white); }
     .welcome-cell--blue { background: var(--blue); }
-    .welcome-cell--blue .welcome-cell__text,
-    .welcome-cell--blue .welcome-cell__sub { color: var(--white); }
-    .welcome-cell__icon { font-size: 3rem; display: block; margin-bottom: 10px; }
-    .welcome-cell__text { font-size: 1.35rem; font-weight: 900; color: var(--black); line-height: 1.5; }
-    .welcome-cell__sub { font-size: 1.1rem; color: #888; margin-top: 5px; }
+    .welcome-cell--blue .welcome-cell__text { color: var(--white); }
+    .welcome-cell--blue .welcome-cell__sub { color: rgba(255,255,255,.75); }
+    .welcome-cell__icon { font-size: 2.8rem; display: block; margin-bottom: 8px; }
+    .welcome-cell__text { font-size: 1.35rem; font-weight: 900; color: var(--black); line-height: 1.4; }
+    .welcome-cell__sub { font-size: 1.1rem; color: #888; margin-top: 4px; }
 
-    /* ============================
-       CONTACT CARD
-    ============================ */
-    .contact-card {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      background: #f4f5f7;
-    }
-    .contact-card__photo {
-      background: var(--blue);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 36px 20px;
-      font-size: 6.4rem;
-    }
-    .contact-card__body { padding: 40px; }
-    .contact-card__role { font-size: 1.1rem; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; margin-bottom: 4px; }
-    .contact-card__name { font-size: 3rem; font-weight: 900; margin-bottom: 16px; }
-    .contact-card__msg { font-size: 1.4rem; color: #444; line-height: 1.9; margin-bottom: 28px; }
+    /* ==============================
+       AGE BARS
+    ============================== */
+    .age-bars { display: flex; flex-direction: column; gap: 16px; }
+    .age-row { display: grid; grid-template-columns: 52px 1fr 44px; align-items: center; gap: 12px; }
+    .age-row__label { font-size: 1.25rem; font-weight: 700; color: rgba(255,255,255,.55); text-align: right; }
+    .age-bar-bg { background: rgba(255,255,255,.1); height: 8px; overflow: hidden; }
+    .age-bar-fill { height: 8px; background: var(--blue); width: 0; transition: width 1.2s cubic-bezier(.22,1,.36,1); }
+    .age-row__count { font-size: 1.3rem; font-weight: 900; color: var(--white); }
 
-    /* ============================
+    /* ==============================
+       ACCESS
+    ============================== */
+    .map-wrap { aspect-ratio: 16/9; overflow: hidden; background: #eee; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .company-list { margin-top: 24px; display: flex; flex-direction: column; gap: 0; border-top: 1px solid #e5e5e5; }
+    .company-row { display: grid; grid-template-columns: 90px 1fr; border-bottom: 1px solid #e5e5e5; }
+    .company-row__th { font-size: 1.25rem; font-weight: 700; color: #888; padding: 12px 0; }
+    .company-row__td { font-size: 1.4rem; color: #222; padding: 12px 0; line-height: 1.65; }
+
+    /* ==============================
        FORM
-    ============================ */
-    .form { display: flex; flex-direction: column; gap: 20px; max-width: 640px; }
-    .form__field { display: flex; flex-direction: column; gap: 6px; }
+    ============================== */
+    .form { display: flex; flex-direction: column; gap: 18px; }
+    .form__field { display: flex; flex-direction: column; gap: 5px; }
     .form__label { font-size: 1.3rem; font-weight: 700; color: #333; }
     .form__req { color: var(--blue); margin-left: 4px; }
     .form__input, .form__select, .form__textarea {
-      width: 100%;
-      border: 2px solid #ccc;
-      padding: 12px 16px;
-      font-size: 1.5rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      background: var(--white);
+      width: 100%; border: 2px solid #ccc; padding: 12px 14px;
+      font-size: 1.6rem; font-family: inherit; outline: none;
+      transition: border-color .2s, box-shadow .2s; background: var(--white);
     }
     .form__input:focus, .form__select:focus, .form__textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(0,87,184,0.12);
+      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,87,184,.1);
     }
     .form__textarea { resize: vertical; }
     .form__error { font-size: 1.2rem; color: #e53e3e; display: none; }
@@ -694,685 +555,567 @@
     .form__field.has-error .form__textarea { border-color: #e53e3e; }
     .form__field.has-error .form__error { display: block; }
 
-    /* ============================
-       ACCESS
-    ============================ */
-    .access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-    .access-map { aspect-ratio: 4/3; background: #eee; overflow: hidden; }
-    .access-map iframe { width: 100%; height: 100%; border: 0; display: block; }
-    .company-table { width: 100%; border-collapse: collapse; }
-    .company-table tr { border-bottom: 1px solid #e5e5e5; }
-    .company-table th { font-size: 1.3rem; font-weight: 700; color: #888; padding: 13px 0; width: 110px; text-align: left; vertical-align: top; }
-    .company-table td { font-size: 1.4rem; padding: 13px 0; color: #222; line-height: 1.65; }
-
-    /* ============================
+    /* ==============================
        FINAL CTA
-    ============================ */
+    ============================== */
     .final-cta {
       background: var(--blue);
-      padding: 100px 5vw;
+      padding: 56px 20px;
       text-align: center;
-      position: relative;
     }
-    .final-cta::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 64px 100vw 0 0;
-      border-color: var(--white) transparent transparent transparent;
+    .final-cta__title {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 10px;
     }
-    .final-cta__title { font-size: clamp(3rem, 4.5vw, 5.4rem); font-weight: 900; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
-    .final-cta__sub { font-size: 1.5rem; color: rgba(255,255,255,0.8); margin-bottom: 44px; }
+    .final-cta__sub { font-size: 1.45rem; color: rgba(255,255,255,.8); margin-bottom: 36px; line-height: 1.8; }
+    .final-cta__btns { display: flex; flex-direction: column; gap: 10px; }
 
-    /* ============================
+    /* ==============================
        FOOTER
-    ============================ */
-    footer { background: var(--black); padding: 48px 5vw; text-align: center; }
-    .footer__logo { font-size: 1.6rem; font-weight: 900; color: var(--white); margin-bottom: 8px; }
-    .footer__logo span { color: var(--blue); }
-    .footer__info { font-size: 1.2rem; color: rgba(255,255,255,0.45); line-height: 1.9; }
+    ============================== */
+    footer { background: var(--black); padding: 40px 20px 100px; text-align: center; }
+    .footer__logo img { height: 36px; width: auto; margin: 0 auto 12px; }
+    .footer__info { font-size: 1.2rem; color: rgba(255,255,255,.4); line-height: 1.9; }
 
-    /* ============================
-       STICKY MOBILE CTA
-    ============================ */
-    .sticky-mob {
-      display: none;
+    /* ==============================
+       STICKY BOTTOM CTA（スマホ）
+    ============================== */
+    .sticky-cta {
       position: fixed;
       bottom: 0; left: 0; right: 0;
-      z-index: 490;
-      background: var(--black);
+      z-index: 800;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       border-top: 2px solid var(--blue);
-      padding: 10px 14px;
-      gap: 8px;
     }
-    .sticky-mob a {
-      flex: 1; display: flex;
-      align-items: center; justify-content: center;
-      padding: 13px 8px;
-      font-size: 1.4rem; font-weight: 900;
-      text-decoration: none;
+    .sticky-cta a {
+      display: flex; align-items: center; justify-content: center;
+      gap: 6px; padding: 14px 8px;
+      font-size: 1.5rem; font-weight: 900;
+      text-decoration: none; letter-spacing: .03em;
     }
-    .sticky-mob__tel { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.2); color: var(--white); }
-    .sticky-mob__apply { background: var(--blue); color: var(--white); }
+    .sticky-cta__tel { background: var(--black); color: var(--white); }
+    .sticky-cta__apply { background: var(--blue); color: var(--white); }
 
-    /* ============================
+    /* ==============================
        ANIMATIONS
-    ============================ */
-    .js-fade {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.65s ease, transform 0.75s cubic-bezier(.165,.84,.44,1);
-    }
+    ============================== */
+    .js-fade { opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .75s cubic-bezier(.165,.84,.44,1); }
     .js-fade.in { opacity: 1; transform: translateY(0); }
+    .js-fade-d1 { transition-delay: .1s; }
+    .js-fade-d2 { transition-delay: .2s; }
 
-    .js-fade-delay-1 { transition-delay: 0.1s; }
-    .js-fade-delay-2 { transition-delay: 0.2s; }
-    .js-fade-delay-3 { transition-delay: 0.3s; }
-
-    /* ============================
-       SCROLL PROGRESS BAR
-    ============================ */
-    .progress-bar {
-      position: fixed;
-      top: 60px; left: 0;
-      height: 3px;
-      background: var(--blue);
-      z-index: 501;
-      width: 0%;
-      transition: width 0.1s linear;
+    /* ==============================
+       DESKTOP OVERRIDES（768px+）
+    ============================== */
+    @media (min-width: 768px) {
+      .header { padding: 0 40px; }
+      .hero__content { padding: 60px 10vw 48px; max-width: 700px; }
+      .hero__copy { font-size: clamp(4rem, 5.5vw, 6.4rem); }
+      .hero__btns { flex-direction: row; }
+      .hero__btns .btn { min-width: 220px; }
+      .section { padding: 80px 10vw; }
+      .section--rep { padding: 0; }
+      .numbers-strip { grid-template-columns: repeat(5, 1fr); }
+      .number-cell:nth-child(odd) { background: var(--black); }
+      .number-cell:nth-child(even) { background: #1a1a1a; }
+      .photo-strip { grid-template-columns: repeat(4, 1fr); }
+      .photo-strip__wide { grid-column: 1 / -1; aspect-ratio: 21/7; }
+      .features { display: grid; grid-template-columns: 1fr 1fr; }
+      .welcome-grid { grid-template-columns: repeat(4, 1fr); }
+      .sugimoto { grid-template-columns: 200px 1fr; }
+      .rep-layout-desktop { display: grid; grid-template-columns: 1fr 1fr; }
+      .rep-layout-desktop .rep-photo-wrap { aspect-ratio: auto; min-height: 460px; }
+      .rep-layout-desktop .rep-content { padding: 48px 48px; display: flex; flex-direction: column; justify-content: center; }
+      .age-section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+      .access-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+      .company-list { margin-top: 0; }
+      .final-cta__btns { flex-direction: row; justify-content: center; }
+      footer { padding-bottom: 48px; }
+      .sticky-cta { display: none; }
+      .pain { padding: 80px 10vw; }
+      .appeal-strip { padding: 48px 10vw; }
     }
 
-    /* ============================
-       RESPONSIVE
-    ============================ */
-    @media (max-width: 1024px) {
-      .hero__inner { grid-template-columns: 1fr; min-height: auto; padding: 60px 5vw; }
-      .hero__blue-right { display: none; }
-      .hero__stats { flex-direction: row; flex-wrap: wrap; }
-      .stat-block { flex: 1 1 200px; }
-      .rep-layout { grid-template-columns: 1fr; gap: 40px; }
-      .rep-photo { aspect-ratio: 5/2; }
-      .age-inner { grid-template-columns: 1fr; gap: 48px; }
-      .access-grid { grid-template-columns: 1fr; }
-      .two-col { grid-template-columns: 1fr; }
-      .numbers-band__grid { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width: 1100px) {
+      .hero__content { max-width: 800px; }
+      .section { padding: 96px 8vw; }
+      .pain { padding: 96px 8vw; }
     }
 
-    @media (max-width: 768px) {
-      .features-grid { grid-template-columns: 1fr 1fr; }
-      .welcome-grid { grid-template-columns: repeat(2, 1fr); }
-      .contact-card { grid-template-columns: 1fr; }
-      .contact-card__photo { aspect-ratio: 4/1; font-size: 5rem; }
-    }
-
-    @media (max-width: 600px) {
-      .header-nav { display: none; }
-      .hamburger { display: flex; }
-      .mobile-nav { display: flex; }
-      .features-grid { grid-template-columns: 1fr; }
-      .numbers-band__grid { grid-template-columns: repeat(2, 1fr); }
-      .sticky-mob { display: flex; }
-      footer { padding-bottom: 80px; }
-      .btn { font-size: 1.4rem; padding: 1em 1.5em; }
-      .hero__blue-left { display: none; }
-      .hero__title { font-size: 3.2rem; }
-    }
-
-    /* ============================
-       SUCCESS STATE
-    ============================ */
+    /* ==============================
+       SUCCESS
+    ============================== */
     .form-success {
-      display: none;
-      background: #EFF6FF;
-      border: 2px solid var(--blue);
-      padding: 48px;
-      max-width: 640px;
-      text-align: center;
+      display: none; background: #EFF6FF;
+      border: 2px solid var(--blue); padding: 40px 20px; text-align: center;
     }
-    .form-success__icon { font-size: 4.8rem; margin-bottom: 14px; }
+    .form-success__icon { font-size: 4.8rem; margin-bottom: 12px; }
     .form-success__title { font-size: 2.2rem; font-weight: 900; color: var(--blue); margin-bottom: 8px; }
-    .form-success__body { font-size: 1.5rem; color: #444; }
+    .form-success__body { font-size: 1.45rem; color: #444; }
+
+    /* ==============================
+       DIVIDER CUTS
+    ============================== */
+    .cut-top-blue::before {
+      content: '';
+      display: block;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 44px 100vw 0 0;
+      border-color: var(--white) transparent transparent transparent;
+    }
+    .cut-bottom-white::after {
+      content: '';
+      display: block;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 0 44px 100vw;
+      border-color: transparent transparent var(--white) transparent;
+    }
   </style>
 </head>
 <body>
 
-<!-- SCROLL PROGRESS -->
-<div class="progress-bar" id="progressBar"></div>
-
-<!-- HEADER -->
-<header class="site-header" id="siteHeader">
-  <div class="header-logo">有限会社<span>アドヴァンス</span></div>
-  <nav class="header-nav">
-    <a href="#features">6つの魅力</a>
-    <a href="#message">代表メッセージ</a>
-    <a href="#job">求人詳細</a>
-    <a href="#contact">面談について</a>
-    <a href="#apply" class="header-cta">応募する</a>
-  </nav>
-  <button class="hamburger" id="hamburger" aria-label="メニュー">
-    <span></span><span></span><span></span>
-  </button>
+<!-- ヘッダー -->
+<header class="header" id="siteHeader">
+  <a href="#top" class="header__logo"><img src="images/logo.png" alt="有限会社アドヴァンス" /></a>
+  <a href="#apply" class="header__cta">今すぐ応募</a>
 </header>
+<div class="progress" id="progressBar"></div>
 
-<!-- MOBILE DRAWER -->
-<nav class="mobile-nav" id="mobileNav">
-  <a href="#features" class="mob-link">6つの魅力</a>
-  <a href="#message" class="mob-link">代表メッセージ</a>
-  <a href="#job" class="mob-link">求人詳細</a>
-  <a href="#contact" class="mob-link">面談について</a>
-  <a href="#apply" class="mobile-apply mob-link">今すぐ応募する</a>
-</nav>
-
-<!-- HERO -->
+<!-- ヒーロー -->
 <section class="hero" id="top">
-  <div class="hero__blue-left"></div>
-  <div class="hero__blue-right"></div>
-  <div class="hero__inner">
-    <div class="hero__left js-fade">
-      <span class="hero__tag">DRIVER RECRUITING</span>
-      <h1 class="hero__title">
-        千葉・埼玉エリア<br>
-        <span class="blue">食品輸送ドライバー</span>
-        積極採用中
-      </h1>
-      <p class="hero__sub">
-        20年以上、毎年欠かさず賞与を支給。<br>
-        全車エアサス搭載で体への負担が少ない。<br>
-        未経験でも3週間〜1ヶ月の長期研修で安心。
-      </p>
-      <div class="hero__badges">
-        <span class="hero__badge hero__badge--filled">月給33万円以上も可</span>
-        <span class="hero__badge">賞与年2回</span>
-        <span class="hero__badge">社宅家賃半額</span>
-        <span class="hero__badge">未経験OK</span>
-        <span class="hero__badge">週休1〜2日選択可</span>
-      </div>
-      <div class="hero__cta">
-        <a href="#apply" class="btn btn--blue btn-arrow">まずは話を聞いてみる</a>
-        <a href="tel:0471262003" class="btn btn--tel">📞 04-7126-2003</a>
-      </div>
+  <div class="hero__bg"></div>
+  <div class="hero__content js-fade">
+    <span class="hero__label">千葉・埼玉エリア ／ 食品輸送</span>
+    <h1 class="hero__copy">
+      頑張りが、<br>
+      ちゃんと<br>
+      <span class="accent">報われる会社</span><br>
+      があります。
+    </h1>
+    <p class="hero__sub">
+      20年以上、毎年欠かさず賞与を支給。<br>
+      ドライバーを大切にする運送会社です。
+    </p>
+    <div class="hero__badges">
+      <span class="hero__badge hero__badge--filled">月給33万円以上も可</span>
+      <span class="hero__badge">賞与年2回</span>
+      <span class="hero__badge">未経験OK</span>
+      <span class="hero__badge">週休1〜2日選択可</span>
     </div>
-    <div class="hero__stats" id="heroStats">
-      <div class="stat-block">
-        <div class="stat-block__num">67<sup>台</sup></div>
-        <div class="stat-block__label">稼働中の<br>車両数</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-block__num">20<sup>年+</sup></div>
-        <div class="stat-block__label">毎年欠かさず<br>賞与支給</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-block__num">33<sup>万〜</sup></div>
-        <div class="stat-block__label">月給実績<br>（月26日稼働）</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-block__num">15<sup>年+</sup></div>
-        <div class="stat-block__label">勤続ベテラン<br>在籍</div>
-      </div>
+    <div class="hero__btns">
+      <a href="#apply" class="btn btn--blue">今すぐ応募する</a>
+      <a href="tel:0471262003" class="btn btn--outline-white">📞 04-7126-2003</a>
     </div>
   </div>
+  <span class="scroll-down">SCROLL</span>
 </section>
 
-<!-- NUMBERS BAND -->
-<div class="numbers-band">
-  <div class="numbers-band__grid">
-    <div class="number-cell">
-      <div class="number-cell__val js-counter" data-target="67">0<em>台</em></div>
-      <div class="number-cell__label">稼働車両数</div>
-    </div>
-    <div class="number-cell">
-      <div class="number-cell__val js-counter" data-target="67">0<em>名</em></div>
-      <div class="number-cell__label">ドライバー数</div>
-    </div>
-    <div class="number-cell">
-      <div class="number-cell__val">20<em>年+</em></div>
-      <div class="number-cell__label">毎年賞与支給</div>
-    </div>
-    <div class="number-cell">
-      <div class="number-cell__val">100<em>%</em></div>
-      <div class="number-cell__label">全車エアサス</div>
-    </div>
-    <div class="number-cell">
-      <div class="number-cell__val">33<em>万〜</em></div>
-      <div class="number-cell__label">月給実績</div>
-    </div>
+<!-- 月収アピールストリップ -->
+<div class="appeal-strip">
+  <div class="appeal-strip__label">週1休み・月26日稼働の場合</div>
+  <div class="appeal-strip__num js-counter" data-target="338"><span>月</span>0<span>円〜</span></div>
+  <div class="appeal-strip__note">※日給13,000円〜 ／ 賞与は別途年2回</div>
+  <div class="appeal-strip__sub">
+    <span class="appeal-strip__item">💰 賞与年2回</span>
+    <span class="appeal-strip__item">📅 週休1〜2日選択</span>
+    <span class="appeal-strip__item">🏠 社宅家賃半額</span>
+    <span class="appeal-strip__item">🚗 社用車貸与可</span>
   </div>
 </div>
 
-<!-- FEATURES -->
+<!-- 共感コピー（ペインポイント） -->
+<div class="pain cut-top-blue cut-bottom-white">
+  <div class="pain__heading">
+    今の仕事、<span class="accent">こんな悩み</span><br>ありませんか？
+  </div>
+  <ul class="pain__list js-fade">
+    <li class="pain__item">どれだけ頑張っても給料が上がらない</li>
+    <li class="pain__item">賞与がない、または毎年減らされている</li>
+    <li class="pain__item">体がきつい仕事なのに正当に評価されない</li>
+    <li class="pain__item">年齢や経歴で転職を諦めている</li>
+    <li class="pain__item">安定して長く働ける職場を探している</li>
+  </ul>
+  <div class="pain__resolve js-fade js-fade-d1">
+    アドヴァンスは、そんな方のために<br>
+    <span class="big">20年以上、ずっと賞与を払い続けています。</span>
+  </div>
+</div>
+
+<!-- 写真ストリップ -->
+<div class="photo-strip">
+  <div class="photo-strip__item photo-strip__wide">
+    <img src="images/real-staff-advance.jpg" alt="アドヴァンスのスタッフとトラック" loading="lazy" />
+  </div>
+  <div class="photo-strip__item">
+    <img src="images/real-truck-isuzu.jpg" alt="いすゞGIGAトラック" loading="lazy" />
+  </div>
+  <div class="photo-strip__item">
+    <img src="images/real-truck-hino.jpg" alt="日野冷凍車" loading="lazy" />
+  </div>
+  <div class="photo-strip__item">
+    <img src="images/real-staff-wing.jpg" alt="スタッフとウィング車" loading="lazy" />
+  </div>
+  <div class="photo-strip__item">
+    <img src="images/real-fleet-rainy.jpg" alt="アドヴァンス車列" loading="lazy" />
+  </div>
+</div>
+
+<!-- 6つの魅力 -->
 <section class="section section--gray" id="features">
-  <div class="section__inner">
-    <span class="section__tag">FEATURES</span>
-    <h2 class="section__title">アドヴァンス <span class="accent">6つの魅力</span></h2>
-    <p class="section__lead">稼げる・働きやすい・長く続けられる。ドライバーファーストな職場です。</p>
-    <div class="features-grid js-fade">
-      <div class="feature">
-        <div class="feature__num">1</div>
-        <span class="feature__icon">💰</span>
-        <div class="feature__title">賞与年2回<br>月給33万円以上も可</div>
-        <p class="feature__body">日給13,000円〜。週1休み・月26日稼働で338,000円の実績あり。20年以上、一度も賞与を欠かしたことがありません。</p>
+  <span class="section__tag">FEATURES</span>
+  <h2 class="section__title">アドヴァンスが<br><span class="accent">選ばれる6つの理由</span></h2>
+  <p class="section__lead">稼げて・体にやさしく・長く続けられる。ドライバーが主役の職場です。</p>
+  <div class="features js-fade">
+    <div class="feature">
+      <div class="feature__num">1</div>
+      <div class="feature__body">
+        <div class="feature__title">賞与年2回・月給33万円以上も可</div>
+        <p class="feature__text">日給13,000円〜。月26日稼働で338,000円の実績あり。創業以来20年以上、一度も賞与を欠かしていません。</p>
         <span class="feature__chip">日給 13,000円〜</span>
       </div>
-      <div class="feature">
-        <div class="feature__num">2</div>
-        <span class="feature__icon">🪑</span>
-        <div class="feature__title">全車エアサス搭載<br>腰・体への負担が少ない</div>
-        <p class="feature__body">全67台にエアサスペンションとパワーゲートを完備。手積み・手降ろしはほぼなし。体に長く優しい環境で働けます。</p>
+    </div>
+    <div class="feature feature--blue">
+      <div class="feature__num">2</div>
+      <div class="feature__body">
+        <div class="feature__title">全車エアサス搭載・腰への負担が少ない</div>
+        <p class="feature__text">67台全てにエアサス＋パワーゲートを完備。手積み・手降ろしはほぼなし。体に長く優しい環境です。</p>
         <span class="feature__chip">パワーゲート・バックカメラ完備</span>
       </div>
-      <div class="feature feature--blue">
-        <div class="feature__num">3</div>
-        <span class="feature__icon">🗺️</span>
-        <div class="feature__title">近距離・ほぼ固定ルート<br>1日200〜250kmで安心</div>
-        <p class="feature__body">首都圏エリアを中心とした食品配送。ラウンド型（2〜3便）またはルート型（10〜15件）。慣れれば安心のルート配送です。</p>
+    </div>
+    <div class="feature">
+      <div class="feature__num">3</div>
+      <div class="feature__body">
+        <div class="feature__title">近距離・固定ルートで1日200〜250km</div>
+        <p class="feature__text">首都圏中心の食品配送。ほぼ固定ルートなので、慣れれば安心して働けます。</p>
         <span class="feature__chip">首都圏エリア中心</span>
       </div>
-      <div class="feature feature--blue">
-        <div class="feature__num">4</div>
-        <span class="feature__icon">📚</span>
-        <div class="feature__title">充実の研修で<br>未経験でも安心</div>
-        <p class="feature__body">3週間〜1ヶ月の長期研修で、初めての方も丁寧にサポート。普通免許のみの方も相談可。資格取得補助制度あり。</p>
-        <span class="feature__chip">未経験・普通免許のみもOK</span>
+    </div>
+    <div class="feature feature--blue">
+      <div class="feature__num">4</div>
+      <div class="feature__body">
+        <div class="feature__title">3週間〜1ヶ月の長期研修あり</div>
+        <p class="feature__text">未経験・普通免許のみでもOK。丁寧な研修と資格取得補助で、一からしっかり育てます。</p>
+        <span class="feature__chip">未経験・普通免許もOK</span>
       </div>
-      <div class="feature">
-        <div class="feature__num">5</div>
-        <span class="feature__icon">🏠</span>
-        <div class="feature__title">社宅補助＋社用車貸与<br>移住・転居も安心サポート</div>
-        <p class="feature__body">社宅の家賃を半額負担。社用車の貸与も相談可能。遠方からの移住もしっかりバックアップします。</p>
+    </div>
+    <div class="feature">
+      <div class="feature__num">5</div>
+      <div class="feature__body">
+        <div class="feature__title">社宅家賃半額・社用車貸与で移住も安心</div>
+        <p class="feature__text">遠方からの転居もしっかりサポート。社宅の家賃を半額負担、社用車の貸与も相談可能です。</p>
         <span class="feature__chip">社宅家賃 半額負担</span>
       </div>
-      <div class="feature">
-        <div class="feature__num">6</div>
-        <span class="feature__icon">📅</span>
-        <div class="feature__title">週休1〜2日を<br>自分で選べる</div>
-        <p class="feature__body">出勤時間も5パターン（14〜18時）から選択可。ライフスタイルに合わせた柔軟な働き方ができます。</p>
+    </div>
+    <div class="feature feature--blue">
+      <div class="feature__num">6</div>
+      <div class="feature__body">
+        <div class="feature__title">週休1〜2日・出勤時間も自分で選べる</div>
+        <p class="feature__text">出勤時間は14〜18時の5パターンから選択可。ライフスタイルに合わせた働き方ができます。</p>
         <span class="feature__chip">出勤時間5パターン選択可</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- REPRESENTATIVE -->
-<section class="section" id="message">
-  <div class="section__inner">
-    <span class="section__tag">REPRESENTATIVE MESSAGE</span>
-    <h2 class="section__title">代表 <span class="accent">メッセージ</span></h2>
-    <div class="rep-layout">
-      <div class="rep-photo js-fade">
-        <div class="rep-photo__plate">
-          <div class="rep-photo__role">代表取締役 / 現役ドライバー</div>
-          <div class="rep-photo__name">櫻井 謙治</div>
-          <div class="rep-photo__age">53歳</div>
-        </div>
+<!-- 実績ナンバーズ -->
+<div class="numbers-strip">
+  <div class="number-cell">
+    <div class="number-cell__val js-counter" data-target="67">0<em>台</em></div>
+    <div class="number-cell__label">稼働車両数</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-cell__val js-counter" data-target="67">0<em>名</em></div>
+    <div class="number-cell__label">ドライバー数</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-cell__val">20<em>年+</em></div>
+    <div class="number-cell__label">毎年賞与支給</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-cell__val">100<em>%</em></div>
+    <div class="number-cell__label">全車エアサス</div>
+  </div>
+  <div class="number-cell">
+    <div class="number-cell__val">15<em>年+</em></div>
+    <div class="number-cell__label">勤続ベテラン在籍</div>
+  </div>
+</div>
+
+<!-- 代表メッセージ -->
+<section class="section--rep" id="message">
+  <div class="rep-layout-desktop">
+    <div class="rep-photo-wrap">
+      <img src="images/president-real.jpg" alt="代表取締役 櫻井謙治" />
+      <div class="rep-photo-wrap__overlay">
+        <div class="rep-photo-wrap__role">代表取締役 ／ 現役ドライバー</div>
+        <div class="rep-photo-wrap__name">櫻井 謙治（53歳）</div>
       </div>
-      <div class="js-fade js-fade-delay-1">
-        <p class="rep-quote">「ドライバーもしっかり賞与がもらえる環境を作りたい」その一念で、20年以上走り続けてきました。</p>
-        <p class="rep-body">私はもともと証券会社の営業職でした。転職してドライバーとなり、33歳で独立して有限会社アドヴァンスを立ち上げました。</p>
-        <p class="rep-body">ドライバーという仕事は、日本の物流を支える大切な仕事です。にもかかわらず、賞与が出ない、評価されないという会社も少なくありません。だからこそ私は、「ドライバーがちゃんと報われる会社」を作ることを使命にしてきました。</p>
-        <p class="rep-body">20年以上、一度も賞与を欠かしていません。それが私の誇りであり、みなさんへの約束です。</p>
-        <div class="rep-history">
-          <strong>証券会社営業職</strong> → <strong>ドライバーへ転職</strong> → <strong>33歳で独立・アドヴァンス設立</strong>
-        </div>
+    </div>
+    <div class="rep-content js-fade">
+      <span class="section__tag">REPRESENTATIVE MESSAGE</span>
+      <p class="rep-quote">「ドライバーがちゃんと<br>報われる会社を作りたい」</p>
+      <p class="rep-body">私はもともと証券会社の営業職でした。33歳でドライバーに転職し、独立してアドヴァンスを設立しました。</p>
+      <p class="rep-body">ドライバーは日本の物流を支える大切な仕事です。それなのに賞与がない、評価されない会社が多い。だから私は「ドライバーがちゃんと報われる会社」を作ることを使命にしてきました。</p>
+      <p class="rep-body"><strong>20年以上、一度も賞与を欠かしていません。</strong>それが私の誇りであり、みなさんへの約束です。</p>
+      <div class="rep-history">
+        <strong>証券会社営業</strong> → <strong>ドライバー転職</strong> → <strong>33歳で独立・設立</strong>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AGE DISTRIBUTION -->
-<div class="age-section" id="ageSection">
-  <div class="age-inner">
+<!-- こんな方歓迎 -->
+<section class="section section--gray">
+  <span class="section__tag">WHO WE WELCOME</span>
+  <h2 class="section__title">こんな方を<br><span class="accent">お待ちしています</span></h2>
+  <div class="welcome-grid js-fade">
+    <div class="welcome-cell"><span class="welcome-cell__icon">🚗</span><div class="welcome-cell__text">普通免許のみの方</div><div class="welcome-cell__sub">資格補助あり</div></div>
+    <div class="welcome-cell welcome-cell--blue"><span class="welcome-cell__icon">🔰</span><div class="welcome-cell__text">ドライバー未経験</div><div class="welcome-cell__sub">長期研修で安心</div></div>
+    <div class="welcome-cell"><span class="welcome-cell__icon">💼</span><div class="welcome-cell__text">異業種からの転職</div><div class="welcome-cell__sub">経歴不問</div></div>
+    <div class="welcome-cell"><span class="welcome-cell__icon">🏠</span><div class="welcome-cell__text">移住を検討中</div><div class="welcome-cell__sub">社宅サポートあり</div></div>
+    <div class="welcome-cell welcome-cell--blue"><span class="welcome-cell__icon">⚡</span><div class="welcome-cell__text">しっかり稼ぎたい</div><div class="welcome-cell__sub">月33万円以上の実績</div></div>
+    <div class="welcome-cell"><span class="welcome-cell__icon">👴</span><div class="welcome-cell__text">40代・50代以上</div><div class="welcome-cell__sub">年齢不問</div></div>
+    <div class="welcome-cell"><span class="welcome-cell__icon">🔄</span><div class="welcome-cell__text">現職中で転職活動中</div><div class="welcome-cell__sub">入社日柔軟対応</div></div>
+    <div class="welcome-cell welcome-cell--blue"><span class="welcome-cell__icon">📅</span><div class="welcome-cell__text">休日の選択肢が欲しい</div><div class="welcome-cell__sub">週休1〜2日選択可</div></div>
+  </div>
+</section>
+
+<!-- 年齢構成 -->
+<section class="section section--black">
+  <div class="age-section-inner">
     <div class="js-fade">
-      <span class="section__tag" style="color:white;border-bottom-color:rgba(255,255,255,0.4);">MEMBERS</span>
-      <h2 class="section__title" style="color:white;margin-bottom:16px;">幅広い年代が<br><span style="color:var(--blue);">長く活躍中</span></h2>
-      <p class="section__lead">40代・50代が中心。年齢不問で採用中。社歴15年以上のベテランも多く在籍しています。</p>
-      <a href="#apply" class="btn btn--white btn-arrow" style="margin-top:8px;">今すぐ応募する</a>
+      <span class="section__tag">MEMBERS</span>
+      <h2 class="section__title">幅広い年代が<br><span class="accent">長く活躍中</span></h2>
+      <p class="section__lead">40代・50代が中心。年齢不問・学歴不問で採用中。社歴15年以上のベテランも多く在籍しています。</p>
     </div>
-    <div class="age-bars js-fade js-fade-delay-1" id="ageBars">
-      <div class="age-row">
-        <div class="age-row__label">20代</div>
-        <div class="age-bar-bg"><div class="age-bar-fill" data-width="2"></div></div>
-        <div class="age-row__count">1名</div>
-      </div>
-      <div class="age-row">
-        <div class="age-row__label">30代</div>
-        <div class="age-bar-bg"><div class="age-bar-fill" data-width="11"></div></div>
-        <div class="age-row__count">7名</div>
-      </div>
-      <div class="age-row">
-        <div class="age-row__label">40代</div>
-        <div class="age-bar-bg"><div class="age-bar-fill" data-width="32"></div></div>
-        <div class="age-row__count">20名</div>
-      </div>
-      <div class="age-row">
-        <div class="age-row__label">50代</div>
-        <div class="age-bar-bg"><div class="age-bar-fill" data-width="48"></div></div>
-        <div class="age-row__count">30名</div>
-      </div>
-      <div class="age-row">
-        <div class="age-row__label">60代〜</div>
-        <div class="age-bar-bg"><div class="age-bar-fill" data-width="7"></div></div>
-        <div class="age-row__count">4名+</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- JOB DETAILS -->
-<section class="section section--gray" id="job">
-  <div class="section__inner">
-    <span class="section__tag">JOB DETAILS</span>
-    <h2 class="section__title">求人 <span class="accent">詳細</span></h2>
-    <p class="section__lead">食品輸送を中心とした、安定・安心のお仕事です。</p>
-    <table class="job-table js-fade">
-      <tr><th>職種</th><td>食品配送ドライバー（トラック）</td></tr>
-      <tr><th>給与</th><td><span class="chip">日給 13,000円〜</span> 月26日稼働で338,000円以上も可<br><small style="color:#999;">※賞与年2回（20年以上毎年支給実績）</small></td></tr>
-      <tr><th>勤務時間</th><td>14:00〜 / 15:00〜 / 16:00〜 / 17:00〜 / 18:00〜 のいずれか<br><small style="color:#999;">※相談可</small></td></tr>
-      <tr><th>休日</th><td>週休1日または週休2日（ご自身で選択可）</td></tr>
-      <tr><th>配送エリア</th><td>首都圏エリア中心（1日200〜250km程度）</td></tr>
-      <tr><th>配送スタイル</th><td>ラウンド型（2〜3便）またはルート型（10〜15件）／ほぼ固定ルート</td></tr>
-      <tr><th>取扱荷物</th><td>パレット（飲料等）・カゴ車・カート車・ドーリー車<br><span class="chip">手積み・手降ろしは原則なし</span></td></tr>
-      <tr><th>使用車両</th><td>冷凍車・ウィング車（4t・6t・8t・10t）<br>全車：エアサス＋パワーゲート＋バックカメラ完備</td></tr>
-      <tr><th>応募資格</th><td>普通免許以上<br><span class="chip">未経験OK</span><span class="chip">年齢不問</span><span class="chip">学歴不問</span></td></tr>
-      <tr><th>待遇・福利厚生</th><td>社宅補助（家賃半額）／社用車貸与（相談）／資格取得補助<br>試用期間なし／入社日柔軟対応／現職中OK</td></tr>
-      <tr><th>勤務地</th><td>千葉県野田市吉春25-1（本社）<br><small style="color:#999;">清水公園駅より車5分 / マイカー通勤OK</small></td></tr>
-    </table>
-    <div class="two-col js-fade">
-      <div class="info-box">
-        <div class="info-box__title">こんな方が活躍しています</div>
-        <ul class="check-list">
-          <li>車が好きで、運転技術に自信がある方</li>
-          <li>ドライバーに挑戦してみたい方</li>
-          <li>長期的に安定して働きたい方</li>
-          <li>ドライバーを大切にする会社で働きたい方</li>
-          <li>体を動かすより運転でしっかり稼ぎたい方</li>
-        </ul>
-      </div>
-      <div class="info-box info-box--blue">
-        <div class="info-box__title">こんな方も大歓迎</div>
-        <ul class="check-list">
-          <li>普通免許しかない方（取得補助あり）</li>
-          <li>未経験でトラック運転が不安な方</li>
-          <li>現職中で転職を考えている方</li>
-          <li>遠方から移住を検討している方</li>
-          <li>年齢・学歴を理由にあきらめていた方</li>
-        </ul>
-      </div>
+    <div class="age-bars js-fade js-fade-d1" id="ageBars">
+      <div class="age-row"><div class="age-row__label">20代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="2"></div></div><div class="age-row__count">1名</div></div>
+      <div class="age-row"><div class="age-row__label">30代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="11"></div></div><div class="age-row__count">7名</div></div>
+      <div class="age-row"><div class="age-row__label">40代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="32"></div></div><div class="age-row__count">20名</div></div>
+      <div class="age-row"><div class="age-row__label">50代</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="48"></div></div><div class="age-row__count">30名</div></div>
+      <div class="age-row"><div class="age-row__label">60代〜</div><div class="age-bar-bg"><div class="age-bar-fill" data-width="7"></div></div><div class="age-row__count">4名+</div></div>
     </div>
   </div>
 </section>
 
-<!-- WELCOME -->
-<section class="section">
-  <div class="section__inner">
-    <span class="section__tag">WHO WE WELCOME</span>
-    <h2 class="section__title">こんな方を <span class="accent">お待ちしています</span></h2>
-    <p class="section__lead">未経験・年齢・学歴は関係ありません。やる気のある方、大歓迎です。</p>
-    <div class="welcome-grid js-fade">
-      <div class="welcome-cell"><span class="welcome-cell__icon">🚗</span><div class="welcome-cell__text">普通免許のみの方</div><div class="welcome-cell__sub">資格補助あり</div></div>
-      <div class="welcome-cell welcome-cell--blue"><span class="welcome-cell__icon">🔰</span><div class="welcome-cell__text">ドライバー未経験の方</div><div class="welcome-cell__sub">長期研修で安心</div></div>
-      <div class="welcome-cell"><span class="welcome-cell__icon">💼</span><div class="welcome-cell__text">異業種からの転職</div><div class="welcome-cell__sub">前職・経歴不問</div></div>
-      <div class="welcome-cell"><span class="welcome-cell__icon">🏠</span><div class="welcome-cell__text">移住を検討中の方</div><div class="welcome-cell__sub">社宅・引越サポート</div></div>
-      <div class="welcome-cell welcome-cell--blue"><span class="welcome-cell__icon">👴</span><div class="welcome-cell__text">40代・50代以上の方</div><div class="welcome-cell__sub">年齢不問で採用中</div></div>
-      <div class="welcome-cell"><span class="welcome-cell__icon">⚡</span><div class="welcome-cell__text">しっかり稼ぎたい方</div><div class="welcome-cell__sub">月33万円以上の実績</div></div>
-      <div class="welcome-cell"><span class="welcome-cell__icon">🔄</span><div class="welcome-cell__text">現職中で転職活動中</div><div class="welcome-cell__sub">入社日柔軟対応</div></div>
-      <div class="welcome-cell welcome-cell--blue"><span class="welcome-cell__icon">📅</span><div class="welcome-cell__text">休日の選択肢が欲しい</div><div class="welcome-cell__sub">週休1〜2日選択可</div></div>
-    </div>
-  </div>
+<!-- 求人詳細 -->
+<section class="section" id="job">
+  <span class="section__tag">JOB DETAILS</span>
+  <h2 class="section__title">求人 <span class="accent">詳細</span></h2>
+  <p class="section__lead">食品輸送を中心とした、安定・安心のお仕事です。</p>
+  <table class="job-table js-fade">
+    <tr><th>職種</th><td>食品配送ドライバー（トラック）</td></tr>
+    <tr><th>給与</th><td><span class="chip">日給 13,000円〜</span>月26日稼働で338,000円以上も可<br><small style="color:#999">※賞与年2回（20年以上毎年支給）</small></td></tr>
+    <tr><th>勤務時間</th><td>14:00〜 / 15:00〜 / 16:00〜 / 17:00〜 / 18:00〜<br><small style="color:#999">※相談可</small></td></tr>
+    <tr><th>休日</th><td>週休1日または週休2日（ご自身で選択可）</td></tr>
+    <tr><th>エリア</th><td>首都圏中心（1日200〜250km程度）</td></tr>
+    <tr><th>配送</th><td>ラウンド型（2〜3便）またはルート型（10〜15件）<br>ほぼ固定ルート</td></tr>
+    <tr><th>荷物</th><td>パレット・カゴ車など<br><span class="chip">手積み・手降ろしほぼなし</span></td></tr>
+    <tr><th>車両</th><td>冷凍車・ウィング車（4t〜10t）<br>全車エアサス＋パワーゲート＋バックカメラ</td></tr>
+    <tr><th>資格</th><td>普通免許以上<br><span class="chip">未経験OK</span><span class="chip">年齢不問</span><span class="chip">学歴不問</span></td></tr>
+    <tr><th>待遇</th><td>社宅補助（家賃半額）／社用車貸与（相談）<br>資格取得補助／試用期間なし／入社日柔軟</td></tr>
+    <tr><th>勤務地</th><td>千葉県野田市吉春25-1<br><small style="color:#999">清水公園駅より車5分 / マイカー通勤OK</small></td></tr>
+  </table>
 </section>
 
-<!-- CONTACT -->
+<!-- 面談担当 -->
 <section class="section section--gray" id="contact">
-  <div class="section__inner">
-    <span class="section__tag">CONTACT</span>
-    <h2 class="section__title">まずは <span class="accent">お気軽にご相談</span> ください</h2>
-    <p class="section__lead">堅苦しい面接ではなく、まずはお話しする場として歓迎しています。</p>
-    <div class="contact-card js-fade">
-      <div class="contact-card__photo">👤</div>
-      <div class="contact-card__body">
-        <div class="contact-card__role">統括部長 / 面談担当</div>
-        <div class="contact-card__name">杉本</div>
-        <p class="contact-card__msg">「面接」という形式ばったものではなく、まずは会社や仕事のことを気軽に話せる場にしたいと思っています。「話だけ聞きたい」「今すぐではないけど検討している」という段階でも大丈夫です。ぜひお気軽にご連絡ください。</p>
-        <div class="btn-group">
-          <a href="tel:0471262003" class="btn btn--blue btn-arrow">📞 04-7126-2003</a>
-          <a href="#apply" class="btn btn--outline btn-arrow">✉️ フォームで問い合わせ</a>
-        </div>
+  <span class="section__tag">CONTACT</span>
+  <h2 class="section__title">まずは<br><span class="accent">気軽に話しましょう</span></h2>
+  <p class="section__lead">堅苦しい面接ではありません。「少し興味がある」程度でも大歓迎です。</p>
+  <div class="sugimoto js-fade">
+    <div class="sugimoto__photo">
+      <img src="images/sugimoto-desk.jpg" alt="面談担当 杉本" />
+    </div>
+    <div class="sugimoto__body">
+      <div class="sugimoto__role">統括部長 ／ 面談担当</div>
+      <div class="sugimoto__name">杉本</div>
+      <p class="sugimoto__msg">「今すぐじゃないけど気になる」「未経験でも大丈夫か聞いてみたい」そんな気持ちで連絡してくれて大丈夫です。まずは話だけでも聞きに来てください。</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <a href="tel:0471262003" class="btn btn--blue">📞 04-7126-2003 に電話する</a>
+        <a href="#apply" class="btn btn--black">✉️ フォームで問い合わせ</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ACCESS -->
+<!-- アクセス -->
 <section class="section" id="access">
-  <div class="section__inner">
-    <span class="section__tag">ACCESS</span>
-    <h2 class="section__title">会社情報 <span class="accent">・アクセス</span></h2>
-    <div class="access-grid js-fade">
-      <div class="access-map">
-        <iframe src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E9%87%8E%E7%94%B0%E5%B8%82%E5%90%89%E6%98%A525-1&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      <div>
-        <table class="company-table">
-          <tr><th>会社名</th><td>有限会社アドヴァンス</td></tr>
-          <tr><th>所在地</th><td>千葉県野田市吉春25-1<br><small style="color:#999;">清水公園駅より車5分 / マイカー通勤OK</small></td></tr>
-          <tr><th>電話</th><td><a href="tel:0471262003" style="color:var(--blue);font-weight:700;">04-7126-2003</a></td></tr>
-          <tr><th>事業内容</th><td>一般貨物運送業（食品配送を中心）</td></tr>
-          <tr><th>車両数</th><td>67台</td></tr>
-          <tr><th>従業員数</th><td>67名（ドライバー）</td></tr>
-        </table>
-      </div>
+  <span class="section__tag">ACCESS</span>
+  <h2 class="section__title">会社情報 <span class="accent">・アクセス</span></h2>
+  <div class="access-layout js-fade">
+    <div class="map-wrap">
+      <iframe src="https://maps.google.com/maps?q=%E5%8D%83%E8%91%89%E7%9C%8C%E9%87%8E%E7%94%B0%E5%B8%82%E5%90%89%E6%98%A525-1&output=embed" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="company-list">
+      <div class="company-row"><div class="company-row__th">会社名</div><div class="company-row__td">有限会社アドヴァンス</div></div>
+      <div class="company-row"><div class="company-row__th">所在地</div><div class="company-row__td">千葉県野田市吉春25-1<br><small style="color:#999">清水公園駅より車5分 / マイカー通勤OK</small></div></div>
+      <div class="company-row"><div class="company-row__th">電話</div><div class="company-row__td"><a href="tel:0471262003" style="color:var(--blue);font-weight:900;">04-7126-2003</a></div></div>
+      <div class="company-row"><div class="company-row__th">事業</div><div class="company-row__td">一般貨物運送業（食品配送中心）</div></div>
+      <div class="company-row"><div class="company-row__th">車両数</div><div class="company-row__td">67台</div></div>
+      <div class="company-row"><div class="company-row__th">従業員</div><div class="company-row__td">67名（ドライバー）</div></div>
     </div>
   </div>
 </section>
 
-<!-- APPLY FORM -->
+<!-- 応募フォーム -->
 <section class="section section--gray" id="apply">
-  <div class="section__inner">
-    <span class="section__tag">APPLICATION</span>
-    <h2 class="section__title">応募 <span class="accent">フォーム</span></h2>
-    <p class="section__lead">下記フォームよりお気軽にご連絡ください。担当者より折り返しご連絡いたします。</p>
-    <form class="form js-fade" id="applyForm" novalidate>
-      <div class="form__field" id="field-name">
-        <label class="form__label">お名前<span class="form__req">*</span></label>
-        <input type="text" class="form__input" placeholder="例：山田 太郎" />
-        <span class="form__error">お名前を入力してください</span>
-      </div>
-      <div class="form__field" id="field-tel">
-        <label class="form__label">電話番号<span class="form__req">*</span></label>
-        <input type="tel" class="form__input" placeholder="例：090-1234-5678" />
-        <span class="form__error">電話番号を入力してください</span>
-      </div>
-      <div class="form__field">
-        <label class="form__label">メールアドレス</label>
-        <input type="email" class="form__input" placeholder="例：yamada@example.com" />
-      </div>
-      <div class="form__field">
-        <label class="form__label">お持ちの免許</label>
-        <select class="form__select">
-          <option value="">選択してください</option>
-          <option>普通免許</option>
-          <option>準中型免許</option>
-          <option>中型免許</option>
-          <option>大型免許</option>
-          <option>その他</option>
-        </select>
-      </div>
-      <div class="form__field">
-        <label class="form__label">メッセージ・ご質問</label>
-        <textarea rows="4" class="form__textarea" placeholder="「まず話だけ聞きたい」「未経験ですが大丈夫か確認したい」など、お気軽にどうぞ。"></textarea>
-      </div>
-      <div>
-        <button type="submit" class="btn btn--blue btn-arrow">応募する</button>
-      </div>
-      <p style="font-size:1.2rem;color:#999;">内容確認後、担当者よりご連絡いたします。</p>
-    </form>
-    <div class="form-success" id="formSuccess">
-      <div class="form-success__icon">✅</div>
-      <div class="form-success__title">送信が完了しました</div>
-      <div class="form-success__body">担当者より折り返しご連絡いたします。お気軽にお待ちください。</div>
+  <span class="section__tag">APPLICATION</span>
+  <h2 class="section__title">応募 <span class="accent">フォーム</span></h2>
+  <p class="section__lead">「話だけ聞きたい」でも大丈夫。お気軽にどうぞ。</p>
+  <form class="form js-fade" id="applyForm" novalidate>
+    <div class="form__field" id="field-name">
+      <label class="form__label">お名前<span class="form__req">*</span></label>
+      <input type="text" class="form__input" placeholder="例：山田 太郎" />
+      <span class="form__error">お名前を入力してください</span>
     </div>
+    <div class="form__field" id="field-tel">
+      <label class="form__label">電話番号<span class="form__req">*</span></label>
+      <input type="tel" class="form__input" placeholder="例：090-1234-5678" />
+      <span class="form__error">電話番号を入力してください</span>
+    </div>
+    <div class="form__field">
+      <label class="form__label">メールアドレス</label>
+      <input type="email" class="form__input" placeholder="例：yamada@example.com" />
+    </div>
+    <div class="form__field">
+      <label class="form__label">お持ちの免許</label>
+      <select class="form__select">
+        <option value="">選択してください</option>
+        <option>普通免許</option><option>準中型免許</option><option>中型免許</option><option>大型免許</option><option>その他</option>
+      </select>
+    </div>
+    <div class="form__field">
+      <label class="form__label">メッセージ</label>
+      <textarea rows="4" class="form__textarea" placeholder="「話だけ聞きたい」「未経験でも大丈夫か聞きたい」など、なんでもどうぞ。"></textarea>
+    </div>
+    <button type="submit" class="btn btn--blue" style="width:100%">応募する</button>
+    <p style="font-size:1.2rem;color:#999;text-align:center;">内容確認後、担当者よりご連絡いたします。</p>
+  </form>
+  <div class="form-success" id="formSuccess">
+    <div class="form-success__icon">✅</div>
+    <div class="form-success__title">送信完了しました</div>
+    <div class="form-success__body">担当者より折り返しご連絡いたします。</div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- 最後のCTA -->
 <div class="final-cta">
-  <h2 class="final-cta__title">一緒に走りましょう。</h2>
-  <p class="final-cta__sub">ドライバーを大切にする会社です。まずはお気軽にご連絡ください。</p>
-  <div class="btn-group" style="justify-content:center;">
-    <a href="#apply" class="btn btn--white btn-arrow">✉️ 応募フォームへ</a>
-    <a href="tel:0471262003" class="btn btn--outline-white btn-arrow">📞 04-7126-2003</a>
+  <h2 class="final-cta__title">一緒に<br>走りましょう。</h2>
+  <p class="final-cta__sub">ドライバーを大切にする会社で、<br>長く安心して働きませんか。</p>
+  <div class="final-cta__btns">
+    <a href="#apply" class="btn btn--white" style="min-width:200px">✉️ 応募フォームへ</a>
+    <a href="tel:0471262003" class="btn btn--outline-white" style="min-width:200px">📞 04-7126-2003</a>
   </div>
 </div>
 
-<!-- FOOTER -->
+<!-- フッター -->
 <footer>
-  <div class="footer__logo">有限会社<span>アドヴァンス</span></div>
+  <div class="footer__logo"><img src="images/logo.png" alt="有限会社アドヴァンス" /></div>
   <div class="footer__info">
     〒278-0011 千葉県野田市吉春25-1　TEL: 04-7126-2003<br>
     © 有限会社アドヴァンス All Rights Reserved.
   </div>
 </footer>
 
-<!-- STICKY MOBILE CTA -->
-<div class="sticky-mob">
-  <a href="tel:0471262003" class="sticky-mob__tel">📞 電話する</a>
-  <a href="#apply" class="sticky-mob__apply">✉️ 応募する</a>
+<!-- スマホ固定CTA -->
+<div class="sticky-cta">
+  <a href="tel:0471262003" class="sticky-cta__tel">📞 電話する</a>
+  <a href="#apply" class="sticky-cta__apply">✉️ 応募する</a>
 </div>
 
 <script>
-// ── スクロールプログレスバー ──
-const progressBar = document.getElementById('progressBar');
-const siteHeader = document.getElementById('siteHeader');
-
+// スクロールプログレスバー・ヘッダー
+const bar = document.getElementById('progressBar');
+const hdr = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  progressBar.style.width = (scrollTop / docHeight * 100) + '%';
-  siteHeader.classList.toggle('scrolled', scrollTop > 20);
+  const s = window.scrollY, h = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (s / h * 100) + '%';
+  hdr.classList.toggle('scrolled', s > 20);
 }, { passive: true });
 
-// ── ハンバーガーメニュー ──
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobileNav');
-
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileNav.classList.toggle('open');
-});
-
-document.querySelectorAll('.mob-link').forEach(a => {
-  a.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileNav.classList.remove('open');
-  });
-});
-
-// ── スムーズスクロール ──
+// スムーズスクロール
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const offset = 64;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
 
-// ── IntersectionObserver ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      observer.unobserve(entry.target);
-    }
-  });
+// フェードイン
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); fadeObs.unobserve(e.target); } });
 }, { threshold: 0.08 });
+document.querySelectorAll('.js-fade').forEach(el => fadeObs.observe(el));
 
-document.querySelectorAll('.js-fade').forEach(el => observer.observe(el));
-
-// ── Hero stat blocks ──
-const heroStats = document.getElementById('heroStats');
-const statObs = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting) {
-    document.querySelectorAll('.stat-block').forEach(b => b.classList.add('in'));
-    statObs.disconnect();
-  }
-}, { threshold: 0.1 });
-statObs.observe(heroStats);
-
-// ── 年齢バー アニメーション ──
-const ageObs = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting) {
-    document.querySelectorAll('.age-bar-fill').forEach(bar => {
-      bar.style.width = bar.dataset.width + '%';
-    });
-    ageObs.disconnect();
-  }
-}, { threshold: 0.3 });
-const ageBars = document.getElementById('ageBars');
-if (ageBars) ageObs.observe(ageBars);
-
-// ── カウントアップ ──
+// カウントアップ
 function countUp(el, target, duration) {
-  let start = 0;
-  const step = target / (duration / 16);
-  const suffix = el.querySelector('em') ? el.querySelector('em').outerHTML : '';
+  let v = 0, step = target / (duration / 16);
+  // 元のHTML内のテキストノードを探して保持
+  const inner = el.innerHTML;
+  const prefix = inner.match(/^[^0-9]*/)?.[0] || '';
+  const suffix = inner.match(/[^0-9]*$/)?.[0] || '';
   const timer = setInterval(() => {
-    start = Math.min(start + step, target);
-    el.innerHTML = Math.floor(start) + suffix;
-    if (start >= target) clearInterval(timer);
+    v = Math.min(v + step, target);
+    el.innerHTML = prefix + Math.floor(v).toLocaleString() + suffix;
+    if (v >= target) clearInterval(timer);
   }, 16);
 }
-
-const counterObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      countUp(el, parseInt(el.dataset.target), 1000);
-      counterObs.unobserve(el);
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      const inner = el.innerHTML;
+      const prefix = inner.replace(/\d+/, '').split(/\d/)[0];
+      const suffix = inner.replace(/.*\d/, '');
+      let v = 0, step = target / 60;
+      const timer = setInterval(() => {
+        v = Math.min(v + step, target);
+        el.innerHTML = prefix + Math.floor(v).toLocaleString() + suffix;
+        if (v >= target) clearInterval(timer);
+      }, 16);
+      cntObs.unobserve(el);
     }
   });
 }, { threshold: 0.5 });
-document.querySelectorAll('.js-counter').forEach(el => counterObs.observe(el));
+document.querySelectorAll('.js-counter').forEach(el => cntObs.observe(el));
 
-// ── フォームバリデーション ──
+// 年齢バー
+const ageObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.age-bar-fill').forEach(b => { b.style.width = b.dataset.width + '%'; });
+    ageObs.disconnect();
+  }
+}, { threshold: 0.3 });
+const ab = document.getElementById('ageBars');
+if (ab) ageObs.observe(ab);
+
+// フォームバリデーション
 document.getElementById('applyForm').addEventListener('submit', e => {
   e.preventDefault();
-  let valid = true;
-
-  const nameField = document.getElementById('field-name');
-  const nameInput = nameField.querySelector('input');
-  if (!nameInput.value.trim()) {
-    nameField.classList.add('has-error');
-    valid = false;
-  } else {
-    nameField.classList.remove('has-error');
-  }
-
-  const telField = document.getElementById('field-tel');
-  const telInput = telField.querySelector('input');
-  if (!telInput.value.trim()) {
-    telField.classList.add('has-error');
-    valid = false;
-  } else {
-    telField.classList.remove('has-error');
-  }
-
-  if (valid) {
+  let ok = true;
+  ['field-name', 'field-tel'].forEach(id => {
+    const f = document.getElementById(id);
+    const inp = f.querySelector('input');
+    if (!inp.value.trim()) { f.classList.add('has-error'); ok = false; }
+    else f.classList.remove('has-error');
+  });
+  if (ok) {
     document.getElementById('applyForm').style.display = 'none';
-    const success = document.getElementById('formSuccess');
-    success.style.display = 'block';
-    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const s = document.getElementById('formSuccess');
+    s.style.display = 'block';
+    s.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 });
-
-// エラークリア
-document.querySelectorAll('.form__input').forEach(input => {
-  input.addEventListener('input', () => {
-    input.closest('.form__field').classList.remove('has-error');
-  });
+document.querySelectorAll('.form__input').forEach(i => {
+  i.addEventListener('input', () => i.closest('.form__field').classList.remove('has-error'));
 });
 </script>
 </body>
