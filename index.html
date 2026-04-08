@@ -217,8 +217,11 @@
     .fv__photo img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: 70% 20%; /* スマホ：右側の人物が映るよう中心を右寄りに */
       display: block;
+    }
+    @media (min-width: 768px) {
+      .fv__photo img { object-position: center 20%; }
     }
     /* 左からの濃いグラデーション（テキスト可読性確保） */
     .fv__photo::after {
@@ -819,48 +822,44 @@
     }
     /* 円本体 */
     .float-btn__circle {
-      width: 64px; height: 64px;
+      width: 82px; height: 82px;
       border-radius: 50%;
       background: var(--blue);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 2px;
-      box-shadow: 0 4px 20px rgba(26,141,200,.5);
+      gap: 3px;
+      box-shadow: 0 4px 24px rgba(26,141,200,.55);
       transition: transform .2s, box-shadow .2s;
       position: relative;
     }
     .float-btn:hover .float-btn__circle {
       transform: scale(1.08);
-      box-shadow: 0 6px 28px rgba(26,141,200,.65);
+      box-shadow: 0 8px 32px rgba(26,141,200,.7);
     }
     /* 脈動リング */
     .float-btn__circle::before {
       content: '';
-      position: absolute; inset: -4px;
+      position: absolute; inset: -5px;
       border-radius: 50%;
-      border: 2px solid rgba(26,141,200,.45);
+      border: 2px solid rgba(26,141,200,.5);
       animation: pulse-ring 2.2s ease-out infinite;
     }
     @keyframes pulse-ring {
-      0%   { transform: scale(1);   opacity: .8; }
-      70%  { transform: scale(1.22); opacity: 0; }
-      100% { transform: scale(1.22); opacity: 0; }
+      0%   { transform: scale(1);    opacity: .9; }
+      70%  { transform: scale(1.25); opacity: 0; }
+      100% { transform: scale(1.25); opacity: 0; }
     }
     .float-btn__text {
-      font-size: .75rem; font-weight: 900;
-      color: #fff; letter-spacing: .04em;
-      line-height: 1.2; text-align: center;
-      writing-mode: horizontal-tb;
-    }
-    /* 矢印 */
-    .float-btn__arrow {
-      font-size: 1rem; color: #fff; line-height: 1;
+      font-size: 1.05rem; font-weight: 900;
+      color: #fff; letter-spacing: .05em;
+      line-height: 1.3; text-align: center;
+      text-shadow: 0 1px 3px rgba(0,0,0,.25);
     }
     /* 縦ライン（ボタン下） */
     .float-btn__line {
-      width: 1px; height: 28px;
+      width: 1px; height: 32px;
       background: linear-gradient(to bottom, var(--blue), transparent);
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     /* =====================
