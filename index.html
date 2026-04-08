@@ -198,293 +198,156 @@
     .btn--white { background: var(--white); color: var(--blue); }
 
     /* =====================
-       雑誌コラム風ファーストビュー（全面リデザイン）
+       FIRST VIEW（雑誌コラム型・物語起点）
     ===================== */
-    .mag-intro {
+    .fv {
       padding-top: 57px; /* 固定ヘッダー補正 */
-      background: var(--white);
-      overflow: hidden;
       position: relative;
+      overflow: hidden;
+      background: #0d1117;
     }
 
-    /* 全体をスパン：ページTOP帯 */
-    .mag-intro__topbar {
-      background: var(--blue);
-      display: flex; align-items: center;
-      padding: 7px 20px; gap: 12px;
-    }
-    .mag-intro__topbar-en {
-      font-family: 'Oswald', sans-serif;
-      font-size: .95rem; letter-spacing: .22em;
-      color: rgba(255,255,255,.6);
-    }
-    .mag-intro__topbar-line {
-      flex: 1; height: 1px;
-      background: rgba(255,255,255,.2);
-    }
-    .mag-intro__topbar-ja {
-      font-size: 1.05rem; font-weight: 700;
-      color: rgba(255,255,255,.85); letter-spacing: .08em;
-    }
-    .mag-intro__topbar-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: .95rem; color: var(--yellow);
-      letter-spacing: .12em;
-    }
-
-    /* メインレイアウト */
-    .mag-intro__inner {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ─── 写真パネル ─── */
-    .mag-intro__photo {
+    /* モバイル：写真フル画面＋テキストオーバーレイ */
+    .fv__photo {
       position: relative;
       width: 100%;
-      height: 56vw;
-      min-height: 240px;
-      max-height: 420px;
-      overflow: hidden;
-      flex-shrink: 0;
+      height: calc(100svh - 57px);
+      min-height: 500px;
     }
-    .mag-intro__photo img {
+    .fv__photo img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 18%;
+      object-position: center 20%;
       display: block;
     }
-    /* 写真下からのグラデーション */
-    .mag-intro__photo::after {
+    /* 左からの濃いグラデーション（テキスト可読性確保） */
+    .fv__photo::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,.0) 30%,
-        rgba(13,20,30,.75) 100%
+      background:
+        linear-gradient(to right, rgba(0,0,0,.72) 0%, rgba(0,0,0,.3) 55%, transparent 100%),
+        linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 50%);
+    }
+
+    /* 上部カテゴリ帯 */
+    .fv__bar {
+      position: absolute; top: 0; left: 0; right: 0;
+      z-index: 5;
+      display: flex; align-items: center; gap: 14px;
+      padding: 9px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.3);
+      backdrop-filter: blur(4px);
+    }
+    .fv__bar-cat {
+      font-family: 'Oswald', sans-serif;
+      font-size: .9rem; letter-spacing: .22em;
+      color: var(--yellow); text-transform: uppercase;
+    }
+    .fv__bar-line {
+      flex: 1; height: 1px;
+      background: rgba(255,255,255,.18);
+    }
+    .fv__bar-info {
+      font-size: 1rem; font-weight: 700;
+      color: rgba(255,255,255,.55); letter-spacing: .06em;
+    }
+
+    /* メインコピーブロック */
+    .fv__copy {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 5;
+      padding: 0 22px 44px;
+    }
+    /* 縦ライン装飾 */
+    .fv__copy::before {
+      content: '';
+      display: block;
+      width: 2px; height: 36px;
+      background: var(--blue);
+      margin-bottom: 16px;
+    }
+    /* 小見出し */
+    .fv__copy-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem; letter-spacing: .22em;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 10px;
+    }
+    /* メインキャッチ */
+    .fv__copy-main {
+      font-size: clamp(3rem, 9vw, 5.2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.18;
+      letter-spacing: -.02em;
+      margin-bottom: 18px;
+    }
+    .fv__copy-main em {
+      font-style: normal;
+      color: var(--yellow);
+      position: relative;
+      display: inline-block;
+    }
+    /* 黄色テキストの斜めアンダーライン */
+    .fv__copy-main em::after {
+      content: '';
+      position: absolute; bottom: 2px; left: 0; right: 0;
+      height: 3px;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        var(--yellow) 0px, var(--yellow) 2px,
+        transparent 2px, transparent 7px
       );
     }
-    /* 写真左上：号数バッジ */
-    .mag-intro__badge {
-      position: absolute; top: 14px; left: 14px;
-      z-index: 3;
-      background: var(--yellow);
-      font-family: 'Oswald', sans-serif;
-      font-size: .85rem; font-weight: 700;
-      letter-spacing: .18em; color: var(--black);
-      padding: 4px 10px;
-    }
-    /* 写真下部オーバーレイキャッチ（モバイル） */
-    .mag-intro__photo-copy {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      z-index: 3; padding: 16px 18px 20px;
-    }
-    .mag-intro__photo-copy-head {
-      font-size: clamp(2.4rem, 7.5vw, 3.8rem);
-      font-weight: 900; color: #fff;
-      line-height: 1.2; letter-spacing: -.02em;
-    }
-    .mag-intro__photo-copy-head em {
-      font-style: normal; color: var(--yellow);
-    }
-
-    /* ─── テキストパネル ─── */
-    .mag-intro__text {
-      background: var(--white);
-      padding: 26px 20px 32px;
-      position: relative;
-    }
-    /* 上部ブルーライン */
-    .mag-intro__text::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 4px; background: var(--blue);
-    }
-    /* カテゴリ行 */
-    .mag-intro__kicker {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 16px;
-    }
-    .mag-intro__kicker-tag {
-      background: var(--blue); color: #fff;
-      font-family: 'Oswald', sans-serif;
-      font-size: .85rem; letter-spacing: .18em;
-      padding: 3px 10px;
-    }
-    .mag-intro__kicker-text {
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--blue); letter-spacing: .06em;
-    }
-    /* 大見出し（テキストパネル内・PC用） */
-    .mag-intro__headline {
-      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-      font-weight: 900; line-height: 1.2;
-      letter-spacing: -.02em; color: var(--black);
-      margin-bottom: 16px;
-      display: none; /* モバイルは写真上に表示 */
-    }
-    .mag-intro__headline em {
-      font-style: normal; color: var(--blue);
-    }
-    /* 区切りライン */
-    .mag-intro__hr {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 14px;
-    }
-    .mag-intro__hr span {
-      display: block; width: 36px; height: 2px;
-      background: var(--blue);
-    }
-    .mag-intro__hr::after {
-      content: '';
-      flex: 1; height: 1px;
-      background: #e5e5e5;
-    }
     /* サブコピー */
-    .mag-intro__sub {
-      font-size: 1.3rem; color: #555; line-height: 1.85;
-      margin-bottom: 20px;
-    }
-    /* 統計ブロック */
-    .mag-intro__stats {
-      display: flex; gap: 0;
-      border: 1px solid #e8edf2;
-      margin-bottom: 22px;
-    }
-    .mag-intro__stat {
-      flex: 1; padding: 12px 0 10px;
-      text-align: center; position: relative;
-    }
-    .mag-intro__stat + .mag-intro__stat::before {
-      content: '';
-      position: absolute; left: 0; top: 20%; bottom: 20%;
-      width: 1px; background: #e8edf2;
-    }
-    .mag-intro__stat-val {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.2rem; font-weight: 700;
-      color: var(--blue); line-height: 1;
-    }
-    .mag-intro__stat-val em {
-      font-style: normal; font-size: .42em;
-      font-family: 'Noto Sans JP', sans-serif;
-      color: #666;
-    }
-    .mag-intro__stat-lbl {
-      font-size: 1rem; color: #888; margin-top: 3px;
-    }
-    /* CTAボタン */
-    .mag-intro__cta {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      background: var(--blue); color: #fff;
-      font-size: 1.5rem; font-weight: 900;
-      padding: 16px; letter-spacing: .04em;
-      transition: background .2s;
-    }
-    .mag-intro__cta:hover { background: var(--blue-dark); }
-    .mag-intro__cta::after { content: '→'; }
-
-    /* ─── PC レイアウト（768px+） ─── */
-    @media (min-width: 768px) {
-      .mag-intro__inner {
-        flex-direction: row;
-        min-height: calc(100svh - 57px - 34px); /* header + topbar */
-        max-height: 820px;
-      }
-      /* 写真: 左56%、高さフル、斜め右縁 */
-      .mag-intro__photo {
-        flex: 0 0 56%;
-        height: auto; max-height: none;
-        clip-path: polygon(0 0, 92% 0, 100% 100%, 0 100%);
-      }
-      /* 写真内キャッチはPC非表示 */
-      .mag-intro__photo-copy { display: none; }
-      /* テキスト: 右44% */
-      .mag-intro__text {
-        flex: 1;
-        padding: 52px 48px 52px 52px;
-        display: flex; flex-direction: column; justify-content: center;
-        border-left: none;
-      }
-      .mag-intro__text::before { display: none; }
-      /* PC では大見出しをテキストパネルに表示 */
-      .mag-intro__headline { display: block; }
-      .mag-intro__stat-val { font-size: 2.4rem; }
-    }
-    @media (min-width: 1100px) {
-      .mag-intro__photo { flex: 0 0 58%; }
-      .mag-intro__text { padding: 60px 60px 60px 64px; }
-      .mag-intro__headline { font-size: 4.6rem; }
+    .fv__copy-sub {
+      font-size: 1.35rem;
+      color: rgba(255,255,255,.72);
+      line-height: 1.8;
+      max-width: 480px;
     }
 
-    /* =====================
-       HERO
-    ===================== */
-    .hero {
-      position: relative;
-      height: 100svh; min-height: 560px;
-      background: var(--black);
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding-top: 57px; overflow: hidden;
+    /* スクロールヒント */
+    .fv__scroll {
+      position: absolute; bottom: 10px; right: 22px;
+      z-index: 5;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
-    .hero__bg {
-      position: absolute; inset: 0;
-      background: url('images/real-fleet-sunny.jpg') center 40% / cover no-repeat;
-      filter: brightness(.35);
-    }
-    /* 左側ブルー縦帯（参考サイトの左三角パネル） */
-    .hero__left-panel {
-      position: absolute; top: 0; left: 0; bottom: 0;
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 100vh 0 0 22vw;
-      border-color: transparent transparent transparent rgba(26,141,200,.55);
-    }
-    /* 下部斜めカット */
-    .hero__cut {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 0; width: 0;
-      border-style: solid;
-      border-width: 60px 100vw 0 0;
-      border-color: var(--white) transparent transparent transparent;
-    }
-    .hero__content {
-      position: relative; z-index: 1;
-      padding: 28px 20px 80px;
-    }
-    .hero__label {
-      display: inline-block;
-      background: var(--blue); color: var(--white);
-      font-size: 1.1rem; font-weight: 900; letter-spacing: .14em;
-      padding: 4px 14px; margin-bottom: 16px;
-    }
-    .hero__copy {
-      font-size: clamp(3.2rem, 9vw, 5.8rem);
-      font-weight: 900; color: var(--white);
-      line-height: 1.2; letter-spacing: -.01em; margin-bottom: 16px;
-    }
-    .hero__copy .accent { color: var(--yellow); }
-    .hero__sub { font-size: 1.45rem; color: rgba(255,255,255,.8); line-height: 1.8; margin-bottom: 28px; }
-    .hero__badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 28px; }
-    .hero__badge {
-      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.28);
-      color: var(--white); font-size: 1.2rem; font-weight: 700; padding: 5px 12px;
-    }
-    .hero__badge--filled { background: var(--blue); border-color: var(--blue); }
-    .hero__btns { display: flex; flex-direction: column; gap: 10px; }
-    .scroll-hint {
-      position: absolute; bottom: 72px; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
-    }
-    .scroll-hint__label {
+    .fv__scroll-label {
       font-family: 'Oswald', sans-serif;
-      font-size: 1rem; letter-spacing: .22em; color: rgba(255,255,255,.45);
+      font-size: .85rem; letter-spacing: .2em;
+      color: rgba(255,255,255,.35);
+      writing-mode: vertical-rl;
     }
-    .scroll-hint__line {
-      width: 1px; height: 36px;
-      background: linear-gradient(to bottom, rgba(255,255,255,.45), transparent);
+    .fv__scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.35), transparent);
       animation: sl 1.8s ease-in-out infinite;
     }
+
+    /* ── PC レイアウト（768px+）：左写真・右テキストの2カラム ── */
+    @media (min-width: 768px) {
+      .fv__photo {
+        height: calc(100svh - 57px);
+        max-height: 900px;
+      }
+      .fv__photo::after {
+        background:
+          linear-gradient(to right, rgba(0,0,0,.78) 0%, rgba(0,0,0,.42) 52%, rgba(0,0,0,.1) 100%),
+          linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 45%);
+      }
+      .fv__copy {
+        padding: 0 10vw 8vh;
+        max-width: 620px;
+      }
+      .fv__copy-main { font-size: clamp(4rem, 6vw, 6.4rem); }
+      .fv__copy-sub { font-size: 1.5rem; }
+    }
+    @media (min-width: 1100px) {
+      .fv__copy { max-width: 700px; }
+    }
+
     @keyframes sl { 0%,100%{opacity:.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
 
     /* =====================
@@ -951,8 +814,7 @@
     ===================== */
     @media (min-width: 768px) {
       .header { padding: 0 40px; }
-      .hero__content { padding: 60px 8vw 100px; max-width: 720px; }
-      .hero__btns { flex-direction: row; }
+      /* hero削除済み */
       .section { padding: 80px 8vw; }
       .sugimoto-text { padding: 48px 8vw; }
       .numbers-strip { grid-template-columns: repeat(5,1fr); }
@@ -990,97 +852,36 @@
   <a href="#apply" class="header__cta">今すぐ応募</a>
 </header>
 
-<!-- 雑誌コラム風ファーストビュー -->
-<div class="mag-intro">
-  <!-- 上部ブルー帯 -->
-  <div class="mag-intro__topbar">
-    <span class="mag-intro__topbar-en">DRIVER RECRUIT</span>
-    <span class="mag-intro__topbar-line"></span>
-    <span class="mag-intro__topbar-ja">千葉・埼玉 食品配送ドライバー求人</span>
-    <span class="mag-intro__topbar-line"></span>
-    <span class="mag-intro__topbar-num">No.01</span>
-  </div>
-  <div class="mag-intro__inner">
-    <!-- 左：写真パネル -->
-    <div class="mag-intro__photo">
-      <img src="images/real-staff-advance.jpg" alt="アドヴァンスのドライバー" />
-      <div class="mag-intro__badge">FEATURE</div>
-      <!-- モバイル：写真に重なるキャッチコピー -->
-      <div class="mag-intro__photo-copy">
-        <p class="mag-intro__photo-copy-head">
-          頑張りが、ちゃんと<br><em>報われる</em><br>職場があります。
-        </p>
-      </div>
+<!-- FIRST VIEW（雑誌コラム型・物語起点） -->
+<div class="fv" id="top">
+  <div class="fv__photo">
+    <img src="images/real-staff-wing.jpg" alt="アドヴァンスのドライバー" />
+
+    <!-- 上部カテゴリ帯 -->
+    <div class="fv__bar">
+      <span class="fv__bar-cat">Driver Recruit</span>
+      <span class="fv__bar-line"></span>
+      <span class="fv__bar-info">千葉・埼玉｜食品配送ドライバー</span>
     </div>
-    <!-- 右：テキストパネル -->
-    <div class="mag-intro__text">
-      <!-- カテゴリ -->
-      <div class="mag-intro__kicker">
-        <span class="mag-intro__kicker-tag">RECRUIT</span>
-        <span class="mag-intro__kicker-text">ドライバー求人特集</span>
-      </div>
-      <!-- PC用大見出し -->
-      <h2 class="mag-intro__headline">
-        頑張りが、ちゃんと<br><em>報われる</em><br>職場があります。
-      </h2>
-      <!-- 区切り -->
-      <div class="mag-intro__hr"><span></span></div>
-      <!-- サブコピー -->
-      <p class="mag-intro__sub">
-        千葉・埼玉の食品配送ドライバー募集。<br>
-        20年間、賞与を一度も欠かしていません。<br>
-        未経験・ブランクある方も大歓迎です。
+
+    <!-- メインコピー -->
+    <div class="fv__copy">
+      <div class="fv__copy-eyebrow">ADVANCE DRIVER STORY</div>
+      <h1 class="fv__copy-main">
+        20年間、<br>ドライバーを<br><em>裏切らなかった</em><br>会社があります。
+      </h1>
+      <p class="fv__copy-sub">
+        給料、休み、賞与、体への配慮。<br>全部、正面から向き合ってきました。
       </p>
-      <!-- 数字3点セット -->
-      <div class="mag-intro__stats">
-        <div class="mag-intro__stat">
-          <div class="mag-intro__stat-val">338,000<em>円〜</em></div>
-          <div class="mag-intro__stat-lbl">月収実績</div>
-        </div>
-        <div class="mag-intro__stat">
-          <div class="mag-intro__stat-val">20<em>年+</em></div>
-          <div class="mag-intro__stat-lbl">賞与連続支給</div>
-        </div>
-        <div class="mag-intro__stat">
-          <div class="mag-intro__stat-val">67<em>台</em></div>
-          <div class="mag-intro__stat-lbl">エアサス搭載</div>
-        </div>
-      </div>
-      <!-- CTA -->
-      <a href="#apply" class="mag-intro__cta">今すぐ話を聞いてみる</a>
+    </div>
+
+    <!-- スクロールヒント -->
+    <div class="fv__scroll">
+      <span class="fv__scroll-label">SCROLL</span>
+      <span class="fv__scroll-line"></span>
     </div>
   </div>
 </div>
-
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero__bg"></div>
-  <div class="hero__left-panel"></div>
-  <div class="hero__content js-fade">
-    <div class="hero__label">CHIBA / SAITAMA — FOOD LOGISTICS DRIVER</div>
-    <h1 class="hero__copy">
-      頑張りが、<br>ちゃんと<br><span class="accent">報われる会社</span><br>があります。
-    </h1>
-    <p class="hero__sub">
-      20年以上、毎年欠かさず賞与を支給。<br>ドライバーを大切にする運送会社です。
-    </p>
-    <div class="hero__badges">
-      <span class="hero__badge hero__badge--filled">月給33万円以上も可</span>
-      <span class="hero__badge">賞与年2回</span>
-      <span class="hero__badge">未経験OK</span>
-      <span class="hero__badge">週休1〜2日選択可</span>
-    </div>
-    <div class="hero__btns">
-      <a href="#apply" class="btn btn--blue" style="min-width:180px">今すぐ応募する</a>
-      <a href="tel:0471262003" class="btn btn--outline-white">📞 04-7126-2003</a>
-    </div>
-  </div>
-  <div class="scroll-hint">
-    <span class="scroll-hint__label">SCROLL</span>
-    <span class="scroll-hint__line"></span>
-  </div>
-  <div class="hero__cut"></div>
-</section>
 
 <!-- 月収アピール -->
 <div class="appeal">
