@@ -28,33 +28,10 @@
     a { color: inherit; text-decoration: none; }
     img { display: block; width: 100%; }
 
-    /* =====================
-       斜めスラッシュ装飾パターン（参考サイトのslash.svgをCSS再現）
-    ===================== */
-    .slash-deco {
-      background-image: repeating-linear-gradient(
-        -45deg,
-        var(--blue) 0px, var(--blue) 2px,
-        transparent 2px, transparent 9px
-      );
-      background-repeat: repeat-x;
-      background-position: left bottom;
-      background-size: 13px 13px;
-      padding-bottom: 8px;
-    }
-    .slash-deco--yellow {
-      background-image: repeating-linear-gradient(
-        -45deg,
-        var(--yellow) 0px, var(--yellow) 2px,
-        transparent 2px, transparent 9px
-      );
-    }
-    .slash-deco--white {
-      background-image: repeating-linear-gradient(
-        -45deg,
-        rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 2px,
-        transparent 2px, transparent 9px
-      );
+    /* 斜めスラッシュ装飾パターン（一時非表示） */
+    .slash-deco, .slash-deco--yellow, .slash-deco--white {
+      background-image: none;
+      padding-bottom: 0;
     }
 
     /* =====================
@@ -294,17 +271,8 @@
       position: relative;
       display: inline-block;
     }
-    /* 黄色テキストの斜めアンダーライン */
-    .fv__copy-main em::after {
-      content: '';
-      position: absolute; bottom: 2px; left: 0; right: 0;
-      height: 3px;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        var(--yellow) 0px, var(--yellow) 2px,
-        transparent 2px, transparent 7px
-      );
-    }
+    /* 黄色テキストの斜めアンダーライン（一時非表示） */
+    .fv__copy-main em::after { content: none; }
     /* サブコピー */
     .fv__copy-sub {
       font-size: 1.35rem;
@@ -416,18 +384,11 @@
       font-weight: 900; color: var(--white);
       line-height: 1.45; margin-bottom: 28px; text-align: center;
     }
-    /* 斜めスラッシュ強調 */
+    /* 斜めスラッシュ強調（一時非表示） */
     .pain__heading .em {
       color: var(--yellow);
-      padding-bottom: 6px;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        var(--yellow) 0px, var(--yellow) 2px,
-        transparent 2px, transparent 9px
-      );
-      background-repeat: repeat-x;
-      background-position: left bottom;
-      background-size: 13px 13px;
+      padding-bottom: 0;
+      background-image: none;
     }
     .pain__list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
     .pain__item {
@@ -443,14 +404,8 @@
     }
     .pain__resolve .big {
       font-size: 2rem; display: block; margin-top: 6px;
-      padding-bottom: 4px;
-      background-image: repeating-linear-gradient(
-        -45deg, rgba(255,255,255,.3) 0px, rgba(255,255,255,.3) 2px,
-        transparent 2px, transparent 9px
-      );
-      background-repeat: repeat-x;
-      background-position: left bottom;
-      background-size: 13px 13px;
+      padding-bottom: 0;
+      background-image: none;
     }
 
     /* =====================
@@ -489,25 +444,12 @@
     .section--blue .section__title,
     .section--black .section__title { color: var(--white); }
 
-    /* 斜めスラッシュ強調テキスト */
-    .section__title .slash {
-      padding-bottom: 6px;
-      background-image: repeating-linear-gradient(
-        -45deg,
-        var(--blue) 0px, var(--blue) 2px,
-        transparent 2px, transparent 9px
-      );
-      background-repeat: repeat-x;
-      background-position: left bottom;
-      background-size: 13px 13px;
-    }
+    /* 斜めスラッシュ強調テキスト（一時非表示） */
+    .section__title .slash,
     .section--blue .section__title .slash,
     .section--black .section__title .slash {
-      background-image: repeating-linear-gradient(
-        -45deg,
-        rgba(255,255,255,.4) 0px, rgba(255,255,255,.4) 2px,
-        transparent 2px, transparent 9px
-      );
+      padding-bottom: 0;
+      background-image: none;
     }
 
     .section__lead { font-size: 1.45rem; color: #666; line-height: 1.85; margin-top: 12px; }
@@ -1172,7 +1114,7 @@
   <div class="age-inner">
     <div class="js-fade">
       <span class="section__label">OUR MEMBERS</span>
-      <h2 class="section__title" style="color:white">幅広い年代が<br><span class="slash" style="background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.35) 0px,rgba(255,255,255,.35) 2px,transparent 2px,transparent 9px)">長く活躍中</span></h2>
+      <h2 class="section__title" style="color:white">幅広い年代が<br><span>長く活躍中</span></h2>
       <p class="section__lead">40代・50代が中心。年齢・学歴不問で採用中。社歴15年以上のベテランも多く在籍しています。</p>
     </div>
     <div class="age-chart-wrap js-fade js-fade-d1" id="ageBars">
