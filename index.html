@@ -780,7 +780,7 @@
     .footer__info { font-size: 1.2rem; color: rgba(255,255,255,.38); line-height: 1.9; }
 
     /* =====================
-       STICKY CTA
+       STICKY CTA（モバイル底部バー）
     ===================== */
     .sticky-cta {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 800;
@@ -793,6 +793,75 @@
     }
     .sticky-cta__tel { background: var(--black); color: var(--white); }
     .sticky-cta__apply { background: var(--blue); color: var(--white); }
+
+    /* =====================
+       フローティング丸ボタン（縦中央・右寄せ）
+    ===================== */
+    .float-btn {
+      position: fixed;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 810;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      text-decoration: none;
+      /* 入場アニメ */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .float-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* 円本体 */
+    .float-btn__circle {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 20px rgba(26,141,200,.5);
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+    }
+    .float-btn:hover .float-btn__circle {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(26,141,200,.65);
+    }
+    /* 脈動リング */
+    .float-btn__circle::before {
+      content: '';
+      position: absolute; inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(26,141,200,.45);
+      animation: pulse-ring 2.2s ease-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%   { transform: scale(1);   opacity: .8; }
+      70%  { transform: scale(1.22); opacity: 0; }
+      100% { transform: scale(1.22); opacity: 0; }
+    }
+    .float-btn__text {
+      font-size: .75rem; font-weight: 900;
+      color: #fff; letter-spacing: .04em;
+      line-height: 1.2; text-align: center;
+      writing-mode: horizontal-tb;
+    }
+    /* 矢印 */
+    .float-btn__arrow {
+      font-size: 1rem; color: #fff; line-height: 1;
+    }
+    /* 縦ライン（ボタン下） */
+    .float-btn__line {
+      width: 1px; height: 28px;
+      background: linear-gradient(to bottom, var(--blue), transparent);
+      margin-top: 4px;
+    }
 
     /* =====================
        ANIMATIONS
@@ -1313,19 +1382,30 @@
   </div>
 </footer>
 
+<!-- フローティング丸ボタン -->
+<a href="#apply" class="float-btn" id="floatBtn" aria-label="今すぐ応募">
+  <div class="float-btn__circle">
+    <span class="float-btn__text">今すぐ<br>応募</span>
+  </div>
+  <div class="float-btn__line"></div>
+</a>
+
 <div class="sticky-cta">
   <a href="tel:0471262003" class="sticky-cta__tel">📞 電話する</a>
   <a href="#apply" class="sticky-cta__apply">✉️ 応募する</a>
 </div>
 
 <script>
-// プログレスバー + ヘッダー
+// プログレスバー + ヘッダー + フローティングボタン
 const bar = document.getElementById('progressBar');
 const hdr = document.getElementById('siteHeader');
+const floatBtn = document.getElementById('floatBtn');
 window.addEventListener('scroll', () => {
   const s = window.scrollY, h = document.documentElement.scrollHeight - window.innerHeight;
   bar.style.width = (s / h * 100) + '%';
   hdr.classList.toggle('scrolled', s > 20);
+  // FV（約100px）を過ぎたら表示
+  floatBtn.classList.toggle('visible', s > 120);
 }, { passive: true });
 
 // スムーズスクロール
