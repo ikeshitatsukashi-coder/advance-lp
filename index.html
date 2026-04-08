@@ -198,144 +198,223 @@
     .btn--white { background: var(--white); color: var(--blue); }
 
     /* =====================
-       雑誌コラム風イントロ（参考サイト風・写真左＋テキスト右）
+       雑誌コラム風ファーストビュー（全面リデザイン）
     ===================== */
     .mag-intro {
+      padding-top: 57px; /* 固定ヘッダー補正 */
       background: var(--white);
-      padding-top: 57px; /* 固定ヘッダー分 */
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
+
+    /* 全体をスパン：ページTOP帯 */
+    .mag-intro__topbar {
+      background: var(--blue);
+      display: flex; align-items: center;
+      padding: 7px 20px; gap: 12px;
+    }
+    .mag-intro__topbar-en {
+      font-family: 'Oswald', sans-serif;
+      font-size: .95rem; letter-spacing: .22em;
+      color: rgba(255,255,255,.6);
+    }
+    .mag-intro__topbar-line {
+      flex: 1; height: 1px;
+      background: rgba(255,255,255,.2);
+    }
+    .mag-intro__topbar-ja {
+      font-size: 1.05rem; font-weight: 700;
+      color: rgba(255,255,255,.85); letter-spacing: .08em;
+    }
+    .mag-intro__topbar-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: .95rem; color: var(--yellow);
+      letter-spacing: .12em;
+    }
+
+    /* メインレイアウト */
     .mag-intro__inner {
       display: flex;
       flex-direction: column;
-      min-height: 340px;
     }
-    /* 写真エリア（上部全幅・モバイル） */
+
+    /* ─── 写真パネル ─── */
     .mag-intro__photo {
       position: relative;
       width: 100%;
-      aspect-ratio: 16/9;
+      height: 56vw;
+      min-height: 240px;
+      max-height: 420px;
       overflow: hidden;
       flex-shrink: 0;
     }
     .mag-intro__photo img {
       width: 100%; height: 100%;
-      object-fit: cover; object-position: center 30%;
+      object-fit: cover;
+      object-position: center 18%;
+      display: block;
     }
-    /* 写真上のグラデーション */
+    /* 写真下からのグラデーション */
     .mag-intro__photo::after {
       content: '';
       position: absolute; inset: 0;
       background: linear-gradient(
-        135deg,
-        rgba(26,141,200,.72) 0%,
-        rgba(14,111,160,.45) 50%,
-        transparent 100%
+        to bottom,
+        rgba(0,0,0,.0) 30%,
+        rgba(13,20,30,.75) 100%
       );
     }
-    /* 写真上のオーバーレイテキスト（モバイルのみ） */
-    .mag-intro__overlay {
-      position: absolute; inset: 0;
-      z-index: 2;
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      padding: 20px;
+    /* 写真左上：号数バッジ */
+    .mag-intro__badge {
+      position: absolute; top: 14px; left: 14px;
+      z-index: 3;
+      background: var(--yellow);
+      font-family: 'Oswald', sans-serif;
+      font-size: .85rem; font-weight: 700;
+      letter-spacing: .18em; color: var(--black);
+      padding: 4px 10px;
     }
-    /* 右テキストエリア */
-    .mag-intro__body {
+    /* 写真下部オーバーレイキャッチ（モバイル） */
+    .mag-intro__photo-copy {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 3; padding: 16px 18px 20px;
+    }
+    .mag-intro__photo-copy-head {
+      font-size: clamp(2.4rem, 7.5vw, 3.8rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.2; letter-spacing: -.02em;
+    }
+    .mag-intro__photo-copy-head em {
+      font-style: normal; color: var(--yellow);
+    }
+
+    /* ─── テキストパネル ─── */
+    .mag-intro__text {
       background: var(--white);
-      padding: 28px 20px 32px;
+      padding: 26px 20px 32px;
       position: relative;
     }
-    /* 右上の斜め青装飾 */
-    .mag-intro__body::before {
+    /* 上部ブルーライン */
+    .mag-intro__text::before {
       content: '';
-      position: absolute; top: 0; right: 0;
-      width: 45%; height: 5px;
-      background: var(--blue);
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: var(--blue);
     }
-    /* カテゴリラベル */
-    .mag-intro__tag {
-      display: inline-flex; align-items: center; gap: 8px;
+    /* カテゴリ行 */
+    .mag-intro__kicker {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px;
+    }
+    .mag-intro__kicker-tag {
       background: var(--blue); color: #fff;
-      font-size: 1.05rem; font-weight: 700; letter-spacing: .1em;
-      padding: 5px 14px; margin-bottom: 14px;
-    }
-    .mag-intro__tag::before {
-      content: 'RECRUIT';
       font-family: 'Oswald', sans-serif;
-      font-size: .9rem; opacity: .75;
-      border-right: 1px solid rgba(255,255,255,.4);
-      padding-right: 8px;
+      font-size: .85rem; letter-spacing: .18em;
+      padding: 3px 10px;
     }
-    /* 大見出し */
+    .mag-intro__kicker-text {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--blue); letter-spacing: .06em;
+    }
+    /* 大見出し（テキストパネル内・PC用） */
     .mag-intro__headline {
-      font-size: clamp(2rem, 5.5vw, 3.6rem);
-      font-weight: 900; line-height: 1.25;
-      color: var(--black); margin-bottom: 12px;
-      letter-spacing: -.01em;
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      font-weight: 900; line-height: 1.2;
+      letter-spacing: -.02em; color: var(--black);
+      margin-bottom: 16px;
+      display: none; /* モバイルは写真上に表示 */
     }
     .mag-intro__headline em {
       font-style: normal; color: var(--blue);
-      position: relative;
     }
-    .mag-intro__headline em::after {
+    /* 区切りライン */
+    .mag-intro__hr {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px;
+    }
+    .mag-intro__hr span {
+      display: block; width: 36px; height: 2px;
+      background: var(--blue);
+    }
+    .mag-intro__hr::after {
       content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background-image: repeating-linear-gradient(
-        -45deg, var(--blue) 0px, var(--blue) 2px,
-        transparent 2px, transparent 7px
-      );
+      flex: 1; height: 1px;
+      background: #e5e5e5;
     }
-    /* サブテキスト */
+    /* サブコピー */
     .mag-intro__sub {
-      font-size: 1.3rem; color: #555; line-height: 1.8;
-      border-left: 3px solid var(--blue);
-      padding-left: 12px; margin-bottom: 20px;
+      font-size: 1.3rem; color: #555; line-height: 1.85;
+      margin-bottom: 20px;
     }
-    /* チップ一覧 */
-    .mag-intro__chips {
-      display: flex; flex-wrap: wrap; gap: 8px;
+    /* 統計ブロック */
+    .mag-intro__stats {
+      display: flex; gap: 0;
+      border: 1px solid #e8edf2;
+      margin-bottom: 22px;
     }
-    .mag-intro__chip {
-      background: var(--blue-pale); color: var(--blue);
-      font-size: 1.15rem; font-weight: 700;
-      padding: 5px 12px; border: 1px solid rgba(26,141,200,.2);
+    .mag-intro__stat {
+      flex: 1; padding: 12px 0 10px;
+      text-align: center; position: relative;
     }
-    /* 縦書き装飾英語 */
-    .mag-intro__vert {
-      position: absolute;
-      writing-mode: vertical-rl;
+    .mag-intro__stat + .mag-intro__stat::before {
+      content: '';
+      position: absolute; left: 0; top: 20%; bottom: 20%;
+      width: 1px; background: #e8edf2;
+    }
+    .mag-intro__stat-val {
       font-family: 'Oswald', sans-serif;
-      font-size: clamp(5rem, 9vw, 8rem);
-      font-weight: 700;
-      color: rgba(26,141,200,.05);
-      top: 50%; transform: translateY(-50%);
-      right: 8px; pointer-events: none; user-select: none;
-      letter-spacing: .08em;
+      font-size: 2.2rem; font-weight: 700;
+      color: var(--blue); line-height: 1;
     }
+    .mag-intro__stat-val em {
+      font-style: normal; font-size: .42em;
+      font-family: 'Noto Sans JP', sans-serif;
+      color: #666;
+    }
+    .mag-intro__stat-lbl {
+      font-size: 1rem; color: #888; margin-top: 3px;
+    }
+    /* CTAボタン */
+    .mag-intro__cta {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--blue); color: #fff;
+      font-size: 1.5rem; font-weight: 900;
+      padding: 16px; letter-spacing: .04em;
+      transition: background .2s;
+    }
+    .mag-intro__cta:hover { background: var(--blue-dark); }
+    .mag-intro__cta::after { content: '→'; }
 
-    /* PC: 左写真・右テキスト 横並び */
+    /* ─── PC レイアウト（768px+） ─── */
     @media (min-width: 768px) {
-      .mag-intro { padding-top: 57px; }
       .mag-intro__inner {
         flex-direction: row;
-        min-height: 420px;
+        min-height: calc(100svh - 57px - 34px); /* header + topbar */
+        max-height: 820px;
       }
+      /* 写真: 左56%、高さフル、斜め右縁 */
       .mag-intro__photo {
-        width: 52%;
-        aspect-ratio: auto;
-        flex-shrink: 0;
+        flex: 0 0 56%;
+        height: auto; max-height: none;
+        clip-path: polygon(0 0, 92% 0, 100% 100%, 0 100%);
       }
-      .mag-intro__overlay { display: none; } /* PC は右カラムに表示 */
-      .mag-intro__body {
+      /* 写真内キャッチはPC非表示 */
+      .mag-intro__photo-copy { display: none; }
+      /* テキスト: 右44% */
+      .mag-intro__text {
         flex: 1;
-        padding: 52px 48px 52px 44px;
+        padding: 52px 48px 52px 52px;
         display: flex; flex-direction: column; justify-content: center;
+        border-left: none;
       }
-      .mag-intro__body::before { width: 100%; height: 4px; }
+      .mag-intro__text::before { display: none; }
+      /* PC では大見出しをテキストパネルに表示 */
+      .mag-intro__headline { display: block; }
+      .mag-intro__stat-val { font-size: 2.4rem; }
+    }
+    @media (min-width: 1100px) {
+      .mag-intro__photo { flex: 0 0 58%; }
+      .mag-intro__text { padding: 60px 60px 60px 64px; }
+      .mag-intro__headline { font-size: 4.6rem; }
     }
 
     /* =====================
@@ -911,38 +990,64 @@
   <a href="#apply" class="header__cta">今すぐ応募</a>
 </header>
 
-<!-- 雑誌コラム風イントロ -->
+<!-- 雑誌コラム風ファーストビュー -->
 <div class="mag-intro">
+  <!-- 上部ブルー帯 -->
+  <div class="mag-intro__topbar">
+    <span class="mag-intro__topbar-en">DRIVER RECRUIT</span>
+    <span class="mag-intro__topbar-line"></span>
+    <span class="mag-intro__topbar-ja">千葉・埼玉 食品配送ドライバー求人</span>
+    <span class="mag-intro__topbar-line"></span>
+    <span class="mag-intro__topbar-num">No.01</span>
+  </div>
   <div class="mag-intro__inner">
-    <!-- 左：写真 -->
+    <!-- 左：写真パネル -->
     <div class="mag-intro__photo">
       <img src="images/real-staff-advance.jpg" alt="アドヴァンスのドライバー" />
-      <!-- モバイルのみ写真上オーバーレイ -->
-      <div class="mag-intro__overlay">
-        <div class="mag-intro__tag">ドライバー求人特集</div>
-        <h2 class="mag-intro__headline" style="color:#fff;font-size:clamp(2rem,6vw,3rem);margin-bottom:6px">
-          <em style="color:#FFD600;background:none">稼げて・休めて</em><br>長く続けられる
-        </h2>
-        <p style="color:rgba(255,255,255,.85);font-size:1.2rem">有限会社アドヴァンス｜千葉・埼玉</p>
+      <div class="mag-intro__badge">FEATURE</div>
+      <!-- モバイル：写真に重なるキャッチコピー -->
+      <div class="mag-intro__photo-copy">
+        <p class="mag-intro__photo-copy-head">
+          頑張りが、ちゃんと<br><em>報われる</em><br>職場があります。
+        </p>
       </div>
     </div>
-    <!-- 右：テキスト -->
-    <div class="mag-intro__body">
-      <div class="mag-intro__vert">DRIVER</div>
-      <div class="mag-intro__tag">ドライバー求人特集</div>
-      <h2 class="mag-intro__headline">
-        <em>稼げて・休めて</em><br>長く続けられる<br>運送会社があります。
-      </h2>
-      <p class="mag-intro__sub">
-        千葉・埼玉エリアの食品配送ドライバー募集。<br>
-        創業20年以上・賞与年2回を毎年継続中。
-      </p>
-      <div class="mag-intro__chips">
-        <span class="mag-intro__chip">月収338,000円〜</span>
-        <span class="mag-intro__chip">賞与年2回</span>
-        <span class="mag-intro__chip">未経験OK</span>
-        <span class="mag-intro__chip">週休1〜2日選択可</span>
+    <!-- 右：テキストパネル -->
+    <div class="mag-intro__text">
+      <!-- カテゴリ -->
+      <div class="mag-intro__kicker">
+        <span class="mag-intro__kicker-tag">RECRUIT</span>
+        <span class="mag-intro__kicker-text">ドライバー求人特集</span>
       </div>
+      <!-- PC用大見出し -->
+      <h2 class="mag-intro__headline">
+        頑張りが、ちゃんと<br><em>報われる</em><br>職場があります。
+      </h2>
+      <!-- 区切り -->
+      <div class="mag-intro__hr"><span></span></div>
+      <!-- サブコピー -->
+      <p class="mag-intro__sub">
+        千葉・埼玉の食品配送ドライバー募集。<br>
+        20年間、賞与を一度も欠かしていません。<br>
+        未経験・ブランクある方も大歓迎です。
+      </p>
+      <!-- 数字3点セット -->
+      <div class="mag-intro__stats">
+        <div class="mag-intro__stat">
+          <div class="mag-intro__stat-val">338,000<em>円〜</em></div>
+          <div class="mag-intro__stat-lbl">月収実績</div>
+        </div>
+        <div class="mag-intro__stat">
+          <div class="mag-intro__stat-val">20<em>年+</em></div>
+          <div class="mag-intro__stat-lbl">賞与連続支給</div>
+        </div>
+        <div class="mag-intro__stat">
+          <div class="mag-intro__stat-val">67<em>台</em></div>
+          <div class="mag-intro__stat-lbl">エアサス搭載</div>
+        </div>
+      </div>
+      <!-- CTA -->
+      <a href="#apply" class="mag-intro__cta">今すぐ話を聞いてみる</a>
     </div>
   </div>
 </div>
