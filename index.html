@@ -351,6 +351,21 @@
       line-height: 1; letter-spacing: -.02em;
     }
     .appeal__unit { font-size: .32em; font-family: 'Noto Sans JP', sans-serif; font-weight: 900; }
+    .appeal__split {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      align-items: end; max-width: 920px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .appeal__item { display: flex; flex-direction: column; align-items: center; }
+    .appeal__type {
+      font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900;
+      color: var(--white); letter-spacing: .14em;
+      margin-bottom: 4px; padding: 3px 18px;
+      border: 1.5px solid rgba(255,255,255,.45); border-radius: 999px;
+      background: rgba(0,0,0,.08);
+    }
+    .appeal__split .appeal__num { font-size: clamp(3.4rem, 9.5vw, 7rem); }
     .appeal__note { font-size: 1.2rem; color: rgba(255,255,255,.6); margin-top: 6px; }
     .appeal__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
     .appeal__chip {
@@ -828,8 +843,19 @@
 <div class="appeal">
   <span class="vert-en">SALARY</span>
   <div class="appeal__label">MONTHLY SALARY — ACTUAL RECORD</div>
-  <div class="appeal__num">
-    <span class="appeal__unit">月</span><span class="js-counter" data-target="338000">0</span><span class="appeal__unit">円〜</span>
+  <div class="appeal__split">
+    <div class="appeal__item">
+      <div class="appeal__type">中型</div>
+      <div class="appeal__num">
+        <span class="appeal__unit">月</span><span class="js-counter" data-target="338000">0</span><span class="appeal__unit">円〜</span>
+      </div>
+    </div>
+    <div class="appeal__item">
+      <div class="appeal__type">大型</div>
+      <div class="appeal__num">
+        <span class="appeal__unit">月</span><span class="js-counter" data-target="352000">0</span><span class="appeal__unit">円〜</span>
+      </div>
+    </div>
   </div>
   <div class="appeal__note">※週1休み・月26日稼働の場合 ／ 日給13,000円〜 ／ 賞与は別途年2回</div>
   <div class="appeal__chips">
@@ -1002,7 +1028,7 @@
       <img src="images/president-real.jpg" alt="代表取締役 櫻井謙治" />
       <div class="rep-img__overlay">
         <div class="rep-img__role">代表取締役 ／ 現役ドライバー</div>
-        <div class="rep-img__name">櫻井 謙治（53歳）</div>
+        <div class="rep-img__name">櫻井 謙治（57歳）</div>
       </div>
     </div>
     <div class="rep-text js-fade js-fade-d1">
