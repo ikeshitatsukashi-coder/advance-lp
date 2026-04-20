@@ -656,6 +656,40 @@
     }
 
     /* =====================
+       JOB BUTTONS (Indeed links)
+    ===================== */
+    .job-buttons {
+      display: grid; grid-template-columns: 1fr; gap: 14px;
+      max-width: 1000px; margin: 0 auto; padding: 0 20px;
+    }
+    @media (min-width: 768px) {
+      .job-buttons { grid-template-columns: 1fr 1fr; gap: 18px; }
+    }
+    .job-btn {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--white); border: 2px solid var(--blue);
+      padding: 20px 22px; text-decoration: none;
+      transition: background .2s, color .2s, transform .15s, box-shadow .2s;
+      position: relative;
+    }
+    .job-btn:hover {
+      background: var(--blue); transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(26,141,200,.28);
+    }
+    .job-btn:active { transform: translateY(0) scale(.99); }
+    .job-btn__icon { font-size: 3.2rem; flex-shrink: 0; line-height: 1; }
+    .job-btn__text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .job-btn__title {
+      font-size: 1.6rem; font-weight: 900; color: var(--black);
+      letter-spacing: .02em; line-height: 1.3;
+    }
+    .job-btn:hover .job-btn__title { color: var(--white); }
+    .job-btn__sub {
+      font-size: 1.15rem; color: var(--blue); font-weight: 700;
+    }
+    .job-btn:hover .job-btn__sub { color: rgba(255,255,255,.92); }
+
+    /* =====================
        WELCOME GRID
     ===================== */
     .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: #ccc; }
@@ -1148,26 +1182,43 @@
   </div>
 </section>
 
-<!-- 求人詳細 -->
+<!-- 募集職種 -->
 <section class="section" id="job">
   <div class="section__head">
     <span class="section__label">JOB DETAILS</span>
-    <h2 class="section__title">求人 <span class="slash">詳細</span></h2>
-    <p class="section__lead">食品輸送を中心とした、安定・安心のお仕事です。</p>
+    <h2 class="section__title">募集 <span class="slash">職種</span></h2>
+    <p class="section__lead">気になる職種をクリックすると、求人詳細ページへ移動します。</p>
   </div>
-  <table class="job-table js-fade">
-    <tr><th>職種</th><td>食品配送ドライバー（トラック）</td></tr>
-    <tr><th>給与</th><td><span class="chip">日給 13,000円〜</span>月26日稼働で338,000円以上も可<br><small style="color:#999">※賞与年2回（20年以上毎年支給）</small></td></tr>
-    <tr><th>勤務時間</th><td>14:00〜 / 15:00〜 / 16:00〜 / 17:00〜 / 18:00〜<br><small style="color:#999">※相談可</small></td></tr>
-    <tr><th>休日</th><td>週休1日または週休2日（ご自身で選択可）</td></tr>
-    <tr><th>エリア</th><td>首都圏中心（1日200〜250km程度）</td></tr>
-    <tr><th>配送</th><td>ラウンド型（2〜3便）またはルート型（10〜15件）</td></tr>
-    <tr><th>荷物</th><td>パレット・カゴ車など <span class="chip">手積みほぼなし</span></td></tr>
-    <tr><th>車両</th><td>冷凍車・ウィング車（4t〜10t）全車エアサス＋パワーゲート</td></tr>
-    <tr><th>資格</th><td>普通免許以上 <span class="chip">未経験OK</span><span class="chip">年齢不問</span><span class="chip">学歴不問</span></td></tr>
-    <tr><th>待遇</th><td>社宅補助（家賃半額）／社用車貸与（相談）<br>資格取得補助／試用期間なし／入社日柔軟</td></tr>
-    <tr><th>勤務地</th><td>千葉県野田市吉春25-1<br><small style="color:#999">清水公園駅より車5分 / マイカー通勤OK</small></td></tr>
-  </table>
+  <div class="job-buttons js-fade">
+    <a href="https://jp.indeed.com/viewjob?jk=fbf6452f1803d601&from=shareddesktop_copy" target="_blank" rel="noopener noreferrer" class="job-btn">
+      <span class="job-btn__icon">🚚</span>
+      <span class="job-btn__text">
+        <span class="job-btn__title">食品配送 中型ドライバー</span>
+        <span class="job-btn__sub">4t車 ／ Indeedで詳細を見る →</span>
+      </span>
+    </a>
+    <a href="https://jp.indeed.com/viewjob?jk=bcd8380770c9e76f&from=shareddesktop_copy" target="_blank" rel="noopener noreferrer" class="job-btn">
+      <span class="job-btn__icon">❄️</span>
+      <span class="job-btn__text">
+        <span class="job-btn__title">大型冷凍車ドライバー</span>
+        <span class="job-btn__sub">冷凍配送 ／ Indeedで詳細を見る →</span>
+      </span>
+    </a>
+    <a href="https://jp.indeed.com/viewjob?jk=6c48fe7aac54538e&from=shareddesktop_copy" target="_blank" rel="noopener noreferrer" class="job-btn">
+      <span class="job-btn__icon">🚛</span>
+      <span class="job-btn__text">
+        <span class="job-btn__title">食品配送 大型ドライバー</span>
+        <span class="job-btn__sub">10t車 ／ Indeedで詳細を見る →</span>
+      </span>
+    </a>
+    <a href="https://jp.indeed.com/viewjob?jk=cde2048b70eb6d02&from=shareddesktop_copy" target="_blank" rel="noopener noreferrer" class="job-btn">
+      <span class="job-btn__icon">📋</span>
+      <span class="job-btn__text">
+        <span class="job-btn__title">運行管理者 所長候補</span>
+        <span class="job-btn__sub">管理職 ／ Indeedで詳細を見る →</span>
+      </span>
+    </a>
+  </div>
 </section>
 
 <!-- 杉本さん -->
