@@ -197,9 +197,15 @@
       object-fit: cover;
       object-position: 70% 20%; /* スマホ：右側の人物が映るよう中心を右寄りに */
       display: block;
+      /* スマホ：画像を拡大＋上方向にシフトして人物の顔を画面上部に */
+      transform: scale(1.18) translateY(-10%);
+      transform-origin: center;
     }
     @media (min-width: 768px) {
-      .fv__photo img { object-position: center 20%; }
+      .fv__photo img {
+        object-position: center 20%;
+        transform: none;
+      }
     }
     /* 左からの濃いグラデーション（テキスト可読性確保） */
     .fv__photo::after {
