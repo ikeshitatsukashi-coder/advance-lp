@@ -277,6 +277,13 @@
       position: relative;
       display: inline-block;
     }
+    /* スマホ/PCで改行位置を切り替え */
+    .fv__copy-main .catch-sp { display: inline; }
+    .fv__copy-main .catch-pc { display: none; }
+    @media (min-width: 768px) {
+      .fv__copy-main .catch-sp { display: none; }
+      .fv__copy-main .catch-pc { display: inline; }
+    }
     /* 黄色テキストの斜めアンダーライン（一時非表示） */
     .fv__copy-main em::after { content: none; }
     /* サブコピー */
@@ -885,7 +892,7 @@
     <div class="fv__copy">
       <div class="fv__copy-eyebrow">ADVANCE DRIVER STORY</div>
       <h1 class="fv__copy-main">
-        20年間、<br>ドライバーを<br><em>裏切らなかった</em><br>会社があります。
+        <span class="catch-sp">20年間ドライバーを</span><span class="catch-pc">20年間、<br>ドライバーを</span><br><em>裏切らなかった</em><br>会社があります。
       </h1>
       <p class="fv__copy-sub">
         給料、休み、賞与、体への配慮。<br>全部、正面から向き合ってきました。
