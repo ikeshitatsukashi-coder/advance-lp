@@ -195,15 +195,15 @@
     .fv__photo img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: 70% 20%; /* スマホ：右側の人物が映るよう中心を右寄りに */
+      object-position: 100% 20%; /* スマホ：右端アンカーで人物を左側に */
       display: block;
-      /* スマホ：画像を拡大＋上方向にシフトして人物の顔を画面上部に */
-      transform: scale(1.18) translateY(-10%);
+      /* スマホ：画像を拡大＋上方＋左方向にシフト */
+      transform: scale(1.22) translate(-8%, -10%);
       transform-origin: center;
     }
     @media (min-width: 768px) {
       .fv__photo img {
-        object-position: center 20%;
+        object-position: 30% 20%; /* PC：左寄りに人物を表示 */
         transform: none;
       }
     }
