@@ -245,6 +245,7 @@
       position: absolute; bottom: 0; left: 0; right: 0;
       z-index: 5;
       padding: 0 22px 44px;
+      text-align: right;
     }
     /* 縦ライン装飾 */
     .fv__copy::before {
@@ -253,6 +254,7 @@
       width: 2px; height: 36px;
       background: var(--blue);
       margin-bottom: 16px;
+      margin-left: auto; /* 右寄せ */
     }
     /* 小見出し */
     .fv__copy-eyebrow {
@@ -292,6 +294,7 @@
       color: rgba(255,255,255,.72);
       line-height: 1.8;
       max-width: 480px;
+      margin-left: auto; /* 右寄せ */
     }
 
     /* スクロールヒント */
@@ -326,6 +329,7 @@
       .fv__copy {
         padding: 0 10vw 8vh;
         max-width: 620px;
+        left: auto; /* PCも右寄せ */
       }
       .fv__copy-main { font-size: clamp(4rem, 6vw, 6.4rem); }
       .fv__copy-sub { font-size: 1.5rem; }
