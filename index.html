@@ -323,17 +323,18 @@
           linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 45%);
       }
       .fv__copy {
-        padding: 0 10vw 8vh;
-        max-width: 780px; /* PC：「裏切らなかった会社があります。」が1行に収まる幅 */
+        padding: 0 6vw 8vh;
+        max-width: 920px; /* PC：サブ1行が収まる幅 */
         left: 0; /* PC：左寄せに戻す */
         text-align: left; /* PC：左揃えに戻す */
       }
       .fv__copy::before { margin-left: 0; } /* PC：縦ラインを左に戻す */
       .fv__copy-main { font-size: clamp(3.4rem, 4.6vw, 4.8rem); } /* PC：2行に収まるサイズ */
-      .fv__copy-sub { font-size: 1.5rem; margin-left: 0; } /* PC：サブも左に戻す */
+      .fv__copy-sub { font-size: 1.35rem; max-width: none; margin-left: 0; } /* PC：1行に */
     }
     @media (min-width: 1100px) {
-      .fv__copy { max-width: 820px; }
+      .fv__copy { max-width: 1000px; }
+      .fv__copy-sub { font-size: 1.5rem; }
     }
 
     @keyframes sl { 0%,100%{opacity:.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
