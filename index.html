@@ -203,13 +203,9 @@
     }
     @media (min-width: 768px) {
       .fv__photo img {
-        object-position: center 35%; /* PC：画像上寄りで人物の頭が切れないように */
+        object-position: center; /* PC：縦も拡張するので中央表示でOK */
         transform: none;
       }
-    }
-    /* PCワイド（16:9前後）でさらに頭が切れる場合の補正 */
-    @media (min-width: 1280px) {
-      .fv__photo img { object-position: center 28%; }
     }
     /* 左からの濃いグラデーション（テキスト可読性確保） */
     .fv__photo::after {
@@ -322,8 +318,10 @@
     /* ── PC レイアウト（768px+）：左写真・右テキストの2カラム ── */
     @media (min-width: 768px) {
       .fv__photo {
-        height: calc(100svh - 57px);
-        max-height: 900px;
+        height: auto;
+        aspect-ratio: 16 / 9; /* 画面幅に追従して縦も大きくする */
+        min-height: 480px;
+        max-height: 1200px;
       }
       .fv__photo::after {
         background:
